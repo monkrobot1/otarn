@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+@theme {
+  --color-space-dark: #050510;
+  --color-gold-trim: #E1C16E;
+  --color-glass-bg: rgba(255, 255, 255, 0.05);
+  --color-glass-border: rgba(255, 255, 255, 0.2);
+}
+
+.bg-cosmic {
+  background-image: url('/assets/cosmic_bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: var(--color-space-dark);
+  box-shadow: inset 0 0 150px rgba(0,0,0,0.8);
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+  background-color: var(--color-space-dark);
+  color: white;
+  font-family: 'Inter', sans-serif;
+}
+
+.glass-panel {
+  background: var(--color-glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--color-glass-border);
+  border-radius: 8px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+.geometric-line {
+  position: absolute;
+  background: var(--color-gold-trim);
+  opacity: 0.3;
+}
+
+@keyframes damageFlash {
+  0% { filter: brightness(1) sepia(0) hue-rotate(0) saturate(1); }
+  50% { filter: brightness(2) sepia(1) hue-rotate(-50deg) saturate(5); }
+  100% { filter: brightness(1) sepia(0) hue-rotate(0) saturate(1); }
+}
+
+.anim-damage {
+  animation: damageFlash 0.3s ease-out;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-40px) scale(1.2); opacity: 0; }
+}
+
+.anim-float-text {
+  animation: floatUp 1.2s ease-out forwards;
+}
+
+@keyframes attackLunge {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(20px); }
+  100% { transform: translateX(0); }
+}
+
+.anim-attack {
+  animation: attackLunge 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}

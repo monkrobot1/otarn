@@ -1,0 +1,86 @@
+[
+  {
+    "id": "ENE_JUDGMENT_GRUNT",
+    "name": "Iron Sentinel",
+    "description": "A low-level enforcer of the Judgment sector.",
+    "classRole": "Frontline",
+    "coreStats": {
+      "capacity": 8,
+      "grace": 6,
+      "physicality": 7,
+      "pArmament": 6,
+      "authority": 2,
+      "destiny": 2,
+      "spirituality": 2,
+      "sArmament": 2
+    },
+    "abilities": [
+      "STRIKE"
+    ],
+    "sector": "Judgment"
+  },
+  {
+    "id": "ENE_JUDGMENT_ELITE",
+    "name": "Arbiter of Iron",
+    "description": "An elite bruiser tasked with crushing heretics.",
+    "classRole": "Frontline",
+    "coreStats": {
+      "capacity": 15,
+      "grace": 5,
+      "physicality": 12,
+      "pArmament": 10,
+      "authority": 5,
+      "destiny": 3,
+      "spirituality": 2,
+      "sArmament": 4
+    },
+    "abilities": [
+      "STRIKE",
+      "HEAVY_STRIKE"
+    ],
+    "sector": "Judgment"
+  },
+  {
+    "id": "ENE_JUDGMENT_MAGE",
+    "name": "Circuit Weaver",
+    "description": "Provides spiritual bombardment from the backlines.",
+    "classRole": "Backline",
+    "coreStats": {
+      "capacity": 5,
+      "grace": 8,
+      "physicality": 2,
+      "pArmament": 3,
+      "authority": 10,
+      "destiny": 5,
+      "spirituality": 12,
+      "sArmament": 8
+    },
+    "abilities": [
+      "STRIKE",
+      "MANA_BURN"
+    ],
+    "sector": "Judgment"
+  },
+  {
+    "id": "ENE_JUDGMENT_BOSS",
+    "name": "The Iron Judge",
+    "description": "High Priest of Judgment. Unyielding and merciless.",
+    "classRole": "Boss",
+    "coreStats": {
+      "capacity": 80,
+      "grace": 12,
+      "physicality": 25,
+      "pArmament": 20,
+      "authority": 25,
+      "destiny": 5,
+      "spirituality": 20,
+      "sArmament": 15
+    },
+    "abilities": [
+      "STRIKE",
+      "JUDGMENT_SLAM",
+      "IRON_MAIDEN"
+    ],
+    "sector": "Judgment"
+  }
+]

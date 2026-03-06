@@ -1,0 +1,422 @@
+[
+  {
+    "event_id": "EVT_JUD_001",
+    "title": "The Rusting Dreadnought",
+    "sector": "Judgment",
+    "description": "A derelict Null-Forged dreadnought drifts silently in the void. Faint energy signatures detect a sealed cargo bay, but the hull is leaking concentrated Decay.",
+    "choices": [
+      {
+        "choice_text": "Force the airlock open with raw power.",
+        "requirements": null,
+        "outcomes": [
+          { "weight": 70, "result": "damage_party", "value": 15, "text": "The airlock blows, damaging the party, but you salvage some Faith." },
+          { "weight": 30, "result": "gain_faith", "value": 50, "text": "You tear the doors open cleanly and raid the vault." }
+        ]
+      },
+      {
+        "choice_text": "Send the Necro-Mechanic to interface with the ship's dead AI.",
+        "requirements": { "class_id_present": "CHR_JUD_DTH_001" },
+        "outcomes": [
+          { "weight": 100, "result": "gain_relic", "tier": 2, "text": "Your proxy commands the ship to yield its greatest treasure." }
+        ]
+      }
+    ]
+  },
+  {
+    "event_id": "EVT_JUD_002",
+    "title": "Frozen Data Core",
+    "sector": "Judgment",
+    "description": "You discover a massive sub-zero computing core holding lost archives. Accessing it could yield ancient knowledge, but its automated defenses are active.",
+    "choices": [
+      {
+        "choice_text": "Attempt a brute-force decryption.",
+        "requirements": null,
+        "outcomes": [
+          { "weight": 50, "result": "gain_talent", "tier": 1, "text": "You bypass the security and download a minor axiom protocol." },
+          { "weight": 50, "result": "combat_encounter", "difficulty": "hard", "text": "The core detects intrusion and summons synthetic wardens!" }
+        ]
+      },
+      {
+        "choice_text": "Let it sleep. We have our mission.",
+        "requirements": null,
+        "outcomes": [
+          { "weight": 100, "result": "nothing", "text": "You drift past the core unharmed." }
+        ]
+      }
+    ]
+  },
+  {
+    "event_id": "EVT_JUD_003",
+    "title": "Synthetic Graveyard",
+    "sector": "Judgment",
+    "description": "Thousands of deactivated Null-Forged chassis float here. One of them seems to still possess a faint spark of life.",
+    "choices": [
+      {
+        "choice_text": "Harvest its remaining Dark Matter reserves.",
+        "requirements": null,
+        "outcomes": [
+          { "weight": 100, "result": "gain_max_mp", "value": 5, "text": "Your proxies absorb the dark matter, increasing Capacity." }
+        ]
+      },
+      {
+        "choice_text": "Sacrifice HP to restart its core.",
+        "requirements": null,
+        "outcomes": [
+          { "weight": 60, "result": "damage_party", "value": 20, "text": "The core flares but dies, sapping your energy for nothing." },
+          { "weight": 40, "result": "gain_relic", "tier": 1, "text": "The unit revives momentarily and hands you a component before crumbling." }
+        ]
+      }
+    ]
+  },
+  {
+    "event_id": "EVT_JUD_004",
+    "title": "Quantum Singularity Trap",
+    "sector": "Judgment",
+    "description": "Your path intersects with a localized micro-singularity. It pulls at your ship's hull, demanding a sacrifice of either speed or energy.",
+    "choices": [
+      {
+        "choice_text": "Burn Dark Matter to escape the pull.",
+        "requirements": null,
+        "outcomes": [
+          { "weight": 100, "result": "lose_faith", "value": 20, "text": "You burn away precious ephemeral faith but escape unscathed." }
+        ]
+      },
+      {
+        "choice_text": "Reroute power to shields and brace for impact.",
+        "requirements": null,
+        "outcomes": [
+          { "weight": 80, "result": "damage_party", "value": 30, "text": "The hull groans, and your proxies are battered by gravity waves." },
+          { "weight": 20, "result": "gain_relic", "tier": 3, "text": "The anomaly strips a dormant relic from the void and deposits it on your deck!" }
+        ]
+      }
+    ]
+  },
+  {
+    "event_id": "EVT_JUD_005",
+    "title": "The Cipher's Whisper",
+    "sector": "Judgment",
+    "description": "A rogue AI transmission echoes into your proxies' minds, offering algorithmic perfection in exchange for sensory input.",
+    "choices": [
+      {
+        "choice_text": "Accept the algorithmic rewrite.",
+        "requirements": null,
+        "outcomes": [
+          { "weight": 100, "result": "modify_stats", "buff": "acumen", "debuff": "grace", "value": 10, "text": "Your spiritual hit chance increases, but your bodies become sluggish." }
+        ]
+      },
+      {
+        "choice_text": "Reject the transmission.",
+        "requirements": null,
+        "outcomes": [
+          { "weight": 100, "result": "nothing", "text": "The transmission fades into static." }
+        ]
+      }
+    ]
+  },
+  {
+    "event_id": "EVT_ORD_001",
+    "title": "The Golden Tollbooth",
+    "sector": "Order",
+    "description": "A monolithic tollbooth of absolute gold blocks the hyper-lane. An automated Lumina warden demands tithe in the name of Pontiff-Imperator Solarius.",
+    "choices": [
+      {
+        "choice_text": "Pay the tithe (Lose 30 Faith).",
+        "requirements": { "faith_min": 30 },
+        "outcomes": [
+          { "weight": 100, "result": "lose_faith", "value": 30, "text": "The gates open, and a sterile blessing heals your party." },
+          { "weight": 100, "result": "heal_party", "value": 25, "text": "The blessing of Order washes over you." }
+        ]
+      },
+      {
+        "choice_text": "We are Gods. We pay no toll.",
+        "requirements": null,
+        "outcomes": [
+          { "weight": 100, "result": "combat_encounter", "difficulty": "elite", "text": "The warden activates its laser shielding. Defend yourselves!" }
+        ]
+      }
+    ]
+  },
+  {
+    "event_id": "EVT_ORD_002",
+    "title": "Cathedral Ruins",
+    "sector": "Order",
+    "description": "Floating debris of a shattered techno-cathedral caught in a localized stasis field.",
+    "choices": [
+      {
+        "choice_text": "Search the reliquary.",
+        "requirements": null,
+        "outcomes": [
+          { "weight": 70, "result": "gain_faith", "value": 40, "text": "You find scattered lockboxes of Faith." },
+          { "weight": 30, "result": "gain_relic", "tier": 1, "text": "You discover a pristine artifact overlooked by looters." }
+        ]
+      },
+      {
+        "choice_text": "Use the Time-Paladin to reverse the stasis.",
+        "requirements": { "class_id_present": "CHR_ORD_CHR_001" },
+        "outcomes": [
+          { "weight": 100, "result": "gain_talent", "tier": 2, "text": "The Paladin witnesses the cathedral's past and learns a new doctrine." }
+        ]
+      }
+    ]
+  },
+  {
+    "event_id": "EVT_ORD_003",
+    "title": "Chronometric Fracture",
+    "sector": "Order",
+    "description": "A localized fracture in spacetime loops a 5-minute window eternally. Inside, a lesser Lumina is trapped.",
+    "choices": [
+      {
+        "choice_text": "Shatter the loop with raw power.",
+        "requirements": null,
+        "outcomes": [
+          { "weight": 50, "result": "damage_party", "value": 20, "text": "The backlash of time energy burns your proxies." },
+          { "weight": 50, "result": "gain_max_hp", "value": 10, "text": "The freed energy bolsters your Physicality permanently." }
+        ]
+      }
+    ]
+  },
+  {
+    "event_id": "EVT_ORD_004",
+    "title": "The Scales of Judgment",
+    "sector": "Order",
+    "description": "A massive, floating scale demands balance. One side holds a heavy, dark weight. The other is empty.",
+    "choices": [
+      {
+        "choice_text": "Place your own vitality on the scale (Lose 25% Max HP).",
+        "requirements": null,
+        "outcomes": [
+          { "weight": 100, "result": "gain_relic", "tier": 3, "text": "The scales balance. A powerful relic materializes." }
+        ]
+      },
+      {
+        "choice_text": "Leave it untouched.",
+        "requirements": null,
+        "outcomes": [
+          { "weight": 100, "result": "nothing", "text": "You continue your journey unburdened." }
+        ]
+      }
+    ]
+  },
+  {
+    "event_id": "EVT_ORD_005",
+    "title": "Dogmatic Broadcast",
+    "sector": "Order",
+    "description": "Solarius's voice blasts across all comm channels, repeating an infinitely complex legal theorem.",
+    "choices": [
+      {
+        "choice_text": "Listen and learn the law.",
+        "requirements": null,
+        "outcomes": [
+          { "weight": 70, "result": "modify_stats", "buff": "spirit", "debuff": "fate", "value": 15, "text": "Your proxies gain immense Spiritual Defense, but lose their ability to improvise (Dodge)." }
+        ]
+      }
+    ]
+  },
+  {
+    "event_id": "EVT_CHA_001",
+    "title": "Leyline Convergence",
+    "sector": "Chaos",
+    "description": "Two volatile streams of raw planetary magic collide here, creating a localized storm of pure potential.",
+    "choices": [
+      {
+        "choice_text": "Absorb the raw magic.",
+        "requirements": null,
+        "outcomes": [
+          { "weight": 50, "result": "heal_party", "value": 100, "text": "The energy reinvigorates your proxies completely." },
+          { "weight": 50, "result": "damage_party", "value": 40, "text": "The magic is too wild and burns your proxies from the inside." }
+        ]
+      },
+      {
+        "choice_text": "Use the Geomancer to channel it safely.",
+        "requirements": { "class_id_present": "CHR_CHA_EAR_001" },
+        "outcomes": [
+          { "weight": 100, "result": "gain_faith", "value": 75, "text": "The Geomancer crystallizes the magic into solid Faith." }
+        ]
+      }
+    ]
+  },
+  {
+    "event_id": "EVT_CHA_002",
+    "title": "The Shimmering Mirage",
+    "sector": "Chaos",
+    "description": "A perfect, illusory copy of your party stands before you, mocking your every move.",
+    "choices": [
+      {
+        "choice_text": "Attack the illusions.",
+        "requirements": null,
+        "outcomes": [
+          { "weight": 50, "result": "lose_faith", "value": 20, "text": "You waste energy fighting phantoms." },
+          { "weight": 50, "result": "gain_talent", "tier": 1, "text": "You strike true, shattering the illusion and absorbing its essence." }
+        ]
+      }
+    ]
+  },
+  {
+    "event_id": "EVT_CHA_003",
+    "title": "Elemental Roulette",
+    "sector": "Chaos",
+    "description": "A floating casino run by mutated Espers offers a game of chance. Wager your Faith for a chance at high-tier Relics.",
+    "choices": [
+      {
+        "choice_text": "Wager 50 Faith.",
+        "requirements": { "faith_min": 50 },
+        "outcomes": [
+          { "weight": 60, "result": "lose_faith", "value": 50, "text": "You lose your wager to a rigged game." },
+          { "weight": 40, "result": "gain_relic", "tier": 3, "text": "Jackpot! You win a powerful artifact." }
+        ]
+      },
+      {
+        "choice_text": "Walk away.",
+        "requirements": null,
+        "outcomes": [
+          { "weight": 100, "result": "nothing", "text": "You save your Faith for more certain endeavors." }
+        ]
+      }
+    ]
+  },
+  {
+    "event_id": "EVT_CHA_004",
+    "title": "Volcanic Eruption",
+    "sector": "Chaos",
+    "description": "The planet beneath you splits open, spewing magma into orbit. Your ship's thrusters are caught in the updraft.",
+    "choices": [
+      {
+        "choice_text": "Ride the thermal updraft to skip the next node.",
+        "requirements": null,
+        "outcomes": [
+          { "weight": 100, "result": "skip_node", "text": "You are propelled forward rapidly, bypassing the next sector." }
+        ]
+      },
+      {
+        "choice_text": "Collect the rare magma cores ejecting past you.",
+        "requirements": null,
+        "outcomes": [
+          { "weight": 70, "result": "damage_party", "value": 25, "text": "The heat is too intense, but you grab some cores." },
+          { "weight": 30, "result": "gain_relic", "tier": 2, "text": "You successfully snatch a perfectly formed Magma Core." }
+        ]
+      }
+    ]
+  },
+  {
+    "event_id": "EVT_CHA_005",
+    "title": "Whispers of the Maelstrom",
+    "sector": "Chaos",
+    "description": "Ignis-Tal's madness bleeds into reality here. You hear voices offering power at a cost.",
+    "choices": [
+      {
+        "choice_text": "Listen to the voices (Gain 1 Epic Talent, random character loses 50% HP).",
+        "requirements": null,
+        "outcomes": [
+          { "weight": 100, "result": "trade_hp_for_talent", "tier": 3, "text": "Knowledge floods your mind, but at a painful price." }
+        ]
+      }
+    ]
+  },
+  {
+    "event_id": "EVT_LOV_001",
+    "title": "The Overgrown Spire",
+    "sector": "Love",
+    "description": "A massive, bioluminescent tree has grown completely through an ancient orbital station. Its fruits pulse with restorative energy.",
+    "choices": [
+      {
+        "choice_text": "Harvest the fruits.",
+        "requirements": null,
+        "outcomes": [
+          { "weight": 80, "result": "heal_party", "value": 40, "text": "The fruits are delicious and deeply restorative." },
+          { "weight": 20, "result": "combat_encounter", "difficulty": "normal", "text": "The fruits were actually dormant Sylvan spawn! They attack." }
+        ]
+      },
+      {
+        "choice_text": "Commune with the world-tree (Growth-Warden only).",
+        "requirements": { "class_id_present": "CHR_LOV_GRW_001" },
+        "outcomes": [
+          { "weight": 100, "result": "gain_max_hp", "value": 20, "text": "The Warden channels the tree's latent energy, expanding the party's vitality." }
+        ]
+      }
+    ]
+  },
+  {
+    "event_id": "EVT_LOV_002",
+    "title": "Symbiotic Offering",
+    "sector": "Love",
+    "description": "A parasitic organism floats toward your ship, offering enhanced perception if you let it attach to one of your proxies.",
+    "choices": [
+      {
+        "choice_text": "Accept the parasite.",
+        "requirements": null,
+        "outcomes": [
+          { "weight": 100, "result": "modify_stats", "buff": "fate", "debuff": "capacity", "value": 15, "text": "Your critical strikes are deadlier, but your maximum MP is drained." }
+        ]
+      },
+      {
+        "choice_text": "Incinerate the organism.",
+        "requirements": null,
+        "outcomes": [
+          { "weight": 100, "result": "nothing", "text": "You burn away the threat safely." }
+        ]
+      }
+    ]
+  },
+  {
+    "event_id": "EVT_LOV_003",
+    "title": "The Dreamer's Nexus",
+    "sector": "Love",
+    "description": "You enter a zone of suspended animation spores. Your proxies begin to hallucinate their deepest desires.",
+    "choices": [
+      {
+        "choice_text": "Force them awake.",
+        "requirements": null,
+        "outcomes": [
+          { "weight": 50, "result": "damage_party", "value": 15, "text": "The sudden shock damages their psyche." },
+          { "weight": 50, "result": "gain_talent", "tier": 1, "text": "They wake up with renewed clarity." }
+        ]
+      },
+      {
+        "choice_text": "Let them sleep a little longer (Skip turn in next combat).",
+        "requirements": null,
+        "outcomes": [
+          { "weight": 100, "result": "heal_party", "value": 100, "text": "They awaken fully rested, but will be groggy in the next fight." }
+        ]
+      }
+    ]
+  },
+  {
+    "event_id": "EVT_LOV_004",
+    "title": "Flesh-Shaper's Workshop",
+    "sector": "Love",
+    "description": "An abandoned biomedical lab filled with terrifying, half-finished organic experiments.",
+    "choices": [
+      {
+        "choice_text": "Scavenge for parts.",
+        "requirements": null,
+        "outcomes": [
+          { "weight": 60, "result": "gain_relic", "tier": 1, "text": "You find a useful, albeit gross, organic tool." },
+          { "weight": 40, "result": "combat_encounter", "difficulty": "elite", "text": "One of the experiments wakes up!" }
+        ]
+      }
+    ]
+  },
+  {
+    "event_id": "EVT_LOV_005",
+    "title": "Chorus of the Hive",
+    "sector": "Love",
+    "description": "Elyria's psychic hive-mind extends a tendril of pure emotional connection towards you. It feels overwhelming, but peaceful.",
+    "choices": [
+      {
+        "choice_text": "Sever the connection immediately.",
+        "requirements": null,
+        "outcomes": [
+          { "weight": 100, "result": "damage_party", "value": 10, "text": "The psychic feedback stings, but your minds remain your own." }
+        ]
+      },
+      {
+        "choice_text": "Embrace the connection briefly.",
+        "requirements": null,
+        "outcomes": [
+          { "weight": 70, "result": "gain_faith", "value": 60, "text": "You glean secrets from the hive-mind before pulling away." },
+          { "weight": 30, "result": "modify_stats", "debuff": "authority", "value": 10, "text": "The connection was too strong. You lose some of your individual willpower." }
+        ]
+      }
+    ]
+  }
+]

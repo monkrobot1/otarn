@@ -1,0 +1,16 @@
+[
+  {
+    "id": "BG_ORD_ORB_01",
+    "name": "Order Orbit Alpha",
+    "sector": "Order",
+    "type": "Orbit",
+    "url": "/assets/BG_ORD_ORB_01_url_1772750645954.png"
+  },
+  {
+    "id": "BG_LOV_PLA_01",
+    "name": "Love Planetary Surface",
+    "sector": "Love",
+    "type": "Planetary",
+    "url": "/assets/BG_LOV_PLA_01_url_1772750871814.png"
+  }
+]

@@ -1,0 +1,660 @@
+[
+  {
+    "id": "CHR_JUD_VOD_001",
+    "name": "Void-Borg",
+    "classRole": "Banishment / Space Control",
+    "race": "Null-Forged",
+    "sector": "Judgment",
+    "stats": {
+      "physicality": 15,
+      "authority": 5,
+      "grace": 5,
+      "acumen": 10,
+      "spirit": 5,
+      "fate": 5,
+      "capacity": 15,
+      "destiny": 5
+    }
+  },
+  {
+    "id": "CHR_JUD_CAN_001",
+    "name": "Siege Cannoneer",
+    "classRole": "Heavy Artillery / Giant Cannons",
+    "race": "Null-Forged",
+    "sector": "Judgment",
+    "stats": {
+      "physicality": 18,
+      "authority": 5,
+      "grace": 2,
+      "acumen": 8,
+      "spirit": 5,
+      "fate": 5,
+      "capacity": 20,
+      "destiny": 5
+    }
+  },
+  {
+    "id": "CHR_JUD_SHD_001",
+    "name": "Stealth-Operative",
+    "classRole": "Evasion / Burst Assassin",
+    "race": "Null-Forged",
+    "sector": "Judgment",
+    "stats": {
+      "physicality": 12,
+      "authority": 5,
+      "grace": 5,
+      "acumen": 15,
+      "spirit": 5,
+      "fate": 15,
+      "capacity": 10,
+      "destiny": 5
+    }
+  },
+  {
+    "id": "CHR_JUD_DTH_001",
+    "name": "Necro-Mechanic",
+    "classRole": "Execute / Reanimation",
+    "race": "Null-Forged",
+    "sector": "Judgment",
+    "stats": {
+      "physicality": 10,
+      "authority": 15,
+      "grace": 5,
+      "acumen": 10,
+      "spirit": 5,
+      "fate": 5,
+      "capacity": 15,
+      "destiny": 5
+    }
+  },
+  {
+    "id": "CHR_JUD_DCY_001",
+    "name": "Entropy Engine",
+    "classRole": "DoT (Damage over Time) / Debuffs",
+    "race": "Null-Forged",
+    "sector": "Judgment",
+    "stats": {
+      "physicality": 8,
+      "authority": 15,
+      "grace": 5,
+      "acumen": 12,
+      "spirit": 10,
+      "fate": 5,
+      "capacity": 15,
+      "destiny": 5
+    }
+  },
+  {
+    "id": "CHR_ORD_CHR_001",
+    "name": "Time-Paladin",
+    "classRole": "Initiative Manipulation / Haste",
+    "race": "Lumina",
+    "sector": "Order",
+    "stats": {
+      "physicality": 10,
+      "authority": 10,
+      "grace": 15,
+      "acumen": 5,
+      "spirit": 15,
+      "fate": 5,
+      "capacity": 10,
+      "destiny": 5
+    }
+  },
+  {
+    "id": "CHR_ORD_GRV_001",
+    "name": "Grav-Lancer",
+    "classRole": "Heavy Crowd Control / Positioning",
+    "race": "Lumina",
+    "sector": "Order",
+    "stats": {
+      "physicality": 15,
+      "authority": 8,
+      "grace": 12,
+      "acumen": 5,
+      "spirit": 12,
+      "fate": 5,
+      "capacity": 10,
+      "destiny": 5
+    }
+  },
+  {
+    "id": "CHR_ORD_MAG_001",
+    "name": "Mag-Sentinel",
+    "classRole": "Tanks / Shields / Taunts",
+    "race": "Lumina",
+    "sector": "Order",
+    "stats": {
+      "physicality": 12,
+      "authority": 5,
+      "grace": 10,
+      "acumen": 5,
+      "spirit": 18,
+      "fate": 5,
+      "capacity": 10,
+      "destiny": 5
+    }
+  },
+  {
+    "id": "CHR_ORD_TRU_001",
+    "name": "Inquisitor",
+    "classRole": "Buff Dispel / Absolute Damage",
+    "race": "Lumina",
+    "sector": "Order",
+    "stats": {
+      "physicality": 12,
+      "authority": 12,
+      "grace": 15,
+      "acumen": 10,
+      "spirit": 15,
+      "fate": 5,
+      "capacity": 10,
+      "destiny": 5
+    }
+  },
+  {
+    "id": "CHR_CHA_FIR_001",
+    "name": "Pyromancer",
+    "classRole": "Raw AoE Damage / Burn Status",
+    "race": "Espers",
+    "sector": "Chaos",
+    "stats": {
+      "physicality": 5,
+      "authority": 18,
+      "grace": 10,
+      "acumen": 15,
+      "spirit": 8,
+      "fate": 8,
+      "capacity": 15,
+      "destiny": 10
+    }
+  },
+  {
+    "id": "CHR_CHA_EAR_001",
+    "name": "Geomancer",
+    "classRole": "Physical Mitigation / Terrain Traps",
+    "race": "Espers",
+    "sector": "Chaos",
+    "stats": {
+      "physicality": 10,
+      "authority": 15,
+      "grace": 8,
+      "acumen": 12,
+      "spirit": 12,
+      "fate": 5,
+      "capacity": 12,
+      "destiny": 10
+    }
+  },
+  {
+    "id": "CHR_CHA_WAT_001",
+    "name": "Tidecaller",
+    "classRole": "Fluid Healing / Cleansing",
+    "race": "Espers",
+    "sector": "Chaos",
+    "stats": {
+      "physicality": 5,
+      "authority": 15,
+      "grace": 12,
+      "acumen": 15,
+      "spirit": 10,
+      "fate": 8,
+      "capacity": 18,
+      "destiny": 10
+    }
+  },
+  {
+    "id": "CHR_CHA_AIR_001",
+    "name": "Zephyr-Sprite",
+    "classRole": "High Dodge / Multi-strike",
+    "race": "Espers",
+    "sector": "Chaos",
+    "stats": {
+      "physicality": 5,
+      "authority": 12,
+      "grace": 18,
+      "acumen": 15,
+      "spirit": 8,
+      "fate": 15,
+      "capacity": 12,
+      "destiny": 10
+    }
+  },
+  {
+    "id": "CHR_LOV_LIF_001",
+    "name": "Weaver of Life",
+    "classRole": "Pure Healer / Revive",
+    "race": "Sylvan",
+    "sector": "Love",
+    "stats": {
+      "physicality": 8,
+      "authority": 10,
+      "grace": 10,
+      "acumen": 8,
+      "spirit": 12,
+      "fate": 15,
+      "capacity": 20,
+      "destiny": 5
+    }
+  },
+  {
+    "id": "CHR_LOV_BLD_001",
+    "name": "Blood-Druid",
+    "classRole": "HP Sacrifice / Leech / Vampirism",
+    "race": "Sylvan",
+    "sector": "Love",
+    "stats": {
+      "physicality": 12,
+      "authority": 12,
+      "grace": 8,
+      "acumen": 10,
+      "spirit": 10,
+      "fate": 12,
+      "capacity": 18,
+      "destiny": 5
+    },
+    "spriteManifest": {
+      "idle": {
+        "name": "idle",
+        "url": "/assets/CHR_LOV_BLD_001_idle_1772746568066_blood_druid_idle_idle.webp",
+        "cols": 10,
+        "rows": 10,
+        "totalFrames": 96,
+        "fps": 24,
+        "loop": true
+      },
+      "default_attack": {
+        "name": "default_attack",
+        "url": "/assets/CHR_LOV_BLD_001_default_attack_1772746539462_blood_druid_default_attack_default_attack.webp",
+        "cols": 7,
+        "rows": 7,
+        "totalFrames": 48,
+        "fps": 12,
+        "loop": false
+      },
+      "death": {
+        "name": "death",
+        "url": "/assets/CHR_LOV_BLD_001_death_1772746556179_blood_druid_death_death.webp",
+        "cols": 7,
+        "rows": 7,
+        "totalFrames": 48,
+        "fps": 12,
+        "loop": false
+      }
+    }
+  },
+  {
+    "id": "CHR_LOV_GRW_001",
+    "name": "Growth-Warden",
+    "classRole": "Stacking Buffs / Over-healing",
+    "race": "Sylvan",
+    "sector": "Love",
+    "stats": {
+      "physicality": 10,
+      "authority": 10,
+      "grace": 8,
+      "acumen": 10,
+      "spirit": 15,
+      "fate": 15,
+      "capacity": 20,
+      "destiny": 5
+    }
+  },
+  {
+    "id": "CHR_LOV_DRM_001",
+    "name": "Dream-Walker",
+    "classRole": "Sleep Status / Psychic Damage",
+    "race": "Sylvan",
+    "sector": "Love",
+    "stats": {
+      "physicality": 5,
+      "authority": 15,
+      "grace": 10,
+      "acumen": 15,
+      "spirit": 12,
+      "fate": 15,
+      "capacity": 15,
+      "destiny": 5
+    }
+  },
+  {
+    "id": "BOSS_JUD_000",
+    "name": "Arch-Magister Nihilus",
+    "classRole": "High Priest",
+    "race": "Null-Forged",
+    "sector": "Judgment",
+    "stats": {
+      "physicality": 30,
+      "authority": 30,
+      "grace": 15,
+      "acumen": 25,
+      "spirit": 20,
+      "fate": 10,
+      "capacity": 40,
+      "destiny": 50
+    }
+  },
+  {
+    "id": "BOSS_JUD_001",
+    "name": "The Iron Judge",
+    "classRole": "Physical Execution Sub-Boss",
+    "race": "Null-Forged",
+    "sector": "Judgment",
+    "stats": {
+      "physicality": 25,
+      "authority": 10,
+      "grace": 10,
+      "acumen": 15,
+      "spirit": 10,
+      "fate": 5,
+      "capacity": 25,
+      "destiny": 20
+    }
+  },
+  {
+    "id": "BOSS_JUD_002",
+    "name": "Whisper-Net Prime",
+    "classRole": "Evasive Assassin Sub-Boss",
+    "race": "Null-Forged",
+    "sector": "Judgment",
+    "stats": {
+      "physicality": 15,
+      "authority": 15,
+      "grace": 20,
+      "acumen": 25,
+      "spirit": 10,
+      "fate": 25,
+      "capacity": 20,
+      "destiny": 20
+    }
+  },
+  {
+    "id": "BOSS_JUD_003",
+    "name": "The Flesh Harvester",
+    "classRole": "Drain Tank Sub-Boss",
+    "race": "Null-Forged",
+    "sector": "Judgment",
+    "stats": {
+      "physicality": 20,
+      "authority": 20,
+      "grace": 8,
+      "acumen": 15,
+      "spirit": 15,
+      "fate": 5,
+      "capacity": 30,
+      "destiny": 20
+    }
+  },
+  {
+    "id": "BOSS_JUD_004",
+    "name": "Reactor 0-Decay",
+    "classRole": "Stacking DoT Sub-Boss",
+    "race": "Null-Forged",
+    "sector": "Judgment",
+    "stats": {
+      "physicality": 15,
+      "authority": 25,
+      "grace": 10,
+      "acumen": 20,
+      "spirit": 15,
+      "fate": 5,
+      "capacity": 30,
+      "destiny": 20
+    }
+  },
+  {
+    "id": "BOSS_ORD_000",
+    "name": "Pontiff-Imperator Solarius",
+    "classRole": "High Priest",
+    "race": "Lumina",
+    "sector": "Order",
+    "stats": {
+      "physicality": 25,
+      "authority": 25,
+      "grace": 30,
+      "acumen": 20,
+      "spirit": 30,
+      "fate": 15,
+      "capacity": 30,
+      "destiny": 50
+    }
+  },
+  {
+    "id": "BOSS_ORD_001",
+    "name": "Grand Marshal Aegis",
+    "classRole": "Damage Reflect Sub-Boss",
+    "race": "Lumina",
+    "sector": "Order",
+    "stats": {
+      "physicality": 25,
+      "authority": 10,
+      "grace": 15,
+      "acumen": 10,
+      "spirit": 25,
+      "fate": 10,
+      "capacity": 25,
+      "destiny": 20
+    }
+  },
+  {
+    "id": "BOSS_ORD_002",
+    "name": "The Chrono-Inquisitor",
+    "classRole": "Turn Deletion Sub-Boss",
+    "race": "Lumina",
+    "sector": "Order",
+    "stats": {
+      "physicality": 15,
+      "authority": 20,
+      "grace": 25,
+      "acumen": 15,
+      "spirit": 20,
+      "fate": 10,
+      "capacity": 20,
+      "destiny": 20
+    }
+  },
+  {
+    "id": "BOSS_ORD_003",
+    "name": "Lord Gravitas",
+    "classRole": "Initiative Crusher Sub-Boss",
+    "race": "Lumina",
+    "sector": "Order",
+    "stats": {
+      "physicality": 25,
+      "authority": 15,
+      "grace": 20,
+      "acumen": 10,
+      "spirit": 20,
+      "fate": 5,
+      "capacity": 25,
+      "destiny": 20
+    }
+  },
+  {
+    "id": "BOSS_ORD_004",
+    "name": "The Oracle of Truth",
+    "classRole": "Buff Dispeller Sub-Boss",
+    "race": "Lumina",
+    "sector": "Order",
+    "stats": {
+      "physicality": 15,
+      "authority": 25,
+      "grace": 20,
+      "acumen": 20,
+      "spirit": 25,
+      "fate": 10,
+      "capacity": 20,
+      "destiny": 20
+    }
+  },
+  {
+    "id": "BOSS_CHA_000",
+    "name": "The Maelstrom Sovereign, Ignis-Tal",
+    "classRole": "High Priest",
+    "race": "Espers",
+    "sector": "Chaos",
+    "stats": {
+      "physicality": 20,
+      "authority": 35,
+      "grace": 20,
+      "acumen": 30,
+      "spirit": 20,
+      "fate": 20,
+      "capacity": 35,
+      "destiny": 50
+    }
+  },
+  {
+    "id": "BOSS_CHA_001",
+    "name": "The Cinder-King",
+    "classRole": "Ramping Fire Damage Sub-Boss",
+    "race": "Espers",
+    "sector": "Chaos",
+    "stats": {
+      "physicality": 15,
+      "authority": 25,
+      "grace": 15,
+      "acumen": 20,
+      "spirit": 15,
+      "fate": 15,
+      "capacity": 25,
+      "destiny": 20
+    }
+  },
+  {
+    "id": "BOSS_CHA_002",
+    "name": "Deep-Trench Leviathan",
+    "classRole": "Timeline Manipulation Sub-Boss",
+    "race": "Espers",
+    "sector": "Chaos",
+    "stats": {
+      "physicality": 25,
+      "authority": 20,
+      "grace": 15,
+      "acumen": 15,
+      "spirit": 20,
+      "fate": 10,
+      "capacity": 30,
+      "destiny": 20
+    }
+  },
+  {
+    "id": "BOSS_CHA_003",
+    "name": "The Obsidian Colossus",
+    "classRole": "Physical Immunity Sub-Boss",
+    "race": "Espers",
+    "sector": "Chaos",
+    "stats": {
+      "physicality": 30,
+      "authority": 10,
+      "grace": 8,
+      "acumen": 10,
+      "spirit": 25,
+      "fate": 5,
+      "capacity": 35,
+      "destiny": 20
+    }
+  },
+  {
+    "id": "BOSS_CHA_004",
+    "name": "The Howling Gale",
+    "classRole": "Massive Dodge/Retaliation Sub-Boss",
+    "race": "Espers",
+    "sector": "Chaos",
+    "stats": {
+      "physicality": 15,
+      "authority": 20,
+      "grace": 25,
+      "acumen": 20,
+      "spirit": 15,
+      "fate": 30,
+      "capacity": 20,
+      "destiny": 20
+    }
+  },
+  {
+    "id": "BOSS_LOV_000",
+    "name": "Mother-Spore Elyria",
+    "classRole": "High Priest",
+    "race": "Sylvan",
+    "sector": "Love",
+    "stats": {
+      "physicality": 20,
+      "authority": 25,
+      "grace": 20,
+      "acumen": 25,
+      "spirit": 25,
+      "fate": 25,
+      "capacity": 50,
+      "destiny": 50
+    }
+  },
+  {
+    "id": "BOSS_LOV_001",
+    "name": "The Sanguine Root",
+    "classRole": "Sacrificial Nukes Sub-Boss",
+    "race": "Sylvan",
+    "sector": "Love",
+    "stats": {
+      "physicality": 20,
+      "authority": 25,
+      "grace": 15,
+      "acumen": 20,
+      "spirit": 20,
+      "fate": 15,
+      "capacity": 40,
+      "destiny": 20
+    }
+  },
+  {
+    "id": "BOSS_LOV_002",
+    "name": "The Dream-Weaver",
+    "classRole": "Sleep Assassin Sub-Boss",
+    "race": "Sylvan",
+    "sector": "Love",
+    "stats": {
+      "physicality": 15,
+      "authority": 25,
+      "grace": 25,
+      "acumen": 25,
+      "spirit": 20,
+      "fate": 20,
+      "capacity": 25,
+      "destiny": 20
+    }
+  },
+  {
+    "id": "BOSS_LOV_003",
+    "name": "Overgrowth Behemoth",
+    "classRole": "Over-heal Scaling Sub-Boss",
+    "race": "Sylvan",
+    "sector": "Love",
+    "stats": {
+      "physicality": 30,
+      "authority": 15,
+      "grace": 10,
+      "acumen": 15,
+      "spirit": 25,
+      "fate": 10,
+      "capacity": 40,
+      "destiny": 20
+    }
+  },
+  {
+    "id": "BOSS_LOV_004",
+    "name": "Chimera of Life",
+    "classRole": "Multi-phase Revival Sub-Boss",
+    "race": "Sylvan",
+    "sector": "Love",
+    "stats": {
+      "physicality": 25,
+      "authority": 20,
+      "grace": 15,
+      "acumen": 20,
+      "spirit": 20,
+      "fate": 20,
+      "capacity": 35,
+      "destiny": 20
+    }
+  }
+]
