@@ -63,11 +63,12 @@ export const useDebugStore = create<DebugStore>((set, get) => ({
         else if (level === 'debug') console.debug(prefix, message, data || '');
         else console.log(prefix, message, data || '');
 
-        // Fire-and-forget payload to backend so AI can read it in the Vite terminal
+        /* 
         fetch('/api/log', {
             method: 'POST',
             body: JSON.stringify({ level, prefix, message, data })
-        }).catch(_err => {}); // ignore fetch errors quietly
+        }).catch(_err => {}); 
+        */
 
         set(state => ({
             logs: [entry, ...state.logs].slice(0, 500) // Keep last 500 logs max

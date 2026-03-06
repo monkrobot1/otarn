@@ -8,17 +8,39 @@ export const AxiomPedestal = () => {
     const { globalData, unlockAxiomNode } = useGameStore();
     const [selectedAxiom, setSelectedAxiom] = useState<AxiomType>('Order');
 
-    const handleUnlock = (nodeId: string, cost: number, tier: number) => {
-        if (globalData.axiomPoints[selectedAxiom] < cost) {
-            alert(`Not enough ${selectedAxiom} Points.`);
+    const getPointsSpent = (axiom: AxiomType) => {
+        let spent = 0;
+        const tree = AXIOM_TREES[axiom];
+        Object.entries(globalData.unlockedAxiomNodes).forEach(([nodeId, level]) => {
+            if (nodeId.startsWith(`AXIOM_${axiom.toUpperCase()}_`)) {
+                for (const tier of tree) {
+                    const node = tier.find(n => n.id === nodeId);
+                    if (node) {
+                        spent += node.cost * level; // Sum up all levels spent
+                        break;
+                    }
+                }
+            }
+        });
+        return spent;
+    };
+
+    const handleUnlock = (nodeId: string, cost: number, _tier: number, reqPoints: number, maxLevel: number) => {
+        const pointsSpent = getPointsSpent(selectedAxiom);
+        const currentLevel = globalData.unlockedAxiomNodes[nodeId] || 0;
+
+        if (pointsSpent < reqPoints) {
+            alert(`You must spend ${reqPoints} ${selectedAxiom} Points first to unlock this tier.`);
             return;
         }
 
-        // Check if a node in this tier is already unlocked
-        const tierPrefix = `AXIOM_${selectedAxiom.toUpperCase()}_T${tier}_`;
-        const hasUnlockedInTier = globalData.unlockedAxiomNodes.some(n => n.startsWith(tierPrefix));
-        if (hasUnlockedInTier) {
-            alert('You have already chosen a blessing from this tier.');
+        if (currentLevel >= maxLevel) {
+            alert('This talent is already at maximum level.');
+            return;
+        }
+
+        if (globalData.axiomPoints[selectedAxiom] < cost) {
+            alert(`Not enough ${selectedAxiom} Points.`);
             return;
         }
 
@@ -48,60 +70,97 @@ export const AxiomPedestal = () => {
 
     const renderTree = () => {
         const tree = AXIOM_TREES[selectedAxiom];
+        const pointsSpent = getPointsSpent(selectedAxiom);
+
         return (
-            <div className="grid grid-cols-8 gap-3 w-full h-full items-start overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent">
-                {tree.map((tierOptions, tierIndex) => (
-                    <div key={tierIndex} className="flex flex-col gap-2 h-full">
-                        <div className="text-gray-500 font-mono text-[10px] tracking-widest border-b border-white/20 w-full text-center pb-1 uppercase shrink-0">
-                            TIER {tierIndex + 1}
-                        </div>
-                        <div className="grid grid-rows-4 gap-2 h-full min-h-[300px]">
-                            {tierOptions.map((opt) => {
-                                const isUnlocked = globalData.unlockedAxiomNodes.includes(opt.id);
-                                const tierPrefix = `AXIOM_${selectedAxiom.toUpperCase()}_T${tierIndex + 1}_`;
-                                const tierLocked = !isUnlocked && globalData.unlockedAxiomNodes.some(n => n.startsWith(tierPrefix));
-                                const canAfford = globalData.axiomPoints[selectedAxiom] >= opt.cost;
-                                
-                                return (
-                                    <button
-                                        key={opt.id}
-                                        onClick={() => handleUnlock(opt.id, opt.cost, opt.tier)}
-                                        disabled={tierLocked || (!isUnlocked && !canAfford)}
-                                        className={`w-full p-2 border text-left flex flex-col gap-1 transition-all group overflow-hidden relative ${
-                                            isUnlocked 
-                                                ? 'border-gold-trim bg-gold-trim/10 shadow-[0_0_10px_rgba(212,175,55,0.1)]' 
-                                                : tierLocked
-                                                    ? 'border-red-900/40 bg-black/60 opacity-40 cursor-not-allowed'
-                                                    : canAfford
-                                                        ? 'border-white/20 hover:border-gold-trim/60 hover:bg-white/5 cursor-pointer hover:-translate-y-0.5 hover:shadow-lg'
-                                                        : 'border-white/5 bg-black/50 opacity-50 cursor-not-allowed'
+            <div className="flex gap-4 w-full h-full items-start overflow-x-auto pb-6 pr-2 scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent">
+                {tree.map((tierOptions, tierIndex) => {
+                    const isTierAvailable = pointsSpent >= tierOptions[0].reqPoints;
+                    
+                    return (
+                        <div key={tierIndex} className={`flex flex-col gap-2 h-full transition-all shrink-0 w-[260px] ${!isTierAvailable ? 'opacity-40 grayscale-[80%]' : ''}`}>
+                            <div className="text-gray-500 font-mono text-[10px] tracking-widest border-b border-white/20 w-full text-center pb-1 uppercase shrink-0">
+                                <div>TIER {tierIndex + 1}</div>
+                                {!isTierAvailable && (
+                                    <div className="text-[8px] text-red-500/80 mt-0.5" title="Points required to be spent in this tree before unlocking this tier">
+                                        REQ: {tierOptions[0].reqPoints} PT
+                                    </div>
+                                )}
+                            </div>
+                            <div className="flex flex-col gap-2 h-full">
+                                {tierOptions.map((opt) => {
+                                    const currentLevel = globalData.unlockedAxiomNodes[opt.id] || 0;
+                                    const isUnlocked = currentLevel > 0;
+                                    const isMaxLevel = currentLevel >= opt.maxLevel;
+                                    const canAfford = globalData.axiomPoints[selectedAxiom] >= opt.cost;
+                                    const isGodAbility = opt.effectType === 'unlock_god_ability';
+                                    
+                                    return (
+                                        <button
+                                            key={opt.id}
+                                            onClick={() => handleUnlock(opt.id, opt.cost, opt.tier, opt.reqPoints, opt.maxLevel)}
+                                            disabled={!isTierAvailable || isMaxLevel || (!isMaxLevel && !canAfford)}
+                                            className={`w-full p-2 border text-left flex flex-col gap-1 transition-all group overflow-hidden relative min-h-[125px] ${
+                                                !isTierAvailable
+                                                    ? 'border-white/5 bg-black/80 cursor-not-allowed opacity-40'
+                                                    : isMaxLevel
+                                                        ? 'border-gold-trim bg-gold-trim/20 shadow-[0_0_15px_rgba(212,175,55,0.2)] pb-4'
+                                                    : isUnlocked 
+                                                        ? 'border-gold-trim/60 bg-gold-trim/5 hover:bg-gold-trim/10' 
+                                                        : isGodAbility
+                                                            ? 'border-cyan-500/50 bg-cyan-500/10 hover:border-cyan-400 hover:bg-cyan-500/20 shadow-[0_0_10px_rgba(6,182,212,0.1)]'
+                                                            : canAfford
+                                                                ? 'border-white/20 hover:border-gold-trim/60 hover:bg-white/5 cursor-pointer hover:-translate-y-0.5 hover:shadow-lg'
+                                                                : 'border-white/5 bg-black/50 opacity-50 cursor-not-allowed'
                                         }`}
                                     >
                                         {isUnlocked && <div className="absolute inset-0 bg-gold-trim/5 z-0 animate-pulse pointer-events-none" />}
-                                        <div className="flex justify-between items-start z-10 w-full">
-                                            <span className={`text-[10px] tracking-widest font-mono font-bold w-full truncate pr-1 ${isUnlocked ? 'text-gold-trim drop-shadow-md' : 'text-gray-200'}`} title={opt.name.toUpperCase()}>
-                                                {opt.name.toUpperCase()}
-                                            </span>
-                                        </div>
-                                        <div className="flex justify-between items-center w-full z-10 hidden xl:flex">
-                                            {opt.effectType && (
-                                                <span className="text-[8px] uppercase font-mono tracking-widest text-white/50 bg-white/10 px-1 py-0.5 rounded truncate max-w-[60%]">
-                                                    {opt.effectType.replace('_', ' ')}
+                                        {isGodAbility && !isUnlocked && <div className="absolute inset-0 bg-cyan-500/5 z-0 pointer-events-none" />}
+                                            <div className="flex gap-2 items-start z-10 w-full mb-1">
+                                                <div className={`w-8 h-8 shrink-0 rounded border flex items-center justify-center overflow-hidden bg-black/40 ${isUnlocked ? 'border-gold-trim/50 shadow-[0_0_5px_rgba(212,175,55,0.3)]' : 'border-white/10'}`}>
+                                                    <img 
+                                                        src={`/assets/icons/${opt.icon}`} 
+                                                        alt="" 
+                                                        className={`w-full h-full object-cover transition-transform duration-500 ${isMaxLevel ? 'scale-110' : 'group-hover:scale-110'}`}
+                                                        onError={(e) => {
+                                                            (e.target as HTMLImageElement).src = '/assets/icons/icon_axiom_order.png';
+                                                        }}
+                                                    />
+                                                </div>
+                                                <div className="flex flex-col flex-1 truncate">
+                                                    <span className={`text-[10px] tracking-widest font-mono font-bold truncate ${isUnlocked ? 'text-gold-trim drop-shadow-md' : 'text-gray-200'}`} title={opt.name.toUpperCase()}>
+                                                        {opt.name.toUpperCase()}
+                                                    </span>
+                                                    <span className={`text-[9px] font-mono ${isMaxLevel ? 'text-gold-trim' : isUnlocked ? 'text-white/80' : 'text-gray-500'}`}>
+                                                        RANK {currentLevel} / {opt.maxLevel}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div className="flex justify-between items-center w-full z-10">
+                                                {opt.effectType && (
+                                                    <span className={`text-[7px] uppercase font-mono tracking-widest px-1 py-0.5 rounded truncate max-w-[60%] ${isGodAbility ? 'text-cyan-400 bg-cyan-400/20' : 'text-white/50 bg-white/10'}`}>
+                                                        {opt.effectType.replace('_', ' ')}
+                                                    </span>
+                                                )}
+                                                <span className={`text-[9px] font-mono font-bold shrink-0 ${isMaxLevel ? 'text-gold-trim' : canAfford ? 'text-cyan-400' : 'text-gray-600'}`}>
+                                                    {isMaxLevel ? 'MAXED' : `${opt.cost} PT`}
                                                 </span>
-                                            )}
-                                            <span className={`text-[9px] font-mono font-bold shrink-0 ${isUnlocked ? 'text-green-400' : canAfford && !tierLocked ? 'text-cyan-400' : 'text-gray-600'}`}>
-                                                {isUnlocked ? 'UNLOCKED' : `${opt.cost} PT`}
-                                            </span>
-                                        </div>
-                                        <p className="text-[9px] text-gray-400 z-10 mt-1 leading-snug line-clamp-4">
-                                            {formatDescription(opt.description)}
-                                        </p>
+                                            </div>
+                                            <div className="text-[8px] text-gray-400 z-10 mt-1 leading-tight line-clamp-3">
+                                                {formatDescription(opt.description)}
+                                                {isUnlocked && !isMaxLevel && (
+                                                    <span className="text-green-400 block mt-1 font-bold animate-pulse">
+                                                        NEXT RANK: Increase Potency
+                                                    </span>
+                                                )}
+                                            </div>
                                     </button>
-                                );
-                            })}
+                                    );
+                                })}
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    );
+                })}
             </div>
         );
     };
@@ -115,7 +174,7 @@ export const AxiomPedestal = () => {
                         AXIOM PEDESTAL
                     </h2>
                     <p className="text-gray-400 italic text-xs text-center leading-relaxed px-2">
-                        Offer the latent resonance gathered from your ascensions. Choose wisely, as devoting yourself to an aspect seals the others of its tier forever.
+                        Offer the latent resonance gathered from your ascensions. Invest deeply into your chosen aspects to unlock higher tiers of power.
                     </p>
                 </div>
 
@@ -161,7 +220,10 @@ export const AxiomPedestal = () => {
             <div className="flex-1 h-full flex flex-col overflow-hidden pt-4">
                 <div className="flex justify-between items-end w-full pb-4 border-b border-white/10 mb-4 px-4 shrink-0">
                     <div className="flex flex-col gap-1">
-                        <span className="text-xs text-gray-500 font-mono tracking-widest">CURRENT FOCUS</span>
+                        <span className="text-xs text-gray-500 font-mono tracking-widest flex items-center gap-2">
+                            CURRENT FOCUS
+                            <span className="text-white/40">({getPointsSpent(selectedAxiom)} PT SPENT TOTAL)</span>
+                        </span>
                         <h3 className={`text-2xl font-mono tracking-widest uppercase ${
                             selectedAxiom === 'Order' ? 'text-blue-300 drop-shadow-[0_0_8px_rgba(147,197,253,0.5)]' :
                             selectedAxiom === 'Chaos' ? 'text-red-400 drop-shadow-[0_0_8px_rgba(248,113,113,0.5)]' :

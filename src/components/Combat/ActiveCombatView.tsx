@@ -53,11 +53,11 @@ export const ActiveCombatView = ({ encounterType = 'combat' }: ActiveCombatViewP
   const activeBg = backgroundData.filter(bg => bg.url && bg.url.trim() !== '' && bg.type === 'Planetary')[0]?.url || '/assets/default_galaxy.jpg';
 
   return (
-    <div className="w-full h-full flex flex-col relative z-20 bg-black overflow-hidden">
+    <div className="w-full h-full flex flex-col relative z-20 bg-transparent overflow-hidden">
       
       {/* Background Viewport (Constrained to preserve Aspect above HUD) */}
       <div 
-          className="absolute top-0 left-0 w-full h-[calc(100%-15.5rem)] bg-cover bg-bottom z-0"
+          className="absolute top-0 left-0 w-full h-[calc(100%-15.5rem)] bg-cover bg-bottom z-10"
           style={{ backgroundImage: `url(${activeBg})` }}
       >
           {/* Smooth blend shadow into the HUD base */}
@@ -65,7 +65,7 @@ export const ActiveCombatView = ({ encounterType = 'combat' }: ActiveCombatViewP
       </div>
 
       {/* Solid HUD Backdrop layer below the action */}
-      <div className="absolute bottom-0 left-0 w-full h-[15.5rem] bg-[#070a0f] border-t border-cyan-900/30 shadow-[0_-15px_30px_rgba(0,255,255,0.03)] z-0" />
+      <div className="absolute bottom-0 left-0 w-full h-[15.5rem] bg-[#070a0f] border-t border-cyan-900/30 shadow-[0_-15px_30px_rgba(0,255,255,0.03)] z-10" />
 
       {/* Main Overlay Elements Container */}
       <div className="flex-1 w-full h-full p-6 flex flex-col relative z-20">

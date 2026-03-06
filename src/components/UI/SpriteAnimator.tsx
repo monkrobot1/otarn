@@ -82,11 +82,6 @@ export const SpriteAnimator = ({
   const col = currentFrame % cols;
   const row = Math.floor(currentFrame / cols);
 
-  // Optional: Add simple console group so we can see the data streams without flooding too bad
-  useEffect(() => {
-    if (!playing) return;
-    console.log(`[SpriteAnimator] Frame: ${currentFrame}/${maxFrames} | Col: ${col}, Row: ${row} | Translate: -${(col / cols) * 100}%, -${(row / rows) * 100}%`);
-  }, [currentFrame, playing, maxFrames, col, row, cols, rows]);
 
   return (
     <div 

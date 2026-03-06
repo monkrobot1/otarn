@@ -1,6 +1,9 @@
 import type { ActiveCharacter, BaseCharacter, Ability } from '../types/character';
 import type { StatBlock } from '../types/stats';
 import charactersData from '../data/characters.json';
+import enemiesData from '../data/enemies.json';
+
+const allBaseData = [...charactersData, ...enemiesData];
 
 // Define growth matrices for primary roles (simplification of individual classes for prototype)
 const RoleGrowthModifiers: Record<string, Partial<StatBlock>> = {
@@ -29,9 +32,9 @@ export class CharacterFactory {
    */
   static createFromBaseId(baseId: string, level: number = 1): ActiveCharacter | null {
     // 1. Find the base data in the JSON
-    const dataRow = charactersData.find(c => c.id === baseId);
+    const dataRow = allBaseData.find(c => c.id === baseId);
     if (!dataRow) {
-      console.error(`Character ID ${baseId} not found in characters.json`);
+      console.error(`Character ID ${baseId} not found in characters.json or enemies.json`);
       return null;
     }
 

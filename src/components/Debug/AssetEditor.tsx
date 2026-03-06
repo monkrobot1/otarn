@@ -15,6 +15,36 @@ export const AssetEditor = ({ onClose }: { onClose: () => void }) => {
   const [enemies, setEnemies] = useState<any[]>(enemyData);
   const [relics, setRelics] = useState<any[]>(relicData);
   const [backgrounds, setBackgrounds] = useState<any[]>(backgroundData);
+
+  const addNewAsset = () => {
+    const newId = `NEW_${activeTab.toUpperCase()}_${Date.now()}`;
+    const newName = `New ${activeTab.slice(0, -1)}`;
+    let newAsset: any = { id: newId, name: newName };
+
+    if (activeTab === 'characters' || activeTab === 'enemies') {
+      newAsset = {
+        ...newAsset,
+        classRole: 'Frontline',
+        race: 'Null-Forged',
+        sector: 'Judgment',
+        stats: { physicality: 10, authority: 10, grace: 10, acumen: 10, spirit: 10, fate: 10, capacity: 10, destiny: 10 },
+        spriteManifest: { idle: { name: 'idle', url: '', cols: 1, rows: 1, totalFrames: 1, fps: 12, loop: true } }
+      };
+    } else if (activeTab === 'relics') {
+      newAsset = {
+        ...newAsset,
+        sector: 'Universal',
+        tier: 'Fractured',
+        effect: 'New relic effect description...',
+        color: '#9CA3AF'
+      };
+    } else if (activeTab === 'backgrounds') {
+        newAsset = { ...newAsset, type: 'Environment', sector: 'Universal', url: '' };
+    }
+
+    setActiveCollection((prev: any[]) => [...prev, newAsset]);
+    setSelectedId(newId);
+  };
   
   const [selectedId, setSelectedId] = useState(characterData[0]?.id);
   const [activeAnimation, setActiveAnimation] = useState<keyof SpriteManifest>('idle');
@@ -260,9 +290,20 @@ export const AssetEditor = ({ onClose }: { onClose: () => void }) => {
               }`}
             >
               <div className="font-bold truncate">{item.name}</div>
-              <div className="text-[10px] text-cyan-600 truncate">{item.id}</div>
+              <div className="flex items-center gap-2">
+                <div className="text-[10px] text-cyan-600 truncate">{item.id}</div>
+                {item.id.includes('BOSS') && (
+                  <span className="text-[8px] bg-red-900/50 text-red-400 px-1 border border-red-500/50 leading-none py-0.5 rounded">BOSS</span>
+                )}
+              </div>
             </button>
           ))}
+          <button
+            onClick={addNewAsset}
+            className="mt-4 mx-4 py-2 border border-dashed border-cyan-700 text-cyan-700 hover:border-cyan-400 hover:text-cyan-400 transition-colors"
+          >
+            + ADD NEW {activeTab.slice(0, -1).toUpperCase()}
+          </button>
         </div>
 
         {/* Right Editor Pane */}
@@ -279,6 +320,7 @@ export const AssetEditor = ({ onClose }: { onClose: () => void }) => {
                 
                 {['id', 'name', 'classRole', 'tier', 'color', 'type', 'sector', 'race', 'description', 'effect', 'url'].map(key => {
                     if (selectedItem[key] === undefined && activeTab !== 'backgrounds') return null;
+                    if (activeTab === 'relics' && ['tier', 'color', 'sector', 'effect'].includes(key)) return null;
                     if (activeTab === 'backgrounds' && !['id', 'name', 'type', 'sector', 'url'].includes(key)) return null;
                     return (
                         <div key={key} className="flex flex-col gap-1">
@@ -445,6 +487,92 @@ export const AssetEditor = ({ onClose }: { onClose: () => void }) => {
                                 <span>NO BACKGROUND SET</span>
                             </div>
                         )}
+                    </div>
+                </div>
+            )}
+
+            {/* RELIC INSPECTOR */}
+            {activeTab === 'relics' && (
+                <div className="space-y-6 mt-6 pb-20">
+                    <h2 className="text-yellow-400 border-b border-yellow-400/30 pb-2">RELIC INSPECTOR & PREVIEW</h2>
+                    <div className="flex gap-8 items-start">
+                        {/* Visual Preview */}
+                        <div className="w-1/3 p-6 border border-cyan-900/50 bg-black/40 rounded-xl flex flex-col items-center gap-4 group">
+                            <div 
+                                className="w-32 h-32 rounded-lg flex items-center justify-center relative transition-transform group-hover:scale-105"
+                                style={{ 
+                                    backgroundColor: `${selectedItem.color}22`,
+                                    border: `2px solid ${selectedItem.color}`,
+                                    boxShadow: `0 0 20px ${selectedItem.color}33`
+                                }}
+                            >
+                                <div 
+                                    className="text-4xl filter drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]"
+                                    style={{ color: selectedItem.color }}
+                                >
+                                    {selectedItem.tier === 'Divine' ? '✦' : '✧'}
+                                </div>
+                                {/* Shine effect */}
+                                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent pointer-events-none" />
+                            </div>
+                            <div className="text-center">
+                                <span 
+                                    className="px-3 py-0.5 rounded-full text-[10px] font-bold tracking-widest uppercase"
+                                    style={{ backgroundColor: `${selectedItem.color}44`, color: selectedItem.color }}
+                                >
+                                    {selectedItem.tier}
+                                </span>
+                                <h3 className="mt-2 text-lg font-bold text-white">{selectedItem.name}</h3>
+                                <p className="mt-1 text-gray-400 text-[10px] italic max-w-[200px] leading-relaxed">
+                                    "{selectedItem.effect}"
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Detailed Fields */}
+                        <div className="flex-1 grid grid-cols-2 gap-4">
+                            <div className="flex flex-col gap-1">
+                                <label className="text-gray-500">Tier</label>
+                                <select 
+                                    value={selectedItem.tier}
+                                    onChange={e => handleUpdate('tier', e.target.value)}
+                                    className="bg-black/50 border border-cyan-900 px-3 py-2 text-cyan-100 outline-none focus:border-cyan-400"
+                                >
+                                    {['Fractured', 'Resonant', 'Exalted', 'Reliquary', 'Divine'].map(t => (
+                                        <option key={t} value={t}>{t}</option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div className="flex flex-col gap-1">
+                                <label className="text-gray-500">Sector</label>
+                                <select 
+                                    value={selectedItem.sector}
+                                    onChange={e => handleUpdate('sector', e.target.value)}
+                                    className="bg-black/50 border border-cyan-900 px-3 py-2 text-cyan-100 outline-none focus:border-cyan-400"
+                                >
+                                    {['Judgment', 'Order', 'Chaos', 'Love', 'Universal'].map(s => (
+                                        <option key={s} value={s}>{s}</option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div className="flex flex-col gap-1 col-span-2">
+                                <label className="text-gray-500">Color (Hex)</label>
+                                <div className="flex gap-2">
+                                    <input 
+                                        type="color"
+                                        value={selectedItem.color || '#9CA3AF'}
+                                        onChange={e => handleUpdate('color', e.target.value)}
+                                        className="h-9 w-12 bg-transparent border border-cyan-900 cursor-pointer p-0"
+                                    />
+                                    <input 
+                                        type="text" 
+                                        value={selectedItem.color || ''} 
+                                        onChange={e => handleUpdate('color', e.target.value)}
+                                        className="bg-black/50 border border-cyan-900 px-3 py-2 text-cyan-100 outline-none focus:border-cyan-400 flex-1"
+                                    />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             )}

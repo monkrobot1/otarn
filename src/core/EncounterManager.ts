@@ -1,8 +1,9 @@
 import charactersData from '../data/characters.json';
+import enemiesData from '../data/enemies.json';
 import { CharacterFactory } from './CharacterFactory';
 import type { BaseCharacter, ActiveCharacter } from '../types/character';
 
-const allCharacters = charactersData as unknown as BaseCharacter[];
+const allCharacters = [...charactersData, ...enemiesData] as unknown as BaseCharacter[];
 
 export class EncounterManager {
     static generateEncounter(nodeType: 'combat' | 'elite' | 'boss', sector: string, currentSectorLevel: number): ActiveCharacter[] {

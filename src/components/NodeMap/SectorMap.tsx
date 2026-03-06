@@ -10,7 +10,7 @@ interface SectorMapProps {
 }
 
 export const SectorMap = ({ onNodeSelect }: SectorMapProps) => {
-  const { runData, updateRunData } = useGameStore();
+  const { runData, updateRunData, consumeSpark } = useGameStore();
   const [nodes, setNodes] = useState<MapNode[]>([]);
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
   const [selectedNode, setSelectedNode] = useState<MapNode | null>(null);
@@ -51,6 +51,12 @@ export const SectorMap = ({ onNodeSelect }: SectorMapProps) => {
 
   const confirmNodeSelect = () => {
       if (!selectedNode) return;
+      
+      if (!consumeSpark()) {
+          alert("Insufficient Divine Sparks. You are stalled in the void.");
+          return;
+      }
+
       const id = selectedNode.id;
       updateRunData({ currentNodeId: id, visitedNodes: [...visitedNodes, id] });
       
@@ -88,8 +94,15 @@ export const SectorMap = ({ onNodeSelect }: SectorMapProps) => {
           SECTOR MAPPING: ONLINE
         </h2>
         <div className="flex gap-4">
+          <div className="glass-panel px-4 py-1 flex flex-col items-center border-gold-trim/30">
+            <span className="text-[10px] text-gold-trim tracking-tighter uppercase">Divine Sparks (Fuel)</span>
+            <span className="text-lg font-mono text-gold-trim flex items-center gap-2">
+                <span className="w-2 h-2 bg-gold-trim rounded-full animate-pulse"></span>
+                {runData?.divineSparks || 0}
+            </span>
+          </div>
           <div className="glass-panel px-4 py-1 flex flex-col items-center">
-            <span className="text-xs text-gray-400">Ephemeral Faith</span>
+            <span className="text-[10px] text-gray-400 uppercase tracking-tighter">Ephemeral Faith</span>
             <span className="text-lg font-mono text-cyan-300">{runData?.ephemeralFaith || 0}</span>
           </div>
         </div>
