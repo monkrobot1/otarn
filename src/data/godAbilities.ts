@@ -91,7 +91,7 @@ export const GOD_ABILITIES: Record<string, GodIntervention> = {
     'GOD_LOVE': {
         id: 'GOD_LOVE',
         name: 'Unconditional Love',
-        description: 'The next time any proxy would take a lethal hit, they are left at 1 HP instead.',
+        description: 'The next time any champion would take a lethal hit, they are left at 1 HP instead.',
         faithCost: 60,
         effectType: 'status',
         cooldown: 5
@@ -99,7 +99,7 @@ export const GOD_ABILITIES: Record<string, GodIntervention> = {
     'GOD_HIVE_MIND': {
         id: 'GOD_HIVE_MIND',
         name: 'Hive Mind',
-        description: 'For 3 turns, all damage taken by any proxy is distributed evenly across the party.',
+        description: 'For 3 turns, all damage taken by any champion is distributed evenly across the party.',
         faithCost: 50,
         effectType: 'status',
         cooldown: 3

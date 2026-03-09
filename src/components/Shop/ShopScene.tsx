@@ -61,7 +61,7 @@ export const ShopScene: React.FC = () => {
     selectedRelics.push({
       id: 'service-heal',
       type: 'service',
-      name: 'Mend Proxies',
+      name: 'Mend Champions',
       description: 'Fully restore HP to all party members.',
       cost: 50,
       sold: false,

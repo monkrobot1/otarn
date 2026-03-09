@@ -1,7 +1,7 @@
 import type { StatBlock } from './stats';
 
 // Enums to match JSON data
-export type CharacterRole = 'Frontline' | 'Backline';
+export type CharacterRole = 'Frontline' | 'Backline' | 'Boss';
 export type SectorName = 'Judgment' | 'Order' | 'Chaos' | 'Love';
 export type RaceName = 'Null-Forged' | 'Lumina' | 'Espers' | 'Sylvan';
 
@@ -40,8 +40,17 @@ export interface Ability {
   targeting: 'enemy' | 'ally' | 'self' | 'all_enemies' | 'all_allies';
   baseDamage?: number;
   baseHeal?: number;
+  costRevelation?: number;
   hits?: AbilityHit[];
   statusEffects?: string[];
+  vfxType?: 'projectile' | 'beam' | 'hit' | 'buff';
+  vfxUrl?: string;
+  iconUrl?: string;
+  iconSprite?: {
+    sheet: 'chaos_ability_icons.png' | 'order_ability_icons.png' | 'judgment_ability_icons.png' | 'love_ability_icons.png' | 'character_portraits.png';
+    row: number;
+    col: number;
+  };
 }
 
 export interface BaseCharacter {
@@ -53,6 +62,8 @@ export interface BaseCharacter {
   stats: StatBlock;
   abilities?: Ability[];
   spriteManifest?: SpriteManifest;
+  fullArtUrl?: string;
+  portraitUrl?: string;
 }
 
 export interface StatusEffect {
@@ -68,6 +79,12 @@ export interface ActiveCharacter {
   baseId: string;           // Reference to BaseCharacter template
   name: string;
   portraitUrl: string; // Dynamic path or remote URL for 512x512 generated dummy art
+  portraitSprite?: {
+    sheet: 'chaos_ability_icons.png' | 'order_ability_icons.png' | 'judgment_ability_icons.png' | 'love_ability_icons.png' | 'character_portraits.png';
+    row: number;
+    col: number;
+  };
+  fullArtUrl?: string; // Full screen art reference
   spriteSheet?: {
     url: string;
     cols: number;

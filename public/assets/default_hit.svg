@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="100" viewBox="0 0 400 100">
+  <rect width="400" height="100" fill="transparent"/>
+  <!-- Frame 1 -->
+  <path d="M40 40 L60 60 M60 40 L40 60" stroke="#f00" stroke-width="4" stroke-linecap="round"/>
+  <!-- Frame 2 -->
+  <path d="M130 30 L170 70 M170 30 L130 70" stroke="#f00" stroke-width="6" stroke-linecap="round"/>
+  <!-- Frame 3 -->
+  <path d="M220 20 L280 80 M280 20 L220 80" stroke="#ff0" stroke-width="8" stroke-linecap="round"/>
+  <!-- Frame 4 -->
+  <path d="M300 0 L400 100 M400 0 L300 100" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+</svg>

@@ -12,6 +12,7 @@ interface SpriteAnimatorProps {
   onComplete?: () => void;
   className?: string;
   mirrored?: boolean;
+  randomStartOffset?: boolean;
 }
 
 export const SpriteAnimator = ({
@@ -26,62 +27,85 @@ export const SpriteAnimator = ({
   onComplete,
   className = '',
   mirrored = false,
+  randomStartOffset = false,
 }: SpriteAnimatorProps) => {
-  const [currentFrame, setCurrentFrame] = useState(0);
   const maxFrames = totalFrames || (cols * rows);
+
+  // We only determine start frame once on mount
+  const initialFrame = useRef((loop && randomStartOffset && maxFrames > 0) ? Math.floor(Math.random() * maxFrames) : 0);
   
-  const frameRef = useRef(currentFrame);
+  const frameRef = useRef(initialFrame.current);
   const playingRef = useRef(playing);
-  const intervalRef = useRef<number | null>(null);
+  const onCompleteRef = useRef(onComplete);
+  const imgRef = useRef<HTMLImageElement>(null);
+  const requestRef = useRef<number>(0);
+  const lastTimeRef = useRef<number>(performance.now());
 
   const [aspectRatio, setAspectRatio] = useState<number | undefined>(undefined);
 
   useEffect(() => {
+     onCompleteRef.current = onComplete;
+  }, [onComplete]);
+
+  const updateTransform = (frame: number) => {
+      if (!imgRef.current || !cols || !rows) return;
+      const col = frame % cols;
+      const row = Math.floor(frame / cols);
+      imgRef.current.style.transform = `translate(-${(col / cols) * 100}%, -${(row / rows) * 100}%)`;
+  };
+
+  useEffect(() => {
+      // Upon receiving a completely new animation sprite, reset frame unless it's just the initial mount
+      if (frameRef.current > 0 && !loop) {
+          frameRef.current = 0;
+          updateTransform(0);
+      }
+  }, [imageUrl]); 
+
+  useEffect(() => {
     playingRef.current = playing;
-    if (playing && currentFrame >= maxFrames - 1 && !loop) {
+    if (playing && frameRef.current >= maxFrames - 1 && !loop) {
         // Reset if we are asked to play but are already at the end
-        setCurrentFrame(0);
         frameRef.current = 0;
+        updateTransform(0);
     }
   }, [playing, maxFrames, loop]);
 
   useEffect(() => {
     if (!playing) {
-      if (intervalRef.current) clearInterval(intervalRef.current);
+      if (requestRef.current) cancelAnimationFrame(requestRef.current);
       return;
     }
 
     const intervalTime = 1000 / fps;
 
-    intervalRef.current = window.setInterval(() => {
-      // Look closely at the sprite sheet provided, the last few frames might be blank
-      // For now we'll play the whole grid 
-      if (frameRef.current >= maxFrames - 1) {
-        if (loop) {
-          frameRef.current = 0;
-          setCurrentFrame(0);
-        } else {
-          if (intervalRef.current) clearInterval(intervalRef.current);
-          if (onComplete) onComplete();
+    const animate = (time: number) => {
+        if (time - lastTimeRef.current >= intervalTime) {
+            lastTimeRef.current = time;
+            
+            if (frameRef.current >= maxFrames - 1) {
+                if (loop) {
+                    frameRef.current = 0;
+                    updateTransform(0);
+                } else {
+                    if (onCompleteRef.current) onCompleteRef.current();
+                    return; // Stop animating naturally
+                }
+            } else {
+                frameRef.current += 1;
+                updateTransform(frameRef.current);
+            }
         }
-      } else {
-        frameRef.current += 1;
-        setCurrentFrame(frameRef.current);
-      }
-    }, intervalTime);
+        requestRef.current = requestAnimationFrame(animate);
+    };
+
+    lastTimeRef.current = performance.now();
+    requestRef.current = requestAnimationFrame(animate);
 
     return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
+      if (requestRef.current) cancelAnimationFrame(requestRef.current);
     };
-  }, [playing, fps, maxFrames, loop, onComplete]);
-
-
-
-
-  // Calculate coordinates based on current frame
-  const col = currentFrame % cols;
-  const row = Math.floor(currentFrame / cols);
-
+  }, [playing, fps, maxFrames, loop, cols, rows]);
 
   return (
     <div 
@@ -93,12 +117,14 @@ export const SpriteAnimator = ({
         }}
     >
         <img 
+            ref={imgRef}
             src={imageUrl}
             onLoad={(e) => {
                 const img = e.currentTarget;
                 if (cols && rows && img.naturalWidth && img.naturalHeight) {
                     setAspectRatio((img.naturalWidth / cols) / (img.naturalHeight / rows));
                 }
+                updateTransform(frameRef.current);
             }}
             style={{
                 position: 'absolute',
@@ -107,7 +133,7 @@ export const SpriteAnimator = ({
                 width: `${cols * 100}%`,
                 height: `${rows * 100}%`,
                 maxWidth: 'none',
-                transform: `translate(-${(col / cols) * 100}%, -${(row / rows) * 100}%)`,
+                transform: `translate(-${((initialFrame.current % cols) / cols) * 100}%, -${(Math.floor(initialFrame.current / cols) / rows) * 100}%)`,
                 transition: 'none'
             }}
         />

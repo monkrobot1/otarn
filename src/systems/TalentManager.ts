@@ -7,7 +7,7 @@ export class TalentManager {
      * based on the active talents equipped by the party.
      * This creates a self-contained closed-loop system for applying dynamic boosts.
      */
-    static applyPreCombatModifiers(party: ActiveCharacter[], activeTalentsFromRun: string[]): ActiveCharacter[] {
+    static applyPreCombatModifiers(party: ActiveCharacter[], activeTalentsFromRun: string[], activeRelics: string[] = []): ActiveCharacter[] {
         if (!activeTalentsFromRun || activeTalentsFromRun.length === 0) return party;
 
         InternalLogger.info('combat', `TalentManager evaluating ${activeTalentsFromRun.length} active global talents.`);
@@ -83,6 +83,10 @@ export class TalentManager {
                 }
             });
 
+            if (activeRelics.includes('REL_DEFAULT')) {
+                hpModifier += 0.20; // +20% HP capacity from Default Relic
+            }
+
             // Apply calculated Max HP Modifiers
             if (hpModifier !== 1.0) {
                 // Assumes we haven't taken damage yet - combat start!
@@ -100,10 +104,10 @@ export class TalentManager {
      * values or status effects right before they are dealt to the target.
      * Making this extensible so we can easily add logic for tier 3/4 complicated talents later.
      */
-    static onDamageDealt(_source: ActiveCharacter, target: ActiveCharacter, initialDamage: number, _damageType: string, allTalents: string[]): number {
+    static onDamageDealt(_source: ActiveCharacter, target: ActiveCharacter, initialDamage: number, _damageType: string, allTalents: string[], activeRelics: string[] = []): number {
         let modifiedDamage = initialDamage;
 
-        // Example: "Honor Bound" Proxies deal +5% damage to full health enemies
+        // Example: "Honor Bound" Champions deal +5% damage to full health enemies
         if (allTalents.includes('TAL_ORD_007')) {
              // Let's assume maxHp is stored somewhere, for now we will cheat a bit or you'll need the combat store reference
              // This is an extensible hook demonstrating how we will wire it up.
@@ -112,9 +116,12 @@ export class TalentManager {
              }
         }
 
-        // Tier 4 Genesis - reduce damage output by 20%
         if (allTalents.includes('TAL_LOV_029')) {
              modifiedDamage *= 0.8;
+        }
+
+        if (activeRelics.includes('REL_DEFAULT')) {
+             modifiedDamage *= 1.20; // +20% damage from Default Relic
         }
 
         return Math.floor(modifiedDamage);

@@ -12,7 +12,7 @@ The economy of Otaran is split between the eternal power of the God (Meta) and t
 - **Effects:**
   - Permanently unlock new **Axiom Talents** to be added to the global draft pool.
   - Permanently unlock or encounter new **Relics** in the world.
-  - Permanently increase baseline proxy stats (Ascension).
+  - Permanently increase baseline champion stats (Ascension).
 
 ### Ephemeral Faith (Run Currency)
 - **Source:** Earned during a specific run through combat, events, and node traversal.
@@ -20,7 +20,7 @@ The economy of Otaran is split between the eternal power of the God (Meta) and t
 - **Effects:**
   - Activate unlocked Talents for the current run.
   - Purchase mid-run upgrades or healing.
-  - Resurrect fallen proxies.
+  - Resurrect fallen champions.
 
 ---
 
@@ -36,7 +36,7 @@ The economy of Otaran is split between the eternal power of the God (Meta) and t
 
 ---
 
-## 3. Proxy Ascension
-Spending Divine Sparks on specific Proxy profiles permanently increases their baseline rarity (**Stars**).
+## 3. Champion Ascension
+Spending Divine Sparks on specific Champion profiles permanently increases their baseline rarity (**Stars**).
 - **1-Star to 2-Star:** Increases primary class stats by 20%.
 - **Benefits:** Ensures late-game runs begin with significantly stronger base units.

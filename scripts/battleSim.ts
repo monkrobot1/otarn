@@ -4,17 +4,17 @@ import { EncounterManager } from '../src/core/EncounterManager';
 
 async function runSim() {
     console.log("===================================");
-    console.log("   OTARAN PROXY BATTLE SIMULATOR   ");
+    console.log("   OTARAN CHAMPION BATTLE SIMULATOR   ");
     console.log("===================================");
 
     // 1. Setup Allies
-    const proxyIds = ['CHR_JUD_VOD_001', 'CHR_ORD_CHR_001', 'CHR_CHA_FIR_001', 'CHR_LOV_LIF_001'];
-    const party = proxyIds.map(id => CharacterFactory.createFromBaseId(id, 1)).filter(Boolean) as any[];
+    const championIds = ['CHR_JUD_VOD_001', 'CHR_ORD_CHR_001', 'CHR_CHA_FIR_001', 'CHR_LOV_LIF_001'];
+    const party = championIds.map(id => CharacterFactory.createFromBaseId(id, 1)).filter(Boolean) as any[];
 
     // 2. Setup Enemies
     const enemies = EncounterManager.generateEncounter('combat', 'Judgment', 1);
 
-    console.log(`\n[+] Deploying ${party.length} Proxies vs ${enemies.length} Judgment Forces...`);
+    console.log(`\n[+] Deploying ${party.length} Champions vs ${enemies.length} Judgment Forces...`);
 
     // 3. Init Combat
     useCombatStore.getState().initializeCombat(party, enemies);
@@ -29,7 +29,7 @@ async function runSim() {
         const activeEnemies = state.enemies.filter(e => !e.isDead);
 
         if (activeAllies.length === 0) {
-            console.log("\n[-] DEFEAT. The Proxies were wiped out.");
+            console.log("\n[-] DEFEAT. The Champions were wiped out.");
             break;
         }
         if (activeEnemies.length === 0) {

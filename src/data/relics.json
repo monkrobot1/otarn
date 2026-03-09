@@ -1,9 +1,17 @@
 [
   {
+    "id": "REL_DEFAULT",
+    "name": "Default_Relic",
+    "sector": "Universal",
+    "tier": "Common",
+    "effect": "+20% Damage and +20% Max HP.",
+    "color": "#9CA3AF"
+  },
+  {
     "id": "REL_JUD_001",
     "name": "Rusting Crown",
     "sector": "Judgment",
-    "tier": "Resonant",
+    "tier": "Uncommon",
     "effect": "Every time an enemy takes DoT damage, gain +1% Grace (stacks).",
     "color": "#22C55E"
   },
@@ -11,7 +19,7 @@
     "id": "REL_JUD_002",
     "name": "Cyber-Heart",
     "sector": "Judgment",
-    "tier": "Exalted",
+    "tier": "Rare",
     "effect": "Max HP -50%, but gain 100% Debuff Immunity.",
     "color": "#3B82F6"
   },
@@ -19,7 +27,7 @@
     "id": "REL_JUD_003",
     "name": "Void Prism",
     "sector": "Judgment",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "Missing spiritual attacks refund 50% MP.",
     "color": "#9CA3AF"
   },
@@ -27,7 +35,7 @@
     "id": "REL_JUD_004",
     "name": "Judge's Axe",
     "sector": "Judgment",
-    "tier": "Resonant",
+    "tier": "Uncommon",
     "effect": "Physical attacks deal 2x damage to enemies <25% HP.",
     "color": "#22C55E"
   },
@@ -35,7 +43,7 @@
     "id": "REL_JUD_005",
     "name": "Dark Power Battery",
     "sector": "Judgment",
-    "tier": "Reliquary",
+    "tier": "Epic",
     "effect": "Start every combat at maximum MP.",
     "color": "#A855F7"
   },
@@ -43,7 +51,7 @@
     "id": "REL_JUD_006",
     "name": "Shadow Cloak",
     "sector": "Judgment",
-    "tier": "Resonant",
+    "tier": "Uncommon",
     "effect": "Backline units are immune to single-target Physical hits.",
     "color": "#22C55E"
   },
@@ -51,7 +59,7 @@
     "id": "REL_JUD_007",
     "name": "Nanite Injector",
     "sector": "Judgment",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "Allies heal 2% HP when applying a debuff.",
     "color": "#9CA3AF"
   },
@@ -59,7 +67,7 @@
     "id": "REL_JUD_008",
     "name": "Decaying Core",
     "sector": "Judgment",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "Enemies start combat with 1 stack of Decay.",
     "color": "#9CA3AF"
   },
@@ -67,7 +75,7 @@
     "id": "REL_JUD_009",
     "name": "Singularity Engine",
     "sector": "Judgment",
-    "tier": "Exalted",
+    "tier": "Rare",
     "effect": "Killing an enemy grants +50% turn meter (timeline boost).",
     "color": "#3B82F6"
   },
@@ -75,7 +83,7 @@
     "id": "REL_JUD_010",
     "name": "Tungsten Plating",
     "sector": "Judgment",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "Armor (Physical Resist) cannot be reduced.",
     "color": "#9CA3AF"
   },
@@ -83,7 +91,7 @@
     "id": "REL_JUD_011",
     "name": "Rogue AI Chip",
     "sector": "Judgment",
-    "tier": "Reliquary",
+    "tier": "Epic",
     "effect": "15% chance for any skill to trigger twice.",
     "color": "#A855F7"
   },
@@ -91,7 +99,7 @@
     "id": "REL_JUD_012",
     "name": "Harvester's Scythe",
     "sector": "Judgment",
-    "tier": "Reliquary",
+    "tier": "Epic",
     "effect": "10% damage dealt grows Max HP for the run.",
     "color": "#A855F7"
   },
@@ -99,7 +107,7 @@
     "id": "REL_JUD_013",
     "name": "Zero-Point Cell",
     "sector": "Judgment",
-    "tier": "Exalted",
+    "tier": "Rare",
     "effect": "Skills cost 10% Current HP instead of MP.",
     "color": "#3B82F6"
   },
@@ -107,7 +115,7 @@
     "id": "REL_JUD_014",
     "name": "Frozen Watch",
     "sector": "Judgment",
-    "tier": "Resonant",
+    "tier": "Uncommon",
     "effect": "Enemy first turns are 50% slower.",
     "color": "#22C55E"
   },
@@ -115,7 +123,7 @@
     "id": "REL_JUD_015",
     "name": "Synthetic Soul",
     "sector": "Judgment",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "Null-Forged units gain +20% Spirit.",
     "color": "#9CA3AF"
   },
@@ -123,7 +131,7 @@
     "id": "REL_JUD_016",
     "name": "Ocular Link",
     "sector": "Judgment",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "Critical hits cannot be dodged.",
     "color": "#9CA3AF"
   },
@@ -131,7 +139,7 @@
     "id": "REL_JUD_017",
     "name": "Void Visor",
     "sector": "Judgment",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "See exact enemy HP and timeline values.",
     "color": "#9CA3AF"
   },
@@ -139,7 +147,7 @@
     "id": "REL_JUD_018",
     "name": "Scrap Magnet",
     "sector": "Judgment",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "Earn 20% more Ephemeral Faith.",
     "color": "#9CA3AF"
   },
@@ -147,7 +155,7 @@
     "id": "REL_JUD_019",
     "name": "Neutron Dust",
     "sector": "Judgment",
-    "tier": "Exalted",
+    "tier": "Rare",
     "effect": "Movement effects (push/pull) are 2x stronger.",
     "color": "#3B82F6"
   },
@@ -163,7 +171,7 @@
     "id": "REL_ORD_001",
     "name": "High Priest Gavel",
     "sector": "Order",
-    "tier": "Exalted",
+    "tier": "Rare",
     "effect": "First strike of combat is a guaranteed Crit.",
     "color": "#3B82F6"
   },
@@ -171,7 +179,7 @@
     "id": "REL_ORD_002",
     "name": "Truth Pendulum",
     "sector": "Order",
-    "tier": "Resonant",
+    "tier": "Uncommon",
     "effect": "Turn order cannot be manipulated by enemies.",
     "color": "#22C55E"
   },
@@ -179,7 +187,7 @@
     "id": "REL_ORD_003",
     "name": "Slot Tether",
     "sector": "Order",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "If slot 1 is alive, slot 2 gains +20% Physicality.",
     "color": "#9CA3AF"
   },
@@ -187,7 +195,7 @@
     "id": "REL_ORD_004",
     "name": "Aegis Shielding",
     "sector": "Order",
-    "tier": "Reliquary",
+    "tier": "Epic",
     "effect": "Start combat with a Divine Shield (blocks 1 hit).",
     "color": "#A855F7"
   },
@@ -203,7 +211,7 @@
     "id": "REL_ORD_006",
     "name": "Scroll of Decree",
     "sector": "Order",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "Buffs on your team cannot be dispelled.",
     "color": "#9CA3AF"
   },
@@ -211,7 +219,7 @@
     "id": "REL_ORD_007",
     "name": "Paladin Gauntlet",
     "sector": "Order",
-    "tier": "Resonant",
+    "tier": "Uncommon",
     "effect": "Healing granted creates a shield for the same amount.",
     "color": "#22C55E"
   },
@@ -219,7 +227,7 @@
     "id": "REL_ORD_008",
     "name": "Iron Inquisitor",
     "sector": "Order",
-    "tier": "Exalted",
+    "tier": "Rare",
     "effect": "Spiritual attacks permanently reduce enemy damage by 2%.",
     "color": "#3B82F6"
   },
@@ -227,7 +235,7 @@
     "id": "REL_ORD_009",
     "name": "Grav-Boots",
     "sector": "Order",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "Frontline units act 10% faster.",
     "color": "#9CA3AF"
   },
@@ -235,7 +243,7 @@
     "id": "REL_ORD_010",
     "name": "Chrono-Dial",
     "sector": "Order",
-    "tier": "Resonant",
+    "tier": "Uncommon",
     "effect": "Delaying an enemy damages them for 5% current HP.",
     "color": "#22C55E"
   },
@@ -243,7 +251,7 @@
     "id": "REL_ORD_011",
     "name": "Sun Cathedral Brick",
     "sector": "Order",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "Lumina units gain +50 Max HP.",
     "color": "#9CA3AF"
   },
@@ -251,7 +259,7 @@
     "id": "REL_ORD_012",
     "name": "Divine Scales",
     "sector": "Order",
-    "tier": "Exalted",
+    "tier": "Rare",
     "effect": "Damage increases by 20% for each fallen ally.",
     "color": "#3B82F6"
   },
@@ -259,7 +267,7 @@
     "id": "REL_ORD_013",
     "name": "Templar Halo",
     "sector": "Order",
-    "tier": "Resonant",
+    "tier": "Uncommon",
     "effect": "Lowest HP unit heals 5% Max HP every turn start.",
     "color": "#22C55E"
   },
@@ -267,7 +275,7 @@
     "id": "REL_ORD_014",
     "name": "Magnetized Core",
     "sector": "Order",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "Taunted enemies deal 25% less damage.",
     "color": "#9CA3AF"
   },
@@ -275,7 +283,7 @@
     "id": "REL_ORD_015",
     "name": "Executioner Lens",
     "sector": "Order",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "Attacks ignore 15% Armor.",
     "color": "#9CA3AF"
   },
@@ -283,7 +291,7 @@
     "id": "REL_ORD_016",
     "name": "Feather of Truth",
     "sector": "Order",
-    "tier": "Resonant",
+    "tier": "Uncommon",
     "effect": "Incoming Critical hits deal normal damage instead.",
     "color": "#22C55E"
   },
@@ -291,7 +299,7 @@
     "id": "REL_ORD_017",
     "name": "Sun-Forged Edge",
     "sector": "Order",
-    "tier": "Exalted",
+    "tier": "Rare",
     "effect": "Attacks ignore ALL enemy physical resistance.",
     "color": "#3B82F6"
   },
@@ -299,7 +307,7 @@
     "id": "REL_ORD_018",
     "name": "Stasis Generator",
     "sector": "Order",
-    "tier": "Reliquary",
+    "tier": "Epic",
     "effect": "On turn 1, freeze all enemies for 50 TU.",
     "color": "#A855F7"
   },
@@ -307,7 +315,7 @@
     "id": "REL_ORD_019",
     "name": "High Command Seal",
     "sector": "Order",
-    "tier": "Reliquary",
+    "tier": "Epic",
     "effect": "Your first God Intervention costs 0 Faith.",
     "color": "#A855F7"
   },
@@ -323,7 +331,7 @@
     "id": "REL_CHA_001",
     "name": "Storm Bottle",
     "sector": "Chaos",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "Randomizes all enemy stats slightly at combat start.",
     "color": "#9CA3AF"
   },
@@ -331,7 +339,7 @@
     "id": "REL_CHA_002",
     "name": "Cinderstone",
     "sector": "Chaos",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "Burn damage reduces Physical Resist by 5%.",
     "color": "#9CA3AF"
   },
@@ -339,7 +347,7 @@
     "id": "REL_CHA_003",
     "name": "Zephyr Wings",
     "sector": "Chaos",
-    "tier": "Resonant",
+    "tier": "Uncommon",
     "effect": "Dodging (Fate) doubles the next attack's damage.",
     "color": "#22C55E"
   },
@@ -347,7 +355,7 @@
     "id": "REL_CHA_004",
     "name": "Geode Heart",
     "sector": "Chaos",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "Earth/Physical skills grant +20% Physicality for 2 turns.",
     "color": "#9CA3AF"
   },
@@ -355,7 +363,7 @@
     "id": "REL_CHA_005",
     "name": "Tidal Conch",
     "sector": "Chaos",
-    "tier": "Resonant",
+    "tier": "Uncommon",
     "effect": "Healing spells also cleanse all debuffs.",
     "color": "#22C55E"
   },
@@ -363,7 +371,7 @@
     "id": "REL_CHA_006",
     "name": "Obsidian Shard",
     "sector": "Chaos",
-    "tier": "Exalted",
+    "tier": "Rare",
     "effect": "Physical damage taken is capped at 10% Max HP.",
     "color": "#3B82F6"
   },
@@ -371,7 +379,7 @@
     "id": "REL_CHA_007",
     "name": "Ignis-Tal Spark",
     "sector": "Chaos",
-    "tier": "Reliquary",
+    "tier": "Epic",
     "effect": "Burn damage stacks infinitely and cannot decay.",
     "color": "#A855F7"
   },
@@ -379,7 +387,7 @@
     "id": "REL_CHA_008",
     "name": "Storm-Caller Wand",
     "sector": "Chaos",
-    "tier": "Exalted",
+    "tier": "Rare",
     "effect": "Multi-hit attacks hit an extra target for 50% dmg.",
     "color": "#3B82F6"
   },
@@ -387,7 +395,7 @@
     "id": "REL_CHA_009",
     "name": "Primal Drum",
     "sector": "Chaos",
-    "tier": "Resonant",
+    "tier": "Uncommon",
     "effect": "Every 3rd attack is a guaranteed Critical Strike.",
     "color": "#22C55E"
   },
@@ -395,7 +403,7 @@
     "id": "REL_CHA_010",
     "name": "Elemental Map",
     "sector": "Chaos",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "Always see adjacent node details on the map.",
     "color": "#9CA3AF"
   },
@@ -403,7 +411,7 @@
     "id": "REL_CHA_011",
     "name": "Volatile Serum",
     "sector": "Chaos",
-    "tier": "Exalted",
+    "tier": "Rare",
     "effect": "Attacks have 10% chance for 5x damage, or 5% to heal.",
     "color": "#3B82F6"
   },
@@ -411,7 +419,7 @@
     "id": "REL_CHA_012",
     "name": "Lava Bracer",
     "sector": "Chaos",
-    "tier": "Resonant",
+    "tier": "Uncommon",
     "effect": "Frontline units reflect 40% melee damage as Fire.",
     "color": "#22C55E"
   },
@@ -419,7 +427,7 @@
     "id": "REL_CHA_013",
     "name": "Fae Chimes",
     "sector": "Chaos",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "Dodge chance is doubled against Elite units.",
     "color": "#9CA3AF"
   },
@@ -427,7 +435,7 @@
     "id": "REL_CHA_014",
     "name": "Tsunami Pearl",
     "sector": "Chaos",
-    "tier": "Exalted",
+    "tier": "Rare",
     "effect": "Healing spells bounce to a second ally at 50% power.",
     "color": "#3B82F6"
   },
@@ -435,7 +443,7 @@
     "id": "REL_CHA_015",
     "name": "Quake Hammer",
     "sector": "Chaos",
-    "tier": "Resonant",
+    "tier": "Uncommon",
     "effect": "Critical physical hits have 30% chance to Stun.",
     "color": "#22C55E"
   },
@@ -443,7 +451,7 @@
     "id": "REL_CHA_016",
     "name": "Salamander Tail",
     "sector": "Chaos",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "Immune to Burn and Heat effects.",
     "color": "#9CA3AF"
   },
@@ -451,7 +459,7 @@
     "id": "REL_CHA_017",
     "name": "Sylph Dust",
     "sector": "Chaos",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "Esper units gain +30% Acumen.",
     "color": "#9CA3AF"
   },
@@ -459,7 +467,7 @@
     "id": "REL_CHA_018",
     "name": "Chaos Compass",
     "sector": "Chaos",
-    "tier": "Reliquary",
+    "tier": "Epic",
     "effect": "Reroll node events for 0 cost (unlimited).",
     "color": "#A855F7"
   },
@@ -467,7 +475,7 @@
     "id": "REL_CHA_019",
     "name": "Star Fragment",
     "sector": "Chaos",
-    "tier": "Reliquary",
+    "tier": "Epic",
     "effect": "First Spiritual attack hits all enemies for 3x damage.",
     "color": "#A855F7"
   },
@@ -483,7 +491,7 @@
     "id": "REL_LOV_001",
     "name": "Vampiric Seed",
     "sector": "Love",
-    "tier": "Resonant",
+    "tier": "Uncommon",
     "effect": "15% Phys damage dealt returns as healing to weakest ally.",
     "color": "#22C55E"
   },
@@ -491,7 +499,7 @@
     "id": "REL_LOV_002",
     "name": "Catcher of Dreams",
     "sector": "Love",
-    "tier": "Exalted",
+    "tier": "Rare",
     "effect": "Waking enemies take massive spiritual dmg.",
     "color": "#3B82F6"
   },
@@ -499,15 +507,15 @@
     "id": "REL_LOV_003",
     "name": "Spore Pod",
     "sector": "Love",
-    "tier": "Exalted",
-    "effect": "When a proxy dies, heal the team for 100% of its Max HP.",
+    "tier": "Rare",
+    "effect": "When a champion dies, heal the team for 100% of its Max HP.",
     "color": "#3B82F6"
   },
   {
     "id": "REL_LOV_004",
     "name": "World-Tree Sap",
     "sector": "Love",
-    "tier": "Reliquary",
+    "tier": "Epic",
     "effect": "Regenerate 10% HP every turn start.",
     "color": "#A855F7"
   },
@@ -515,7 +523,7 @@
     "id": "REL_LOV_005",
     "name": "Blood-Stone Chalice",
     "sector": "Love",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "Sacrificial HP costs are reduced by 50%.",
     "color": "#9CA3AF"
   },
@@ -523,7 +531,7 @@
     "id": "REL_LOV_006",
     "name": "Sylvan Heart",
     "sector": "Love",
-    "tier": "Resonant",
+    "tier": "Uncommon",
     "effect": "Healing can critically strike (based on Acumen).",
     "color": "#22C55E"
   },
@@ -531,7 +539,7 @@
     "id": "REL_LOV_007",
     "name": "Mycelia Link",
     "sector": "Love",
-    "tier": "Exalted",
+    "tier": "Rare",
     "effect": "Buffs on one unit spread to neighbors at 50% power.",
     "color": "#3B82F6"
   },
@@ -539,7 +547,7 @@
     "id": "REL_LOV_008",
     "name": "Pure Lotus",
     "sector": "Love",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "Revived units start at 100% MP.",
     "color": "#9CA3AF"
   },
@@ -547,7 +555,7 @@
     "id": "REL_LOV_009",
     "name": "Spore Immunity",
     "sector": "Love",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "Immune to Sleep and Paralysis.",
     "color": "#9CA3AF"
   },
@@ -555,7 +563,7 @@
     "id": "REL_LOV_010",
     "name": "Pitcher Plant",
     "sector": "Love",
-    "tier": "Resonant",
+    "tier": "Uncommon",
     "effect": "Enemies <10% HP are eaten and killed instantly.",
     "color": "#22C55E"
   },
@@ -563,7 +571,7 @@
     "id": "REL_LOV_011",
     "name": "Druid Scalpel",
     "sector": "Love",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "Healing an ally grants +5% Authority.",
     "color": "#9CA3AF"
   },
@@ -571,7 +579,7 @@
     "id": "REL_LOV_012",
     "name": "Petal Charm",
     "sector": "Love",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "MP costs are reduced by 2 (min 0).",
     "color": "#9CA3AF"
   },
@@ -579,7 +587,7 @@
     "id": "REL_LOV_013",
     "name": "Root Anklet",
     "sector": "Love",
-    "tier": "Resonant",
+    "tier": "Uncommon",
     "effect": "Debuffed enemies cannot Dodge.",
     "color": "#22C55E"
   },
@@ -587,7 +595,7 @@
     "id": "REL_LOV_014",
     "name": "Vile Parasite",
     "sector": "Love",
-    "tier": "Reliquary",
+    "tier": "Epic",
     "effect": "Equipped unit gains +100% stats but dies in 3 nodes.",
     "color": "#A855F7"
   },
@@ -595,7 +603,7 @@
     "id": "REL_LOV_015",
     "name": "Eye of the Dream",
     "sector": "Love",
-    "tier": "Exalted",
+    "tier": "Rare",
     "effect": "Sleep effects are no longer broken by damage.",
     "color": "#3B82F6"
   },
@@ -603,7 +611,7 @@
     "id": "REL_LOV_016",
     "name": "Cocoon",
     "sector": "Love",
-    "tier": "Resonant",
+    "tier": "Uncommon",
     "effect": "Lethal hits put unit in a 2-turn cocoon before reviving.",
     "color": "#22C55E"
   },
@@ -611,7 +619,7 @@
     "id": "REL_LOV_017",
     "name": "Biolume Lamp",
     "sector": "Love",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "Reduces enemy Hit Chance (Grace) by 15%.",
     "color": "#9CA3AF"
   },
@@ -619,7 +627,7 @@
     "id": "REL_LOV_018",
     "name": "Rose Sanguine",
     "sector": "Love",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "Crits heal the attacker for 10% Max HP.",
     "color": "#9CA3AF"
   },
@@ -627,7 +635,7 @@
     "id": "REL_LOV_019",
     "name": "Elyria's Gift",
     "sector": "Love",
-    "tier": "Reliquary",
+    "tier": "Epic",
     "effect": "Gain a 5th party slot for standard battles.",
     "color": "#A855F7"
   },
@@ -643,7 +651,7 @@
     "id": "REL_UNI_001",
     "name": "Titan's Ring",
     "sector": "Universal",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "+20% Physicality.",
     "color": "#9CA3AF"
   },
@@ -651,7 +659,7 @@
     "id": "REL_UNI_002",
     "name": "Mind-Link Circlet",
     "sector": "Universal",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "+20% Authority.",
     "color": "#9CA3AF"
   },
@@ -659,7 +667,7 @@
     "id": "REL_UNI_003",
     "name": "Quick-Step Bracers",
     "sector": "Universal",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "+15% Grace.",
     "color": "#9CA3AF"
   },
@@ -667,7 +675,7 @@
     "id": "REL_UNI_004",
     "name": "Savant Lamp",
     "sector": "Universal",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "+15% Acumen.",
     "color": "#9CA3AF"
   },
@@ -675,7 +683,7 @@
     "id": "REL_UNI_005",
     "name": "Ghost Totem",
     "sector": "Universal",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "+20% Spirit.",
     "color": "#9CA3AF"
   },
@@ -683,7 +691,7 @@
     "id": "REL_UNI_006",
     "name": "Rabbit's Foot",
     "sector": "Universal",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "+20% Fate.",
     "color": "#9CA3AF"
   },
@@ -691,7 +699,7 @@
     "id": "REL_UNI_007",
     "name": "Leather Sack",
     "sector": "Universal",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "+15% Capacity.",
     "color": "#9CA3AF"
   },
@@ -699,7 +707,7 @@
     "id": "REL_UNI_008",
     "name": "Star Compass",
     "sector": "Universal",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "+15% Destiny.",
     "color": "#9CA3AF"
   },
@@ -707,7 +715,7 @@
     "id": "REL_UNI_009",
     "name": "Mana Battery",
     "sector": "Universal",
-    "tier": "Resonant",
+    "tier": "Uncommon",
     "effect": "Recover 5 MP every turn start.",
     "color": "#22C55E"
   },
@@ -715,7 +723,7 @@
     "id": "REL_UNI_010",
     "name": "Berserker Mask",
     "sector": "Universal",
-    "tier": "Exalted",
+    "tier": "Rare",
     "effect": "Damage +50%, but defense -50%.",
     "color": "#3B82F6"
   },
@@ -723,7 +731,7 @@
     "id": "REL_UNI_011",
     "name": "Guardian Charm",
     "sector": "Universal",
-    "tier": "Reliquary",
+    "tier": "Epic",
     "effect": "Once per combat, survive a lethal hit with 1 HP.",
     "color": "#A855F7"
   },
@@ -731,7 +739,7 @@
     "id": "REL_UNI_012",
     "name": "Thief's Eye",
     "sector": "Universal",
-    "tier": "Resonant",
+    "tier": "Uncommon",
     "effect": "Enemies drop 50% more loot.",
     "color": "#22C55E"
   },
@@ -739,7 +747,7 @@
     "id": "REL_UNI_013",
     "name": "Ancient Map",
     "sector": "Universal",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "Discover all map node types automatically.",
     "color": "#9CA3AF"
   },
@@ -747,7 +755,7 @@
     "id": "REL_UNI_014",
     "name": "Master Key",
     "sector": "Universal",
-    "tier": "Reliquary",
+    "tier": "Epic",
     "effect": "Open any locked event or chest.",
     "color": "#A855F7"
   },
@@ -755,7 +763,7 @@
     "id": "REL_UNI_015",
     "name": "Ever-Full Flask",
     "sector": "Universal",
-    "tier": "Resonant",
+    "tier": "Uncommon",
     "effect": "Consumables have a 50% chance to not be consumed.",
     "color": "#22C55E"
   },
@@ -763,7 +771,7 @@
     "id": "REL_UNI_016",
     "name": "Warrior's Pride",
     "sector": "Universal",
-    "tier": "Exalted",
+    "tier": "Rare",
     "effect": "Damage +1% per 1% HP missing.",
     "color": "#3B82F6"
   },
@@ -771,7 +779,7 @@
     "id": "REL_UNI_017",
     "name": "Sage's Pride",
     "sector": "Universal",
-    "tier": "Exalted",
+    "tier": "Rare",
     "effect": "Spiritual damage +1% for every 1% Current MP.",
     "color": "#3B82F6"
   },
@@ -779,7 +787,7 @@
     "id": "REL_UNI_018",
     "name": "Executioner Hook",
     "sector": "Universal",
-    "tier": "Reliquary",
+    "tier": "Epic",
     "effect": "Killing blows restore 20% of the killer's HP.",
     "color": "#A855F7"
   },
@@ -803,7 +811,7 @@
     "id": "REL_UNI_021",
     "name": "Reflector Lens",
     "sector": "Universal",
-    "tier": "Resonant",
+    "tier": "Uncommon",
     "effect": "Reflect 15% of all incoming damage.",
     "color": "#22C55E"
   },
@@ -811,7 +819,7 @@
     "id": "REL_UNI_022",
     "name": "Shielding Capacitor",
     "sector": "Universal",
-    "tier": "Exalted",
+    "tier": "Rare",
     "effect": "Gain 10 Physical Shield whenever a skill is cast.",
     "color": "#3B82F6"
   },
@@ -819,7 +827,7 @@
     "id": "REL_UNI_023",
     "name": "Timeline Anchor",
     "sector": "Universal",
-    "tier": "Reliquary",
+    "tier": "Epic",
     "effect": "Enemies cannot be pushed beyond 100 TU on the timeline.",
     "color": "#A855F7"
   },
@@ -828,14 +836,14 @@
     "name": "Blood Contract",
     "sector": "Universal",
     "tier": "Divine",
-    "effect": "If a Proxy dies, full heal the party and grant +100% Damage.",
+    "effect": "If a Champion dies, full heal the party and grant +100% Damage.",
     "color": "#EAB308"
   },
   {
     "id": "REL_UNI_025",
     "name": "Iron Will",
     "sector": "Universal",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "Status Resistance +20%.",
     "color": "#9CA3AF"
   },
@@ -843,7 +851,7 @@
     "id": "REL_UNI_026",
     "name": "Double Blade",
     "sector": "Universal",
-    "tier": "Exalted",
+    "tier": "Rare",
     "effect": "Physical attacks hit twice (2nd hit at 50% power).",
     "color": "#3B82F6"
   },
@@ -851,7 +859,7 @@
     "id": "REL_UNI_027",
     "name": "Twin Soul",
     "sector": "Universal",
-    "tier": "Exalted",
+    "tier": "Rare",
     "effect": "Spiritual attacks hit twice (2nd hit at 50% power).",
     "color": "#3B82F6"
   },
@@ -859,7 +867,7 @@
     "id": "REL_UNI_028",
     "name": "Gravity Engine",
     "sector": "Universal",
-    "tier": "Reliquary",
+    "tier": "Epic",
     "effect": "Whenever you act, enemies are delayed by 5 TU.",
     "color": "#A855F7"
   },
@@ -883,7 +891,7 @@
     "id": "REL_UNI_031",
     "name": "Shattered Mirror",
     "sector": "Universal",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "Crit Damage +30%.",
     "color": "#9CA3AF"
   },
@@ -891,7 +899,7 @@
     "id": "REL_UNI_032",
     "name": "Armor Golem's Plating",
     "sector": "Universal",
-    "tier": "Resonant",
+    "tier": "Uncommon",
     "effect": "+15 Armor.",
     "color": "#22C55E"
   },
@@ -899,7 +907,7 @@
     "id": "REL_UNI_033",
     "name": "Cursed Chalice",
     "sector": "Universal",
-    "tier": "Exalted",
+    "tier": "Rare",
     "effect": "Gain +50% XP, but Max HP is reduced by 25%.",
     "color": "#3B82F6"
   },
@@ -907,7 +915,7 @@
     "id": "REL_UNI_034",
     "name": "Divine Band",
     "sector": "Universal",
-    "tier": "Reliquary",
+    "tier": "Epic",
     "effect": "Buffs applied to surrogates last 1 turn longer.",
     "color": "#A855F7"
   },
@@ -915,7 +923,7 @@
     "id": "REL_UNI_035",
     "name": "Vapor Veil",
     "sector": "Universal",
-    "tier": "Resonant",
+    "tier": "Uncommon",
     "effect": "+15% Dodge Chance.",
     "color": "#22C55E"
   },
@@ -923,7 +931,7 @@
     "id": "REL_UNI_036",
     "name": "Omni-Lens",
     "sector": "Universal",
-    "tier": "Fractured",
+    "tier": "Common",
     "effect": "Hit Chance +10%.",
     "color": "#9CA3AF"
   },
@@ -931,7 +939,7 @@
     "id": "REL_UNI_037",
     "name": "Vampiric Claw",
     "sector": "Universal",
-    "tier": "Resonant",
+    "tier": "Uncommon",
     "effect": "Lifesteal 10% from all single-target hits.",
     "color": "#22C55E"
   },
@@ -939,7 +947,7 @@
     "id": "REL_UNI_038",
     "name": "Siphoning Rod",
     "sector": "Universal",
-    "tier": "Resonant",
+    "tier": "Uncommon",
     "effect": "Leech 1 MP from every hit.",
     "color": "#22C55E"
   },
@@ -947,7 +955,7 @@
     "id": "REL_UNI_039",
     "name": "Overdrive Chip",
     "sector": "Universal",
-    "tier": "Exalted",
+    "tier": "Rare",
     "effect": "+50 Speed, but lose 5% current HP every turn.",
     "color": "#3B82F6"
   },

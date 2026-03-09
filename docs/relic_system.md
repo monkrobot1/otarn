@@ -22,7 +22,7 @@ Many Tier 1 (Fractured) relics provide flat bonuses to the 8 Core Stats (e.g., `
 
 ### B. Combat Logic Triggers (Reactive)
 Higher-tier relics (Exalted and above) often hook into combat events:
-- **OnHit:** Triggered every time a proxy deals damage.
+- **OnHit:** Triggered every time a champion deals damage.
 - **OnKill:** Triggered when an enemy dies (e.g., `REL_JUD_009` granting timeline boost).
 - **OnTakeDamage:** Reflect damage or mitigate hits (e.g., `REL_CHA_006` capping damage at 10% Max HP).
 

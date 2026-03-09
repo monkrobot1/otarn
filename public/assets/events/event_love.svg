@@ -1,0 +1,14 @@
+<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ec4899;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#831843;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#grad1)" />
+  <!-- A central geometric shape to represent the event -->
+  <circle cx="200" cy="200" r="120" stroke="rgba(255,255,255,0.2)" stroke-width="2" fill="none" />
+  <polyline points="200,80 284,284 116,284 200,80" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.4)" stroke-width="2" />
+  <text x="200" y="220" font-family="monospace" font-size="20" font-weight="bold" fill="rgba(255,255,255,0.8)" text-anchor="middle">LOVE SECTOR</text>
+  <text x="200" y="380" font-family="monospace" font-size="10" fill="gray" text-anchor="middle">[ IMAGE PLACEHOLDER ]</text>
+</svg>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="100" viewBox="0 0 400 100">
+  <rect width="400" height="100" fill="transparent"/>
+  <!-- Frame 1 -->
+  <circle cx="70" cy="50" r="10" fill="#f90" />
+  <polygon points="60,40 60,60 20,50" fill="#ff0" opacity="0.5"/>
+  <!-- Frame 2 -->
+  <circle cx="170" cy="50" r="12" fill="#f90" />
+  <polygon points="160,35 160,65 110,50" fill="#ff0" opacity="0.7"/>
+  <!-- Frame 3 -->
+  <circle cx="270" cy="50" r="14" fill="#fff" />
+  <polygon points="260,30 260,70 200,50" fill="#f90" opacity="0.9"/>
+  <!-- Frame 4 -->
+  <circle cx="370" cy="50" r="15" fill="#0ff" />
+  <polygon points="360,25 360,75 290,50" fill="#00f" opacity="1.0"/>
+</svg>

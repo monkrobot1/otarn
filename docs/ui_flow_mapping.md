@@ -20,15 +20,15 @@ The application fundamentally exists in one of three macro-states governed by `u
 ### [SCENE 1]: The Main Menu (The Diamond Throne - Hub)
 * **Visuals:** Starfield background via Three.js. Clean glassmorphism UI.
 * **Panels Available:**
-  1.  **Roster Archive:** View unlocked Proxies and their lore.
+  1.  **Roster Archive:** View unlocked Champions and their lore.
   2.  **Ascension Chamber:** Spend Divine Sparks for permanent stat/class upgrades.
   3.  **The Codex:** View discovered Lore, defeated enemies, and found Relics.
 * **Action:** Player selects **"Initiate Run."**
 * **Transition:** Moves to `[SCENE 2]`.
 
 ### [SCENE 2]: The Draft Protocol
-* **Visuals:** A sterilized grid displaying available 1-Star Proxies.
-* **Action:** Player selects exactly 4 Proxies. This creates a snapshot of the `BaseCharacter` data and uses `CharacterFactory` to instantiate 4 Level-1 `ActiveCharacter` objects.
+* **Visuals:** A sterilized grid displaying available 1-Star Champions.
+* **Action:** Player selects exactly 4 Champions. This creates a snapshot of the `BaseCharacter` data and uses `CharacterFactory` to instantiate 4 Level-1 `ActiveCharacter` objects.
 * **Transition:** Player clicks "Engage." Moves to `[SCENE 3]`.
 
 ### [SCENE 3]: Cinematic Interlude (Sector Insertion)
@@ -50,7 +50,7 @@ The application fundamentally exists in one of three macro-states governed by `u
 * **Action:** Turn-based combat executes until Win or Loss.
 * **Transition:**
   * **Win:** Move to `[SCENE 8]` (Loot/Rewards).
-  * **Loss:** The 4 Proxies shatter. Run terminates. Move to `[SCENE 9]` (Run Summary).
+  * **Loss:** The 4 Champions shatter. Run terminates. Move to `[SCENE 9]` (Run Summary).
 
 ### [SCENE 6]: Text Event Interface
 * **Visuals:** A centralized glass panel resembling a visual novel. A static image/portrait on the left, descriptive lore text on the right.
@@ -59,7 +59,7 @@ The application fundamentally exists in one of three macro-states governed by `u
 
 ### [SCENE 7]: Sanctuary (Rest)
 * **Visuals:** A peaceful, gold-hued menu.
-* **Action:** Player chooses to either: (A) Heal the party for 30%, or (B) Attempt to revive a dead proxy.
+* **Action:** Player chooses to either: (A) Heal the party for 30%, or (B) Attempt to revive a dead champion.
 * **Transition:** Returns to `[SCENE 4]` (Map).
 
 ### [SCENE 8]: Combat Rewards & Loot Draft

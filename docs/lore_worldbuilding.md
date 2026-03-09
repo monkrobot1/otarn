@@ -1,7 +1,7 @@
 # Lore & Worldbuilding: Awakening of Otaran
 
 ## 1. High-Level Concept
-Awakening of Otaran is a journey of a forgotten god, awakened after 10,000 years to find their domain usurped. Operating from the **Diamond Throne**, the player recruits and commands mortal proxies to conquer four distinct planetary sectors, each ruled by a traitorous High Priest representing a foundational Axiom of reality.
+Awakening of Otaran is a journey of a forgotten god, awakened after 10,000 years to find their domain usurped. Operating from the **Diamond Throne**, the player recruits and commands mortal champions to conquer four distinct planetary sectors, each ruled by a traitorous High Priest representing a foundational Axiom of reality.
 
 ### Visual Aesthetic: "The Space God Interface"
 The game's visual identity fuses dreamy symbolism with clean sci-fi lines.

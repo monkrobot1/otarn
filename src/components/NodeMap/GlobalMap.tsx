@@ -1,10 +1,11 @@
 import { useGameStore } from '../../store/gameStore';
 
 export const GlobalMap = () => {
-    const { setScene } = useGameStore();
+    const { setScene, updateRunData } = useGameStore();
 
-    const handleSectorClick = (_sector: string) => {
+    const handleSectorClick = (sector: 'Judgment' | 'Order' | 'Chaos' | 'Love') => {
         // In full game, this would lock you to a sector or confirm entry.
+        updateRunData({ currentSector: sector });
         setScene('sector-map');
     };
 

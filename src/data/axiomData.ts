@@ -1299,7 +1299,7 @@ export const AXIOM_TREES: Record<string, AxiomTalent[][]> = {
             {
                 "id": "AXIOM_LOVE_T3_O2",
                 "name": "Hive Mind",
-                "description": "Unlock a divine intervention that distributes all damage taken by any proxy evenly across the party for 3 turns.",
+                "description": "Unlock a divine intervention that distributes all damage taken by any champion evenly across the party for 3 turns.",
                 "icon": "icon_love_ultimate.png",
                 "tier": 3,
                 "cost": 60,
@@ -1537,7 +1537,7 @@ export const AXIOM_TREES: Record<string, AxiomTalent[][]> = {
             {
                 "id": "AXIOM_LOVE_T8_O1",
                 "name": "Unconditional Love",
-                "description": "Unlock a divine intervention that prevents the next lethal hit on any proxy, leaving them at 1 HP instead.",
+                "description": "Unlock a divine intervention that prevents the next lethal hit on any champion, leaving them at 1 HP instead.",
                 "icon": "icon_love_ultimate.png",
                 "tier": 8,
                 "cost": 160,

@@ -1,6 +1,7 @@
 import React from 'react';
 import type { ActiveCharacter } from '../../types/character';
 import { CharacterFactory } from '../../core/CharacterFactory';
+import { PortraitSprite } from '../UI/PortraitSprite';
 
 interface CharacterSheetOverlayProps {
     unit: ActiveCharacter | null;
@@ -32,10 +33,9 @@ export const CharacterSheetOverlay: React.FC<CharacterSheetOverlayProps> = ({ un
                 {/* Left Column: Art & Vitals */}
                 <div className="flex flex-col items-center w-full md:w-1/3 border-r border-cyan-500/20 pr-8">
                     <div className="relative w-48 h-48 rounded-full border-2 border-cyan-400/50 overflow-hidden shadow-[0_0_15px_rgba(0,255,255,0.2)]">
-                        <img 
-                            src={unit.portraitUrl} 
-                            alt={unit.name} 
-                            className="w-full h-full object-cover"
+                        <PortraitSprite 
+                            baseId={unit.baseId} 
+                            className="w-full h-full scale-[1.1] origin-center"
                         />
                     </div>
                     

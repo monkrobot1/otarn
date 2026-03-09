@@ -1,3 +1,6 @@
+import rawEvents from './events.json';
+import rawRelics from './relics.json';
+
 export interface EventChoice {
   id: string;
   label: string;
@@ -11,6 +14,7 @@ export interface GameEvent {
   id: string;
   title: string;
   description: string[];
+  image?: string; // assigned image url
   imagePrompt?: string; // for future AI image insertion
   choices: EventChoice[];
 }
@@ -30,23 +34,23 @@ export const GAME_EVENTS: Record<string, GameEvent> = {
         description: 'Offer some of your current run\'s faith to the shrine, hoping for a boon in return.',
         onSelect: (state: any) => {
           // In a real implementation this would grant a random relic or stat boost.
-          state.setEventResult("You kneel before the shrine. The obsidian glows brighter, and you feel a surge of power course through your proxies. (Received: Minor Blessing)");
+          state.setEventResult("You kneel before the shrine. The obsidian glows brighter, and you feel a surge of power course through your champions. (Received: Minor Blessing)");
           state.updateRunData({ ephemeralFaith: Math.max(0, (state.runData?.ephemeralFaith || 0) - 20) });
         }
       },
       {
         id: 'desecrate',
-        label: '[ Desecrate ] Gain 50 Ephemeral Faith. Take 10 damage to all proxies.',
+        label: '[ Desecrate ] Gain 50 Ephemeral Faith. Take 10 damage to all champions.',
         description: 'Smash the remaining crystals to harvest the raw faith inside, disregarding the backlash.',
         onSelect: (state: any) => {
-          state.setEventResult("You shatter the crystals. Pure, unrefined faith explodes outward, searing your proxies but filling your reserves. (Gained 50 Faith, Party took 10 damage)");
+          state.setEventResult("You shatter the crystals. Pure, unrefined faith explodes outward, searing your champions but filling your reserves. (Gained 50 Faith, Party took 10 damage)");
           state.updateRunData({ ephemeralFaith: (state.runData?.ephemeralFaith || 0) + 50 });
           
           // Apply some damage to party members
           if (state.runData?.activeParty) {
-            const updatedParty = state.runData.activeParty.map((proxy: any) => ({
-              ...proxy,
-              currentHp: Math.max(1, proxy.currentHp - 10)
+            const updatedParty = state.runData.activeParty.map((champion: any) => ({
+              ...champion,
+              currentHp: Math.max(1, champion.currentHp - 10)
             }));
             state.updateRunData({ activeParty: updatedParty });
           }
@@ -87,9 +91,9 @@ export const GAME_EVENTS: Record<string, GameEvent> = {
         onSelect: (state: any) => {
           state.setEventResult("As you draw your weapons, the merchant laughs—a sound like breaking glass. They vanish instantly, leaving behind a trap that scorches your party! (Took 15 damage)");
           if (state.runData?.activeParty) {
-            const updatedParty = state.runData.activeParty.map((proxy: any) => ({
-              ...proxy,
-              currentHp: Math.max(1, proxy.currentHp - 15)
+            const updatedParty = state.runData.activeParty.map((champion: any) => ({
+              ...champion,
+              currentHp: Math.max(1, champion.currentHp - 15)
             }));
             state.updateRunData({ activeParty: updatedParty });
           }
@@ -110,16 +114,16 @@ export const GAME_EVENTS: Record<string, GameEvent> = {
     title: 'THE TEAR IN REALITY',
     description: [
       "A jagged tear in the astral plane slowly spins before you, bleeding impossible colors into the void.",
-      "The chaotic energy radiating from it makes your proxies tremble, but also whispers of boundless potential."
+      "The chaotic energy radiating from it makes your champions tremble, but also whispers of boundless potential."
     ],
     choices: [
       {
         id: 'embrace',
-        label: '[ Embrace Chaos ] A random proxy gains max HP, another loses max HP.',
+        label: '[ Embrace Chaos ] A random champion gains max HP, another loses max HP.',
         description: 'Subject your party to the raw whims of the rift.',
         onSelect: (state: any) => {
           if (!state.runData?.activeParty || state.runData.activeParty.length < 2) {
-             state.setEventResult("The rift flickers and spits you back out. You need more proxies to truly embrace the chaos.");
+             state.setEventResult("The rift flickers and spits you back out. You need more champions to truly embrace the chaos.");
              return;
           }
           const party = [...state.runData.activeParty];
@@ -177,7 +181,7 @@ export const GAME_EVENTS: Record<string, GameEvent> = {
       {
         id: 'drink',
         label: '[ Drink Deeply ] Lose 25 Faith. Party Recovers 50% HP.',
-        description: 'The sorrow threatens to sever your connection to the proxies, but the starlight heals their wounds.',
+        description: 'The sorrow threatens to sever your connection to the champions, but the starlight heals their wounds.',
         condition: (state: any) => (state.runData?.ephemeralFaith || 0) >= 25,
         onSelect: (state: any) => {
            state.updateRunData({ ephemeralFaith: (state.runData?.ephemeralFaith || 0) - 25 });
@@ -187,7 +191,7 @@ export const GAME_EVENTS: Record<string, GameEvent> = {
               return { ...p, currentHp: p.currentHp + 50 }; 
            });
            state.updateRunData({ activeParty: party });
-           state.setEventResult("The liquid tastes like ash and honey. Your proxies' wounds knit together, but a profound sadness drains your Faith.");
+           state.setEventResult("The liquid tastes like ash and honey. Your champions' wounds knit together, but a profound sadness drains your Faith.");
         }
       },
       {
@@ -197,7 +201,7 @@ export const GAME_EVENTS: Record<string, GameEvent> = {
         onSelect: (state: any) => {
            const party = state.runData.activeParty.map((p: any) => ({ ...p, currentHp: Math.max(1, p.currentHp - 15) }));
            state.updateRunData({ activeParty: party });
-           state.setEventResult("As you seal the vial, the statue's wails echo in your mind, causing physical pain to your proxies. But you secured the prize.");
+           state.setEventResult("As you seal the vial, the statue's wails echo in your mind, causing physical pain to your champions. But you secured the prize.");
         }
       },
       {
@@ -212,9 +216,156 @@ export const GAME_EVENTS: Record<string, GameEvent> = {
   }
 };
 
-// Helper function to pick a random event for our prototype
-export const getRandomEvent = () => {
-    const keys = Object.keys(GAME_EVENTS);
-    const randomKey = keys[Math.floor(Math.random() * keys.length)];
-    return GAME_EVENTS[randomKey];
+export const getRandomEvent = (currentSector: string = 'Universal', currentSectorLevel: number = 1) => {
+    const validEvents = rawEvents.filter((e: any) => 
+        (e.sector === currentSector || e.sector === 'Universal') &&
+        (!e.min_sector_level || e.min_sector_level <= currentSectorLevel)
+    );
+
+    let blueprint = rawEvents[Math.floor(Math.random() * rawEvents.length)]; // Fallback
+    
+    if (validEvents.length > 0) {
+        const rarityWeights: Record<string, number> = {
+            'Common': 70,
+            'Uncommon': 25,
+            'Rare': 5
+        };
+        
+        let totalWeight = 0;
+        validEvents.forEach((e: any) => {
+            totalWeight += rarityWeights[e.rarity || 'Common'] || 70;
+        });
+
+        const roll = Math.random() * totalWeight;
+        let cumulative = 0;
+        for (const e of validEvents) {
+            cumulative += rarityWeights[e.rarity || 'Common'] || 70;
+            if (roll <= cumulative) {
+                blueprint = e;
+                break;
+            }
+        }
+    }
+
+    let image = '/assets/events/event_generic_1.svg';
+    const lowerTitle = blueprint.title.toLowerCase();
+    
+    if (blueprint.sector === 'Judgment') image = '/assets/events/event_judgment.svg';
+    else if (blueprint.sector === 'Order') image = '/assets/events/event_order.svg';
+    else if (blueprint.sector === 'Chaos') image = '/assets/events/event_chaos.svg';
+    else if (blueprint.sector === 'Love') image = '/assets/events/event_love.svg';
+    
+    if (lowerTitle.includes('shrine')) image = '/assets/events/event_shatter.svg';
+    else if (lowerTitle.includes('merchant')) image = '/assets/events/event_merchant.svg';
+    else if (lowerTitle.includes('anomaly') || lowerTitle.includes('rift') || lowerTitle.includes('storm')) image = '/assets/events/event_generic_2.svg';
+
+    return {
+        id: blueprint.event_id,
+        title: blueprint.title,
+        image,
+        description: [blueprint.description],
+        choices: blueprint.choices.map((c: any, index: number) => ({
+            id: `choice_${index}`,
+            label: c.choice_text,
+            description: '',
+            rawOutcomes: c.outcomes,
+            condition: c.requirements ? (state: any) => {
+                if (c.requirements.faith_min && (state.runData?.ephemeralFaith || 0) < c.requirements.faith_min) return false;
+                if (c.requirements.class_id_present) {
+                    return state.runData?.activeParty?.some((p: any) => p.id === c.requirements.class_id_present);
+                }
+                return true;
+            } : undefined,
+            onSelect: (state: any) => {
+                const roll = Math.random() * 100;
+                let sum = 0;
+                let pickedOutcome = c.outcomes[0];
+                for (const out of c.outcomes) {
+                    sum += out.weight;
+                    if (roll <= sum) {
+                        pickedOutcome = out;
+                        break;
+                    }
+                }
+
+                // Send debug info to the scene
+                state.setDebugLog?.({
+                    roll,
+                    outcomes: c.outcomes,
+                    picked: pickedOutcome
+                });
+
+                let eventText = pickedOutcome.text;
+                
+                if (pickedOutcome.result === 'gain_faith') {
+                    state.updateRunData({ ephemeralFaith: (state.runData?.ephemeralFaith || 0) + (pickedOutcome.value || 0) });
+                } else if (pickedOutcome.result === 'lose_faith') {
+                    state.updateRunData({ ephemeralFaith: Math.max(0, (state.runData?.ephemeralFaith || 0) - (pickedOutcome.value || 0)) });
+                } else if (pickedOutcome.result === 'sacrifice_hp') {
+                    state.setPendingOutcome?.({ type: 'take_damage', payload: { amount: pickedOutcome.value || 15 } });
+                } else if (pickedOutcome.result === 'damage_party') {
+                    const party = state.runData?.activeParty?.map((p: any) => {
+                        state.triggerFloatingEffect?.(p.instanceId, `-${pickedOutcome.value || 0} HP`, 'negative');
+                        return { ...p, currentHp: Math.max(1, p.currentHp - (pickedOutcome.value || 0)) };
+                    }) || [];
+                    state.updateRunData({ activeParty: party });
+                } else if (pickedOutcome.result === 'heal_party') {
+                    const party = state.runData?.activeParty?.map((p: any) => {
+                        state.triggerFloatingEffect?.(p.instanceId, `+${pickedOutcome.value || 0} HP`, 'positive');
+                        return { ...p, currentHp: p.currentHp + (pickedOutcome.value || 0) };
+                    }) || [];
+                    state.updateRunData({ activeParty: party });
+                } else if (pickedOutcome.result === 'gain_relic') {
+                    // Pick a random relic matching the tier roughly, or any if not found
+                    const validRelics = rawRelics.filter((r: any) => {
+                        if (!pickedOutcome.tier) return true;
+                        if (pickedOutcome.tier === 1 && r.tier === 'Common') return true;
+                        if (pickedOutcome.tier === 2 && r.tier === 'Uncommon') return true;
+                        if (pickedOutcome.tier === 3 && r.tier === 'Rare') return true;
+                        if (pickedOutcome.tier === 4 && r.tier === 'Epic') return true;
+                        if (pickedOutcome.tier === 5 && r.tier === 'Divine') return true;
+                        return false;
+                    });
+                    const relicList = validRelics.length > 0 ? validRelics : rawRelics;
+                    const randomRelic = relicList[Math.floor(Math.random() * relicList.length)];
+                    
+                    const currentRelics = state.runData?.activeRelics || [];
+                    if (currentRelics.length < 4 && randomRelic) {
+                        state.updateRunData({ activeRelics: [...currentRelics, randomRelic.id] });
+                    }
+                    
+                    eventText += ` [Gained Relic: ${randomRelic.name}]`;
+                    state.setPendingOutcome?.({ type: 'view_relic', payload: { relic: randomRelic } });
+                } else if (pickedOutcome.result === 'gain_talent') {
+                    state.setPendingOutcome?.({ type: 'gain_talent', payload: { talentName: pickedOutcome.talent_id || 'Astral Echo' } });
+                } else if (pickedOutcome.result === 'gain_max_hp' || pickedOutcome.result === 'gain_max_mp') {
+                    const type = pickedOutcome.result === 'gain_max_hp' ? 'CAPACITY' : 'AETHER';
+                    state.runData?.activeParty?.forEach((p: any) => {
+                        state.triggerFloatingEffect?.(p.instanceId, `++ ${type}`, 'positive');
+                    });
+                    eventText += " [Max Stats Increased!]";
+                } else if (pickedOutcome.result === 'modify_stats') {
+                    state.runData?.activeParty?.forEach((p: any) => {
+                        state.triggerFloatingEffect?.(p.instanceId, "+ STATS", 'positive');
+                    });
+                    eventText += " [Stats Modified!]";
+                } else if (pickedOutcome.result === 'gain_xp') {
+                    state.runData?.activeParty?.forEach((p: any) => {
+                        state.triggerFloatingEffect?.(p.instanceId, "+ XP", 'positive');
+                    });
+                    eventText += " [Experience Gained!]";
+                } else if (pickedOutcome.result === 'level_up') {
+                    state.runData?.activeParty?.forEach((p: any) => {
+                        state.triggerFloatingEffect?.(p.instanceId, "LEVEL UP!", 'positive');
+                    });
+                    eventText += " [Level Up!]";
+                } else if (pickedOutcome.result === 'combat_encounter') {
+                    eventText += ` [Combat Approaching - ${pickedOutcome.difficulty || 'combat'}]`;
+                    state.setPendingOutcome?.({ type: 'start_combat', payload: { difficulty: pickedOutcome.difficulty || 'combat' } });
+                }
+
+                state.setEventResult(eventText);
+            }
+        }))
+    } as GameEvent;
 };

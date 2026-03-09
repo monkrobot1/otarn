@@ -6,7 +6,7 @@ Each class utilizes a **4-Ability Structure**:
 - **Default Attack**: Basic action, typically low cost or generates resources/timeline advancement.
 - **Special 1**: Class-dependent tactical skill.
 - **Special 2**: Class-dependent tactical skill (utility, buff/debuff, or alternate damage profile).
-- **Ultimate**: An extremely powerful ability that costs **0 MP/TU** but requires the **Revelation Meter** to be fully charged. Revelation acts as a proxy for "Faith", charging up as characters perform specific class actions—like dealing damage, winning battles, landing critical hits, or synergizing with their role (e.g., healing or inflicting debuffs).
+- **Ultimate**: An extremely powerful ability that costs **0 MP/TU** but requires the **Revelation Meter** to be fully charged. Revelation acts as a champion for "Faith", charging up as characters perform specific class actions—like dealing damage, winning battles, landing critical hits, or synergizing with their role (e.g., healing or inflicting debuffs).
 
 ---
 

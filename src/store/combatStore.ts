@@ -2,14 +2,35 @@ import { create } from 'zustand';
 import type { ActiveCharacter } from '../types/character';
 import type { AbilityPayload } from '../types/ability';
 import { useGameStore } from './gameStore';
-import { InternalLogger } from './debugStore';
+import { useCombatUIStore } from './combatUIStore';
 import { TalentManager } from '../systems/TalentManager';
+import { InternalLogger } from './debugStore';
 
 interface CombatLogEntry {
   id: string;
   message: string;
   type: 'damage' | 'heal' | 'buff' | 'system' | 'god';
 }
+
+const getSectorModifier = (sourceSector: string, targetSector: string) => {
+    if (!sourceSector || !targetSector) return { dmg: 1.0, crit: 0 };
+    // Weakness ring: Order < Chaos < Judgment < Love < Order
+    // A < B means A is weak to B, B is strong against A.
+    // So Chaos beats Order. Judgment beats Chaos.
+    const adv: Record<string, string> = {
+      'Order': 'Love',
+      'Chaos': 'Order',
+      'Judgment': 'Chaos',
+      'Love': 'Judgment'
+    };
+    if (adv[sourceSector] === targetSector) {
+        return { dmg: 1.5, crit: 0.25 }; // +50% dmg, +25% crit
+    }
+    if (adv[targetSector] === sourceSector) {
+        return { dmg: 0.5, crit: 0 }; // -50% dmg, base crit
+    }
+    return { dmg: 1.0, crit: 0 };
+};
 
 interface CombatState {
   enemies: ActiveCharacter[];
@@ -18,14 +39,12 @@ interface CombatState {
   currentRound: number;
   activeTurnId: string | null;
   logs: CombatLogEntry[];
-  targetingAbility: import('../types/character').Ability | null;
   
   initializeCombat: (allies: ActiveCharacter[], enemies: ActiveCharacter[]) => void;
   advanceTurn: () => void;
   processPayload: (payload: AbilityPayload) => void;
+  endCombat: (isVictory: boolean) => void;
   castGodIntervention: (faithCost: number, logic: () => void) => void;
-  setTargetingAbility: (ability: import('../types/character').Ability | null) => void;
-  endCombat: (victory: boolean) => void;
 }
 
 export const useCombatStore = create<CombatState>((set, get) => ({
@@ -35,15 +54,13 @@ export const useCombatStore = create<CombatState>((set, get) => ({
   currentRound: 1,
   activeTurnId: null,
   logs: [],
-  targetingAbility: null,
-
-  setTargetingAbility: (ability) => set({ targetingAbility: ability }),
 
   initializeCombat: (allies, enemies) => {
     // Generate initial turn queue based on Fate (Speed)
     // Apply static modifications based on currently active run talents
     const activeTalents = useGameStore.getState().runData?.activeTalents || [];
-    const modifiedAllies = TalentManager.applyPreCombatModifiers(allies, activeTalents);
+    const activeRelics = useGameStore.getState().runData?.activeRelics || [];
+    const modifiedAllies = TalentManager.applyPreCombatModifiers(allies, activeTalents, activeRelics);
     
     // (Optional: Implement enemy talents later)
     const modifiedEnemies = enemies; 
@@ -51,6 +68,8 @@ export const useCombatStore = create<CombatState>((set, get) => ({
     const allCombatants = [...modifiedAllies, ...modifiedEnemies];
     const sortedQueue = allCombatants.sort((a, b) => b.stats.current.fate - a.stats.current.fate);
     
+    useCombatUIStore.getState().clearAll();
+
     set({
       allies: modifiedAllies,
       enemies: modifiedEnemies,
@@ -106,6 +125,7 @@ export const useCombatStore = create<CombatState>((set, get) => ({
            allies,
            enemies,
            currentRound,
+           turnQueue,
            logs: [...get().logs, { id: Date.now().toString(), message: `--- Round ${currentRound} Begins ---`, type: 'system' }]
         });
     }
@@ -117,7 +137,10 @@ export const useCombatStore = create<CombatState>((set, get) => ({
       let isStunned = false;
       let dotDamage = 0;
       let newDebuffs = [...nextActor.debuffs];
-      let currentLogs = [...get().logs];
+      const currentLogs = [...get().logs];
+
+      // No per-turn MP regen; shifted to end of combat
+      const newMp = nextActor.currentMp;
 
       newDebuffs = newDebuffs.map(d => {
         if (d.type === 'Stun') isStunned = true;
@@ -134,8 +157,8 @@ export const useCombatStore = create<CombatState>((set, get) => ({
       }).filter(d => d.duration > 0);
 
       if (dotDamage > 0 || isStunned || newDebuffs.length !== nextActor.debuffs.length) {
-         let newHp = Math.max(0, nextActor.currentHp - dotDamage);
-         let isDead = newHp <= 0;
+         const newHp = Math.max(0, nextActor.currentHp - dotDamage);
+         const isDead = newHp <= 0;
          if (isDead) {
            currentLogs.push({ id: Date.now().toString() + '-death', message: `${nextActor.name} succumbed to damage.`, type: 'system' });
          }
@@ -143,6 +166,7 @@ export const useCombatStore = create<CombatState>((set, get) => ({
          const updateUnitState = (u: ActiveCharacter) => u.instanceId === nextActor.instanceId ? { 
            ...u, 
            currentHp: newHp, 
+           currentMp: newMp,
            isDead, 
            debuffs: newDebuffs,
            hasActedThisRound: (isDead || isStunned) ? true : u.hasActedThisRound
@@ -164,7 +188,7 @@ export const useCombatStore = create<CombatState>((set, get) => ({
 
          if (isDead || isStunned) {
             // Auto skip
-            setTimeout(() => get().advanceTurn(), 0);
+            setTimeout(() => get().advanceTurn(), 500 / (useGameStore.getState().combatSpeed || 1));
             return;
          }
       } else {
@@ -190,10 +214,10 @@ export const useCombatStore = create<CombatState>((set, get) => ({
     InternalLogger.info('combat', `[PAYLOAD] ${sourceUnit.name} casting ability on targets: ${payload.targetIds.join(', ')}`, payload.ability?.name || 'basic');
 
     let finalTargetIds = payload.targetIds;
-    let isConfused = sourceUnit.debuffs.some(d => d.type === 'Confusion');
+    const isConfused = sourceUnit.debuffs.some(d => d.type === 'Confusion');
     
     let totalDamageDealt = 0;
-    let combatLogs: CombatLogEntry[] = [];
+    const combatLogs: CombatLogEntry[] = [];
     
     if (isConfused) {
        const allLiving = [...allies, ...enemies].filter(a => !a.isDead);
@@ -211,16 +235,39 @@ export const useCombatStore = create<CombatState>((set, get) => ({
     let sourcePotencyPhysical = Math.max(1, sourceUnit.stats.base.physicality || 1);
     let sourcePotencySpiritual = Math.max(1, sourceUnit.stats.base.authority || 1);
 
-    // DEV TESTING HACK: Make player attacks 100x more damaging
+    // DEV TESTING HACK: Make player ULT attacks 100x more damaging
     if (allies.some(a => a.instanceId === sourceUnit.instanceId)) {
-       sourcePotencyPhysical *= 100;
-       sourcePotencySpiritual *= 100;
+       if (payload.ability && payload.ability.id.includes('_ULT')) {
+           sourcePotencyPhysical *= 100;
+           sourcePotencySpiritual *= 100;
+       }
+
+       // Add Default Relic
+       const activeRelics = useGameStore.getState().runData?.activeRelics || [];
+       if (activeRelics.includes('REL_DEFAULT')) {
+           sourcePotencyPhysical *= 1.2;
+           sourcePotencySpiritual *= 1.2;
+       }
     }
 
     const updateUnit = (unit: ActiveCharacter) => {
-      // 1. Mark the acting unit as having acted
-      if (unit.instanceId === payload.sourceId && unit.instanceId === activeTurnId) {
-         return { ...unit, hasActedThisRound: true };
+      const isSource = unit.instanceId === payload.sourceId && unit.instanceId === activeTurnId;
+      let newMp = unit.currentMp;
+      let newRev = unit.currentRevelation || 0;
+      let actedState = unit.hasActedThisRound;
+
+      // 1. Mark the acting unit as having acted, consume resources, generate passive zeal
+      if (isSource) {
+         actedState = true;
+         if (payload.ability && payload.ability.costMP) {
+             newMp = Math.max(0, newMp - payload.ability.costMP);
+         }
+         if (payload.ability && payload.ability.costRevelation) {
+             newRev = Math.max(0, newRev - payload.ability.costRevelation);
+         } else if (payload.ability) {
+             // Generate Zeal for casting a normal ability
+             newRev = Math.min(100, newRev + 15);
+         }
       }
 
       // 2. Process Target Damage Mitigations & Healing
@@ -242,28 +289,60 @@ export const useCombatStore = create<CombatState>((set, get) => ({
            if (['Regen', 'Shield', 'Haste', 'Overcharge'].includes(statusName)) {
                newBuffs.push(effect);
                combatLogs.push({ id: effect.id, message: `${unit.name} gained ${statusName}.`, type: 'buff' });
+               const spd = useGameStore.getState().combatSpeed || 1;
+               useCombatUIStore.getState().addVfx({
+                   id: Date.now().toString() + '-' + unit.instanceId + Math.random(),
+                   type: 'buff',
+                   targetId: unit.instanceId,
+                   spriteUrl: '/assets/default_buff.svg',
+                   cols: 4, rows: 1, totalFrames: 4, fps: 12, durationMs: 400 / spd
+               });
            } else {
                newDebuffs.push(effect);
                combatLogs.push({ id: effect.id, message: `${unit.name} afflicted by ${statusName}.`, type: 'damage' });
+               const spd = useGameStore.getState().combatSpeed || 1;
+               useCombatUIStore.getState().addVfx({
+                   id: Date.now().toString() + '-' + unit.instanceId + Math.random(),
+                   type: 'hit',
+                   targetId: unit.instanceId,
+                   spriteUrl: '/assets/default_hit.svg',
+                   cols: 4, rows: 1, totalFrames: 4, fps: 15, durationMs: 300 / spd
+               });
            }
         };
 
-        if (payload.ability) {
+         if (payload.ability) {
            const abil = payload.ability;
+           const sectorMod = getSectorModifier(sourceUnit.sector, unit.sector);
 
            // 1. Process 'hits' array
            if (abil.hits && abil.hits.length > 0) {
               abil.hits.forEach((hit, index) => {
                 let hitDamage = 0;
+                let isCrit = false;
+
+                const BASE_SCALAR = 20;
+
                 if (hit.damageType === 'Physical') {
                   const mitigation = Math.max(1, unit.stats.base.physicality || 1);
-                  hitDamage = Math.floor((sourcePotencyPhysical * hit.multiplier) / mitigation);
+                  hitDamage = Math.floor((sourcePotencyPhysical * hit.multiplier * BASE_SCALAR) / mitigation);
+                  
+                  const baseCritChance = (sourceUnit.stats.current.destiny || 5) / 100;
+                  if (Math.random() < (baseCritChance + sectorMod.crit)) isCrit = true;
+                  
+                  hitDamage = Math.floor(hitDamage * sectorMod.dmg * (isCrit ? 1.5 : 1.0));
                 } else if (hit.damageType === 'Spiritual') {
                   const mitigation = Math.max(1, unit.stats.base.spirit || 1);
-                  hitDamage = Math.floor((sourcePotencySpiritual * hit.multiplier) / mitigation);
+                  hitDamage = Math.floor((sourcePotencySpiritual * hit.multiplier * BASE_SCALAR) / mitigation);
+
+                  const baseCritChance = (sourceUnit.stats.current.destiny || 5) / 100;
+                  if (Math.random() < (baseCritChance + sectorMod.crit)) isCrit = true;
+                  
+                  hitDamage = Math.floor(hitDamage * sectorMod.dmg * (isCrit ? 1.5 : 1.0));
                 } else if (hit.damageType === 'True') {
-                  hitDamage = Math.floor(sourcePotencyPhysical * hit.multiplier); // True ignores mitigation
+                  hitDamage = Math.floor(sourcePotencyPhysical * hit.multiplier * BASE_SCALAR); // True ignores mitigation, resistance, and crit
                 }
+                
                 if (hitDamage < 1) hitDamage = 1;
 
                 totalDamageDealt += hitDamage;
@@ -271,7 +350,7 @@ export const useCombatStore = create<CombatState>((set, get) => ({
                 
                 combatLogs.push({
                   id: Date.now().toString() + '-' + index + '-' + unit.instanceId,
-                  message: `${sourceUnit.name} hit ${unit.name} for ${hitDamage} ${hit.damageType} damage.`,
+                  message: `${sourceUnit.name} hit ${unit.name} for ${hitDamage} ${hit.damageType} damage${isCrit ? ' (CRIT!)' : ''}${sectorMod.dmg > 1.0 ? ' (Weakness!)' : sectorMod.dmg < 1.0 ? ' (Resisted)' : ''}.`,
                   type: 'damage'
                 });
 
@@ -281,22 +360,28 @@ export const useCombatStore = create<CombatState>((set, get) => ({
            } else if (abil.baseDamage) {
               // Fallback simple baseDamage
               const mitigationFactor = Math.max(1, unit.stats.base.physicality || 1);
-              let actualDamage = Math.floor((sourcePotencyPhysical * abil.baseDamage) / mitigationFactor);
+              let actualDamage = Math.floor((sourcePotencyPhysical * abil.baseDamage * 20) / mitigationFactor);
+              
+              let isCrit = false;
+              const baseCritChance = (sourceUnit.stats.current.destiny || 5) / 100;
+              if (Math.random() < (baseCritChance + sectorMod.crit)) isCrit = true;
+
+              actualDamage = Math.floor(actualDamage * sectorMod.dmg * (isCrit ? 1.5 : 1.0));
               if (actualDamage < 1) actualDamage = 1;
 
               totalDamageDealt += actualDamage;
               newHp = Math.max(0, newHp - actualDamage);
               combatLogs.push({
                 id: Date.now().toString() + '-legacy-' + unit.instanceId,
-                message: `${sourceUnit.name} hit ${unit.name} for ${actualDamage} damage.`,
+                message: `${sourceUnit.name} hit ${unit.name} for ${actualDamage} damage${isCrit ? ' (CRIT!)' : ''}${sectorMod.dmg > 1.0 ? ' (Weakness!)' : sectorMod.dmg < 1.0 ? ' (Resisted)' : ''}.`,
                 type: 'damage'
               });
            }
 
            // 2. Process baseHeal
            if (abil.baseHeal) {
-              const maxHp = unit.stats.base.capacity ? unit.stats.base.capacity * 10 : 100;
-              const healAmt = Math.floor(sourcePotencySpiritual * abil.baseHeal);
+              const maxHp = unit.stats.base.capacity ? 10 + (unit.stats.base.capacity * 5) + (unit.level * unit.stats.base.capacity) : 100;
+              const healAmt = Math.floor(sourcePotencySpiritual * abil.baseHeal * 5); // 5 is a good baseline multiplier for heals to reach 30-50%
               newHp = Math.min(maxHp, newHp + healAmt);
               combatLogs.push({
                 id: Date.now().toString() + '-heal-' + unit.instanceId,
@@ -310,11 +395,27 @@ export const useCombatStore = create<CombatState>((set, get) => ({
               abil.statusEffects.forEach(statusName => applyStatus(statusName));
            }
 
+           // 4. Trigger localized Ability VFX
+           if (abil.vfxType) {
+               const spd = useGameStore.getState().combatSpeed || 1;
+               useCombatUIStore.getState().addVfx({
+                   id: Date.now().toString() + '-' + unit.instanceId + Math.random(),
+                   type: abil.vfxType,
+                   sourceId: sourceUnit.instanceId,
+                   targetId: unit.instanceId,
+                   spriteUrl: abil.vfxUrl || `/assets/default_${abil.vfxType}.svg`,
+                   cols: 4, 
+                   rows: 1, 
+                   totalFrames: 4, 
+                   fps: 15, 
+                   durationMs: ['beam', 'projectile'].includes(abil.vfxType) ? 500 : 300
+               }, spd);
+           }
         } else {
            // Legacy un-typed damage/healing payloads
            if (payload.damage) {
               const mitigationFactor = Math.max(1, unit.stats.base.physicality || 1);
-              let actualDamage = Math.floor(payload.damage * (sourcePotencyPhysical / mitigationFactor));
+              let actualDamage = Math.floor(payload.damage * 20 * (sourcePotencyPhysical / mitigationFactor));
               if (actualDamage < 1) actualDamage = 1;
 
               totalDamageDealt += actualDamage;
@@ -348,15 +449,24 @@ export const useCombatStore = create<CombatState>((set, get) => ({
            }
         }
 
+        // Generate Zeal when targeted by hostile abilities (damage or debuff)
+        const isHostile = payload.ability && (payload.ability.targeting === 'enemy' || payload.ability.targeting === 'all_enemies');
+        if (isHostile && unit.instanceId !== payload.sourceId) {
+            newRev = Math.min(100, newRev + 20); // 20 Zeal for taking a hit
+        }
+
         return { 
           ...unit, 
           currentHp: newHp,
+          currentMp: newMp,
+          currentRevelation: newRev,
           buffs: newBuffs,
           debuffs: newDebuffs,
-          isDead: newHp <= 0
+          isDead: newHp <= 0,
+          hasActedThisRound: actedState
         };
       }
-      return unit;
+      return isSource ? { ...unit, currentMp: newMp, currentRevelation: newRev, hasActedThisRound: actedState } : unit;
     };
 
     const nextAllies = allies.map(updateUnit);
@@ -372,7 +482,9 @@ export const useCombatStore = create<CombatState>((set, get) => ({
     InternalLogger.debug('combat', `Payload resolved, dealing ${totalDamageDealt} total damage across all targets.`);
 
     // Automatically advance to next turn after action resolves.
-    get().advanceTurn();
+    setTimeout(() => {
+        get().advanceTurn();
+    }, 1500 / (useGameStore.getState().combatSpeed || 1));
   },
 
   castGodIntervention: (faithCost, logic) => {
@@ -394,15 +506,15 @@ export const useCombatStore = create<CombatState>((set, get) => ({
   },
 
   endCombat: (victory) => {
-    set({ activeTurnId: null, logs: [...get().logs, { id: Date.now().toString(), message: victory ? "Victory Achieved." : "Proxy Wiped.", type: 'system' }] });
+    set({ activeTurnId: null, logs: [...get().logs, { id: Date.now().toString(), message: victory ? "Victory Achieved." : "Champion Wiped.", type: 'system' }] });
     
     // Simulate a brief delay before routing so player can read the log
     setTimeout(() => {
         if (victory) {
             useGameStore.getState().setScene('reward');
         } else {
-            useGameStore.getState().endRun(false);
+            useGameStore.getState().setScene('summary');
         }
-    }, 2000);
+    }, 2000 / (useGameStore.getState().combatSpeed || 1));
   }
 }));

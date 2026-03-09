@@ -8,7 +8,11 @@ interface GameState {
   globalData: GlobalSaveData;
   runData: RunStateData | null;
   currentScene: SceneType;
+  isMenuOpen: boolean;
+  combatSpeed: number;
   setScene: (scene: SceneType) => void;
+  setMenuOpen: (isOpen: boolean) => void;
+  setCombatSpeed: (speed: number) => void;
   updateRunData: (partial: Partial<RunStateData>) => void;
   startNewRun: () => void;
   endRun: (success: boolean) => void;
@@ -16,6 +20,7 @@ interface GameState {
   awardAxiomPoints: (axiom: 'Order' | 'Chaos' | 'Judgment' | 'Love', amount: number) => void;
   unlockAxiomNode: (nodeId: string, cost: number, axiom: 'Order' | 'Chaos' | 'Judgment' | 'Love') => void;
   consumeSpark: () => boolean; // Returns false if out of fuel
+  loadSlot: (slotId: string) => void;
 }
 
 export const useGameStore = create<GameState>((set, get) => ({
@@ -48,12 +53,17 @@ export const useGameStore = create<GameState>((set, get) => ({
         ...loaded,
         divineSparks: typeof loaded.divineSparks === 'number' ? loaded.divineSparks : 12,
         ephemeralFaith: typeof loaded.ephemeralFaith === 'number' ? loaded.ephemeralFaith : 50,
-        availableGodAbilities: Array.isArray(loaded.availableGodAbilities) ? loaded.availableGodAbilities : []
+        availableGodAbilities: Array.isArray(loaded.availableGodAbilities) ? loaded.availableGodAbilities : [],
+        visionRange: typeof loaded.visionRange === 'number' ? loaded.visionRange : 3
     };
   })(),
   currentScene: 'throne',
+  isMenuOpen: false,
+  combatSpeed: 1,
 
   setScene: (scene: SceneType) => set({ currentScene: scene }),
+  setMenuOpen: (isOpen: boolean) => set({ isMenuOpen: isOpen }),
+  setCombatSpeed: (speed: number) => set({ combatSpeed: speed }),
 
   updateRunData: (partial) => {
       const current = get().runData;
@@ -73,9 +83,13 @@ export const useGameStore = create<GameState>((set, get) => ({
       currentNodeId: 'START',
       activeParty: [], // Drafted in Faith Draft phase
       activeRelics: [],
+      activeBlessings: [],
       activeTalents: [],
       visitedNodes: [],
-      availableGodAbilities: Array.isArray(globalData.unlockedGodAbilities) ? [...globalData.unlockedGodAbilities] : []
+      availableGodAbilities: Array.isArray(globalData.unlockedGodAbilities) ? [...globalData.unlockedGodAbilities] : [],
+      currentSector: 'Judgment',
+      currentSectorLevel: 1,
+      visionRange: 3 // Default vision range
     };
     SaveManager.saveRun(newRun);
     set({ runData: newRun });
@@ -120,7 +134,7 @@ export const useGameStore = create<GameState>((set, get) => ({
     const currentLevel = globalData.unlockedAxiomNodes[nodeId] || 0;
     
     if (globalData.axiomPoints[axiom] >= cost) {
-        let newUnlockedAbilities = Array.isArray(globalData.unlockedGodAbilities) ? [...globalData.unlockedGodAbilities] : [];
+        const newUnlockedAbilities = Array.isArray(globalData.unlockedGodAbilities) ? [...globalData.unlockedGodAbilities] : [];
 
         // Find the node to check its effect
         const tree = AXIOM_TREES[axiom];
@@ -164,5 +178,38 @@ export const useGameStore = create<GameState>((set, get) => ({
     SaveManager.saveRun(updated);
     set({ runData: updated });
     return true;
+  },
+
+  loadSlot: (slotId: string) => {
+    SaveManager.setActiveSlot(slotId);
+    
+    const defaults: GlobalSaveData = {
+        divineSparks: 0,
+        axiomPoints: { Order: 0, Chaos: 0, Judgment: 0, Love: 0 },
+        unlockedAxiomNodes: {},
+        unlockedTalentIds: [],
+        unlockedRelicIds: [],
+        permanentStatBonuses: {},
+        unlockedGodAbilities: []
+    };
+    
+    const loadedGlobal = SaveManager.loadGlobal(slotId);
+    const globalData = loadedGlobal ? {
+        ...defaults,
+        ...loadedGlobal,
+        axiomPoints: { ...defaults.axiomPoints, ...(loadedGlobal.axiomPoints || {}) },
+        unlockedGodAbilities: loadedGlobal.unlockedGodAbilities || []
+    } : defaults;
+
+    const loadedRun = SaveManager.loadRun(slotId);
+    const runData = loadedRun ? {
+        ...loadedRun,
+        divineSparks: typeof loadedRun.divineSparks === 'number' ? loadedRun.divineSparks : 12,
+        ephemeralFaith: typeof loadedRun.ephemeralFaith === 'number' ? loadedRun.ephemeralFaith : 50,
+        availableGodAbilities: Array.isArray(loadedRun.availableGodAbilities) ? loadedRun.availableGodAbilities : [],
+        visionRange: typeof loadedRun.visionRange === 'number' ? loadedRun.visionRange : 3
+    } : null;
+
+    set({ globalData, runData });
   }
 }));

@@ -17,7 +17,7 @@ export interface Talent {
   icon?: string;
 }
 
-export type RelicTier = 'Fractured' | 'Resonant' | 'Exalted' | 'Reliquary' | 'Divine';
+export type RelicTier = 'Common' | 'Uncommon' | 'Rare' | 'Epic' | 'Divine';
 
 export interface Relic {
   id: string;
@@ -61,8 +61,12 @@ export interface RunStateData {
   currentNodeId: string;
   activeParty: ActiveCharacter[];
   activeRelics: string[]; // Up to 4 Relic IDs
+  activeBlessings: string[]; // Dynamically generated blessings from events/shrines
   activeTalents: string[]; // Talent IDs drafted for this run
   visitedNodes: string[];
   generatedMap?: MapNode[];
   availableGodAbilities: string[]; // Unlocked abilities available for this run
+  currentSector?: 'Judgment' | 'Order' | 'Chaos' | 'Love' | 'Universal';
+  currentSectorLevel?: number;
+  visionRange: number; // How many jumps ahead can be seen on the map
 }

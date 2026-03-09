@@ -8,7 +8,7 @@ const ROWS_MAX = 5;
 const randomChoice = <T>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)];
 const randomInt = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min;
 
-export const generateMap = (debugEventsOnly: boolean = false): MapNode[] => {
+export const generateMap = (debugEventsOnly: boolean = false, sectorLevel: number = 1): MapNode[] => {
     const nodes: MapNode[][] = []; // grouped by column
 
     // Step 1: Generate Nodes Per Column
@@ -22,7 +22,7 @@ export const generateMap = (debugEventsOnly: boolean = false): MapNode[] => {
         const xPos = 10 + (c * (180 / (COLS - 1))); // from 10 to 190 on a 200-width box
         
         for (let r = 0; r < nodeCount; r++) {
-            const yPercent = 10 + (r * (80 / (nodeCount - 1 || 1))) + randomInt(-5, 5); // Add slight organic jitter
+            const yPercent = 10 + (r * (80 / (nodeCount - 1 || 1))) + (Math.random() * 6 - 3); // Tighter organic jitter to avoid overlap
             
             // Assign type
             let type: NodeType = 'combat';
@@ -46,12 +46,19 @@ export const generateMap = (debugEventsOnly: boolean = false): MapNode[] => {
                 }
             }
             
+            // Calculate Node Level Depth 
+            // Scales roughly +1 level every 3 columns natively, with Elites/Boss getting a bump
+            let nodeLevel = sectorLevel + Math.floor(c / 3);
+            if (type === 'elite') nodeLevel += 1;
+            if (type === 'boss') nodeLevel += 2;
+
             colNodes.push({
                 id: `node_c${c}_r${r}`,
                 type,
                 x: xPos,
                 y: c === COLS - 1 ? 50 : Math.min(Math.max(yPercent, 10), 90), // Boss at 50, others bounded 10-90
-                connections: []
+                connections: [],
+                level: nodeLevel
             });
         }
         nodes.push(colNodes);
@@ -91,7 +98,7 @@ export const generateMap = (debugEventsOnly: boolean = false): MapNode[] => {
             // Find closest index proportionally in nextCol
             const proportionalIdx = Math.floor((i / currentCol.length) * nextCol.length);
             
-            let possibleTargets = [nextCol[proportionalIdx]];
+            const possibleTargets = [nextCol[proportionalIdx]];
             if (proportionalIdx > 0) possibleTargets.push(nextCol[proportionalIdx - 1]);
             if (proportionalIdx < nextCol.length - 1) possibleTargets.push(nextCol[proportionalIdx + 1]);
             
@@ -105,20 +112,26 @@ export const generateMap = (debugEventsOnly: boolean = false): MapNode[] => {
         nextCol.forEach((target, j) => {
             const incomingCount = currentCol.filter(n => n.connections.includes(target.id)).length;
             if (incomingCount === 0) {
+                // Determine source proportionally
                 const proportionalIdx = Math.floor((j / nextCol.length) * currentCol.length);
-                let possibleSources = [currentCol[proportionalIdx]];
+                const possibleSources = [currentCol[proportionalIdx]];
                 if (proportionalIdx > 0) possibleSources.push(currentCol[proportionalIdx - 1]);
                 if (proportionalIdx < currentCol.length - 1) possibleSources.push(currentCol[proportionalIdx + 1]);
                 
                 const source = randomChoice(possibleSources);
-                source.connections.push(target.id);
+                // Verify forward connection redundant but safe
+                const sourceCol = parseInt(source.id.split('_c')[1] || '0');
+                const targetCol = parseInt(target.id.split('_c')[1] || '0');
+                
+                if (targetCol > sourceCol && !source.connections.includes(target.id)) {
+                    source.connections.push(target.id);
+                }
             }
         });
         
-        // Optional 3. Add random extra branches for fun? 
-        // (Just ensure paths don't look completely straight)
+        // 3. Add random extra branches for fun? 
         currentCol.forEach((node) => {
-           if (Math.random() < 0.3 && nextCol.length > 1) { // 30% chance of extra branch
+           if (Math.random() < 0.2 && nextCol.length > 1) { // 20% chance of extra branch
                const target = randomChoice(nextCol);
                if (!node.connections.includes(target.id)) {
                    node.connections.push(target.id);

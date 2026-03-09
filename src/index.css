@@ -5,6 +5,18 @@
   --color-gold-trim: #E1C16E;
   --color-glass-bg: rgba(255, 255, 255, 0.05);
   --color-glass-border: rgba(255, 255, 255, 0.2);
+  
+  --font-sans: 'Stellar', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Forum', ui-serif, Georgia, serif;
+  --font-mono: 'Forum', ui-monospace, SFMono-Regular, monospace;
+  --font-cinzel: 'Cinzel', serif;
+  --font-cinzel-dec: 'Cinzel Decorative', cursive;
+}
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-cinzel-dec);
+  }
 }
 
 .bg-cosmic {
@@ -21,7 +33,7 @@ body {
   overflow: hidden;
   background-color: var(--color-space-dark);
   color: white;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-sans);
 }
 
 .glass-panel {

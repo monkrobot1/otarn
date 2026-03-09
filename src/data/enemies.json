@@ -1,65 +1,579 @@
 [
   {
-    "id": "ENE_JUDGMENT_GRUNT",
+    "id": "ENE_JUD_GRN_01",
     "name": "Iron Sentinel",
-    "description": "A low-level enforcer of the Judgment sector.",
     "classRole": "Frontline",
+    "tier": "grunt",
+    "race": "Null-Forged",
     "sector": "Judgment",
     "stats": {
-      "physicality": 7,
+      "physicality": 10,
       "authority": 2,
-      "grace": 6,
-      "acumen": 10,
+      "grace": 2,
+      "acumen": 5,
       "spirit": 2,
-      "fate": 10,
-      "capacity": 8,
+      "fate": 5,
+      "capacity": 5,
       "destiny": 2
-    },
-    "abilities": [
-      "STRIKE"
-    ]
+    }
   },
   {
-    "id": "ENE_JUDGMENT_ELITE",
-    "name": "Arbiter of Iron",
-    "description": "An elite bruiser tasked with crushing heretics.",
-    "classRole": "Frontline",
+    "id": "ENE_JUD_GRN_02",
+    "name": "Circuit Drone",
+    "classRole": "Backline",
+    "tier": "grunt",
+    "race": "Null-Forged",
     "sector": "Judgment",
     "stats": {
-      "physicality": 12,
+      "physicality": 2,
       "authority": 5,
-      "grace": 5,
-      "acumen": 10,
-      "spirit": 2,
-      "fate": 10,
-      "capacity": 15,
-      "destiny": 3
-    },
-    "abilities": [
-      "STRIKE",
-      "HEAVY_STRIKE"
-    ]
+      "grace": 8,
+      "acumen": 8,
+      "spirit": 5,
+      "fate": 5,
+      "capacity": 3,
+      "destiny": 2
+    }
   },
   {
-    "id": "ENE_JUDGMENT_MAGE",
-    "name": "Circuit Weaver",
-    "description": "Provides spiritual bombardment from the backlines.",
+    "id": "ENE_JUD_GRN_03",
+    "name": "Inquisitor Hound",
+    "classRole": "Frontline",
+    "tier": "grunt",
+    "race": "Null-Forged",
+    "sector": "Judgment",
+    "stats": {
+      "physicality": 8,
+      "authority": 2,
+      "grace": 10,
+      "acumen": 2,
+      "spirit": 2,
+      "fate": 8,
+      "capacity": 4,
+      "destiny": 2
+    }
+  },
+  {
+    "id": "ENE_JUD_GRN_04",
+    "name": "Null-Priest",
     "classRole": "Backline",
+    "tier": "grunt",
+    "race": "Null-Forged",
     "sector": "Judgment",
     "stats": {
       "physicality": 2,
       "authority": 10,
-      "grace": 8,
+      "grace": 4,
+      "acumen": 8,
+      "spirit": 5,
+      "fate": 5,
+      "capacity": 4,
+      "destiny": 2
+    }
+  },
+  {
+    "id": "ENE_JUD_GRN_05",
+    "name": "Shield Battery",
+    "classRole": "Backline",
+    "tier": "grunt",
+    "race": "Null-Forged",
+    "sector": "Judgment",
+    "stats": {
+      "physicality": 5,
+      "authority": 5,
+      "grace": 2,
+      "acumen": 5,
+      "spirit": 8,
+      "fate": 2,
+      "capacity": 6,
+      "destiny": 2
+    }
+  },
+  {
+    "id": "ENE_JUD_ELI_01",
+    "name": "Arbiter of Iron",
+    "classRole": "Frontline",
+    "tier": "elite",
+    "race": "Null-Forged",
+    "sector": "Judgment",
+    "stats": {
+      "physicality": 15,
+      "authority": 8,
+      "grace": 5,
       "acumen": 10,
-      "spirit": 12,
-      "fate": 10,
-      "capacity": 5,
+      "spirit": 2,
+      "fate": 8,
+      "capacity": 12,
       "destiny": 5
-    },
-    "abilities": [
-      "STRIKE",
-      "MANA_BURN"
-    ]
+    }
+  },
+  {
+    "id": "ENE_JUD_ELI_02",
+    "name": "Executioner Construct",
+    "classRole": "Frontline",
+    "tier": "elite",
+    "race": "Null-Forged",
+    "sector": "Judgment",
+    "stats": {
+      "physicality": 18,
+      "authority": 5,
+      "grace": 5,
+      "acumen": 5,
+      "spirit": 2,
+      "fate": 10,
+      "capacity": 10,
+      "destiny": 5
+    }
+  },
+  {
+    "id": "ENE_JUD_ELI_03",
+    "name": "Matrix Overseer",
+    "classRole": "Backline",
+    "tier": "elite",
+    "race": "Null-Forged",
+    "sector": "Judgment",
+    "stats": {
+      "physicality": 5,
+      "authority": 15,
+      "grace": 5,
+      "acumen": 15,
+      "spirit": 10,
+      "fate": 5,
+      "capacity": 8,
+      "destiny": 5
+    }
+  },
+  {
+    "id": "ENE_ORD_GRN_01",
+    "name": "Solar Footman",
+    "classRole": "Frontline",
+    "tier": "grunt",
+    "race": "Lumina",
+    "sector": "Order",
+    "stats": {
+      "physicality": 8,
+      "authority": 5,
+      "grace": 5,
+      "acumen": 5,
+      "spirit": 5,
+      "fate": 5,
+      "capacity": 5,
+      "destiny": 2
+    }
+  },
+  {
+    "id": "ENE_ORD_GRN_02",
+    "name": "Radiant Purger",
+    "classRole": "Backline",
+    "tier": "grunt",
+    "race": "Lumina",
+    "sector": "Order",
+    "stats": {
+      "physicality": 2,
+      "authority": 8,
+      "grace": 5,
+      "acumen": 8,
+      "spirit": 8,
+      "fate": 5,
+      "capacity": 4,
+      "destiny": 2
+    }
+  },
+  {
+    "id": "ENE_ORD_GRN_03",
+    "name": "Chrono-Mite",
+    "classRole": "Frontline",
+    "tier": "grunt",
+    "race": "Lumina",
+    "sector": "Order",
+    "stats": {
+      "physicality": 5,
+      "authority": 2,
+      "grace": 12,
+      "acumen": 5,
+      "spirit": 5,
+      "fate": 8,
+      "capacity": 3,
+      "destiny": 2
+    }
+  },
+  {
+    "id": "ENE_ORD_GRN_04",
+    "name": "Zealot",
+    "classRole": "Frontline",
+    "tier": "grunt",
+    "race": "Lumina",
+    "sector": "Order",
+    "stats": {
+      "physicality": 10,
+      "authority": 5,
+      "grace": 8,
+      "acumen": 2,
+      "spirit": 5,
+      "fate": 5,
+      "capacity": 4,
+      "destiny": 2
+    }
+  },
+  {
+    "id": "ENE_ORD_GRN_05",
+    "name": "Acolyte of Law",
+    "classRole": "Backline",
+    "tier": "grunt",
+    "race": "Lumina",
+    "sector": "Order",
+    "stats": {
+      "physicality": 2,
+      "authority": 8,
+      "grace": 2,
+      "acumen": 5,
+      "spirit": 10,
+      "fate": 5,
+      "capacity": 4,
+      "destiny": 2
+    }
+  },
+  {
+    "id": "ENE_ORD_ELI_01",
+    "name": "Grand Vanguard",
+    "classRole": "Frontline",
+    "tier": "elite",
+    "race": "Lumina",
+    "sector": "Order",
+    "stats": {
+      "physicality": 12,
+      "authority": 12,
+      "grace": 5,
+      "acumen": 5,
+      "spirit": 12,
+      "fate": 5,
+      "capacity": 15,
+      "destiny": 5
+    }
+  },
+  {
+    "id": "ENE_ORD_ELI_02",
+    "name": "Time-Warden",
+    "classRole": "Backline",
+    "tier": "elite",
+    "race": "Lumina",
+    "sector": "Order",
+    "stats": {
+      "physicality": 5,
+      "authority": 15,
+      "grace": 10,
+      "acumen": 15,
+      "spirit": 10,
+      "fate": 10,
+      "capacity": 10,
+      "destiny": 5
+    }
+  },
+  {
+    "id": "ENE_ORD_ELI_03",
+    "name": "Reflection Array",
+    "classRole": "Frontline",
+    "tier": "elite",
+    "race": "Lumina",
+    "sector": "Order",
+    "stats": {
+      "physicality": 10,
+      "authority": 10,
+      "grace": 5,
+      "acumen": 10,
+      "spirit": 15,
+      "fate": 5,
+      "capacity": 12,
+      "destiny": 5
+    }
+  },
+  {
+    "id": "ENE_CHA_GRN_01",
+    "name": "Cinder-Imp",
+    "classRole": "Frontline",
+    "tier": "grunt",
+    "race": "Espers",
+    "sector": "Chaos",
+    "stats": {
+      "physicality": 4,
+      "authority": 5,
+      "grace": 10,
+      "acumen": 5,
+      "spirit": 5,
+      "fate": 8,
+      "capacity": 3,
+      "destiny": 2
+    }
+  },
+  {
+    "id": "ENE_CHA_GRN_02",
+    "name": "Void-Spawn",
+    "classRole": "Frontline",
+    "tier": "grunt",
+    "race": "Espers",
+    "sector": "Chaos",
+    "stats": {
+      "physicality": 8,
+      "authority": 5,
+      "grace": 5,
+      "acumen": 5,
+      "spirit": 5,
+      "fate": 5,
+      "capacity": 5,
+      "destiny": 2
+    }
+  },
+  {
+    "id": "ENE_CHA_GRN_03",
+    "name": "Tidal Spirit",
+    "classRole": "Backline",
+    "tier": "grunt",
+    "race": "Espers",
+    "sector": "Chaos",
+    "stats": {
+      "physicality": 2,
+      "authority": 8,
+      "grace": 8,
+      "acumen": 8,
+      "spirit": 5,
+      "fate": 5,
+      "capacity": 4,
+      "destiny": 2
+    }
+  },
+  {
+    "id": "ENE_CHA_GRN_04",
+    "name": "Chaos Orb",
+    "classRole": "Backline",
+    "tier": "grunt",
+    "race": "Espers",
+    "sector": "Chaos",
+    "stats": {
+      "physicality": 2,
+      "authority": 5,
+      "grace": 12,
+      "acumen": 5,
+      "spirit": 5,
+      "fate": 15,
+      "capacity": 3,
+      "destiny": 2
+    }
+  },
+  {
+    "id": "ENE_CHA_GRN_05",
+    "name": "Ember Hound",
+    "classRole": "Frontline",
+    "tier": "grunt",
+    "race": "Espers",
+    "sector": "Chaos",
+    "stats": {
+      "physicality": 8,
+      "authority": 2,
+      "grace": 8,
+      "acumen": 2,
+      "spirit": 5,
+      "fate": 5,
+      "capacity": 4,
+      "destiny": 2
+    }
+  },
+  {
+    "id": "ENE_CHA_ELI_01",
+    "name": "Magma Golem",
+    "classRole": "Frontline",
+    "tier": "elite",
+    "race": "Espers",
+    "sector": "Chaos",
+    "stats": {
+      "physicality": 15,
+      "authority": 10,
+      "grace": 2,
+      "acumen": 5,
+      "spirit": 8,
+      "fate": 2,
+      "capacity": 18,
+      "destiny": 5
+    }
+  },
+  {
+    "id": "ENE_CHA_ELI_02",
+    "name": "Storm Weaver",
+    "classRole": "Backline",
+    "tier": "elite",
+    "race": "Espers",
+    "sector": "Chaos",
+    "stats": {
+      "physicality": 5,
+      "authority": 15,
+      "grace": 15,
+      "acumen": 12,
+      "spirit": 10,
+      "fate": 10,
+      "capacity": 8,
+      "destiny": 5
+    }
+  },
+  {
+    "id": "ENE_CHA_ELI_03",
+    "name": "Entropy Elemental",
+    "classRole": "Backline",
+    "tier": "elite",
+    "race": "Espers",
+    "sector": "Chaos",
+    "stats": {
+      "physicality": 5,
+      "authority": 12,
+      "grace": 10,
+      "acumen": 15,
+      "spirit": 12,
+      "fate": 12,
+      "capacity": 10,
+      "destiny": 5
+    }
+  },
+  {
+    "id": "ENE_LOV_GRN_01",
+    "name": "Spore Carrier",
+    "classRole": "Frontline",
+    "tier": "grunt",
+    "race": "Sylvan",
+    "sector": "Love",
+    "stats": {
+      "physicality": 5,
+      "authority": 5,
+      "grace": 5,
+      "acumen": 5,
+      "spirit": 5,
+      "fate": 5,
+      "capacity": 5,
+      "destiny": 2
+    }
+  },
+  {
+    "id": "ENE_LOV_GRN_02",
+    "name": "Sanguine Vine",
+    "classRole": "Frontline",
+    "tier": "grunt",
+    "race": "Sylvan",
+    "sector": "Love",
+    "stats": {
+      "physicality": 8,
+      "authority": 5,
+      "grace": 8,
+      "acumen": 5,
+      "spirit": 5,
+      "fate": 5,
+      "capacity": 4,
+      "destiny": 2
+    }
+  },
+  {
+    "id": "ENE_LOV_GRN_03",
+    "name": "Fungal Symbiote",
+    "classRole": "Backline",
+    "tier": "grunt",
+    "race": "Sylvan",
+    "sector": "Love",
+    "stats": {
+      "physicality": 2,
+      "authority": 8,
+      "grace": 5,
+      "acumen": 8,
+      "spirit": 10,
+      "fate": 5,
+      "capacity": 4,
+      "destiny": 2
+    }
+  },
+  {
+    "id": "ENE_LOV_GRN_04",
+    "name": "Nectar Sprite",
+    "classRole": "Backline",
+    "tier": "grunt",
+    "race": "Sylvan",
+    "sector": "Love",
+    "stats": {
+      "physicality": 2,
+      "authority": 5,
+      "grace": 12,
+      "acumen": 5,
+      "spirit": 8,
+      "fate": 8,
+      "capacity": 3,
+      "destiny": 2
+    }
+  },
+  {
+    "id": "ENE_LOV_GRN_05",
+    "name": "Thorned Lasher",
+    "classRole": "Frontline",
+    "tier": "grunt",
+    "race": "Sylvan",
+    "sector": "Love",
+    "stats": {
+      "physicality": 10,
+      "authority": 2,
+      "grace": 8,
+      "acumen": 2,
+      "spirit": 5,
+      "fate": 5,
+      "capacity": 5,
+      "destiny": 2
+    }
+  },
+  {
+    "id": "ENE_LOV_ELI_01",
+    "name": "Overgrowth Shambler",
+    "classRole": "Frontline",
+    "tier": "elite",
+    "race": "Sylvan",
+    "sector": "Love",
+    "stats": {
+      "physicality": 12,
+      "authority": 8,
+      "grace": 2,
+      "acumen": 5,
+      "spirit": 12,
+      "fate": 5,
+      "capacity": 20,
+      "destiny": 5
+    }
+  },
+  {
+    "id": "ENE_LOV_ELI_02",
+    "name": "Mind-Devourer",
+    "classRole": "Backline",
+    "tier": "elite",
+    "race": "Sylvan",
+    "sector": "Love",
+    "stats": {
+      "physicality": 5,
+      "authority": 15,
+      "grace": 8,
+      "acumen": 15,
+      "spirit": 10,
+      "fate": 10,
+      "capacity": 8,
+      "destiny": 5
+    }
+  },
+  {
+    "id": "ENE_LOV_ELI_03",
+    "name": "Flesh-Mender",
+    "classRole": "Backline",
+    "tier": "elite",
+    "race": "Sylvan",
+    "sector": "Love",
+    "stats": {
+      "physicality": 5,
+      "authority": 10,
+      "grace": 5,
+      "acumen": 12,
+      "spirit": 18,
+      "fate": 5,
+      "capacity": 12,
+      "destiny": 5
+    }
   },
   {
     "id": "ENE_JUDGMENT_BOSS",

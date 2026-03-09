@@ -5,6 +5,10 @@ import relicData from '../../data/relics.json';
 import backgroundData from '../../data/backgrounds.json';
 import { SpriteAnimator } from '../UI/SpriteAnimator';
 import type { SpriteManifest, SpriteAnimation } from '../../types/character';
+import ReactCrop, { type Crop } from 'react-image-crop';
+import 'react-image-crop/dist/ReactCrop.css';
+import { useRef } from 'react';
+import { PortraitSprite, portraitMap } from '../UI/PortraitSprite';
 
 type AssetType = 'characters' | 'enemies' | 'relics' | 'backgrounds';
 
@@ -50,6 +54,57 @@ export const AssetEditor = ({ onClose }: { onClose: () => void }) => {
   const [activeAnimation, setActiveAnimation] = useState<keyof SpriteManifest>('idle');
   const [isPlaying, setIsPlaying] = useState(true);
 
+  // Crop State
+  const [crop, setCrop] = useState<Crop>();
+  const [completedCrop, setCompletedCrop] = useState<any>();
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  function getCroppedImg(image: HTMLImageElement, crop: any): string {
+    const canvas = document.createElement('canvas');
+    const scaleX = image.naturalWidth / image.width;
+    const scaleY = image.naturalHeight / image.height;
+    canvas.width = crop.width;
+    canvas.height = crop.height;
+    const ctx = canvas.getContext('2d');
+    
+    if (!ctx) return '';
+    
+    ctx.drawImage(
+      image,
+      crop.x * scaleX,
+      crop.y * scaleY,
+      crop.width * scaleX,
+      crop.height * scaleY,
+      0,
+      0,
+      crop.width,
+      crop.height
+    );
+    
+    return canvas.toDataURL('image/webp').split(',')[1];
+  }
+
+  const savePortrait = async () => {
+    if (!completedCrop || !imgRef.current) return;
+    const base64Data = getCroppedImg(imgRef.current, completedCrop);
+    const fileName = `${selectedId}_portrait_${Date.now()}.webp`;
+    
+    try {
+        const res = await fetch('/api/uploadSprite', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ fileName, base64Data })
+        });
+        const result = await res.json();
+        if (result.success) {
+            handleUpdate('portraitUrl', result.url);
+            alert('Portrait updated successfully!');
+        } else throw new Error(result.error);
+    } catch (err: any) {
+        alert('Upload Error: ' + err.message);
+    }
+  };
+
   // Sync selectedId ONLY when changing tabs, not when data within the collection updates
   useEffect(() => {
     if (activeTab === 'characters') setSelectedId(characters[0]?.id);
@@ -69,7 +124,7 @@ export const AssetEditor = ({ onClose }: { onClose: () => void }) => {
         if (field.includes('.')) {
           const parts = field.split('.');
           const lastPart = parts.pop()!;
-          let currentLevel = { ...item };
+          const currentLevel = { ...item };
           let pointer = currentLevel;
           
           for (const part of parts) {
@@ -364,6 +419,90 @@ export const AssetEditor = ({ onClose }: { onClose: () => void }) => {
                   </div>
                )}
             </div>
+
+            {/* STATIC ART INSPECTOR */}
+            {(activeTab === 'characters' || activeTab === 'enemies') && (
+                <div className="space-y-6 mt-6 pb-4">
+                    <h2 className="text-purple-400 border-b border-purple-400/30 pb-2 flex justify-between items-center">
+                        <span>STATIC ART INSPECTOR (FULL ART & PORTRAIT)</span>
+                        <label className="px-3 py-1 text-[10px] bg-purple-900/40 text-purple-400 border border-purple-500 hover:bg-purple-500 hover:text-black transition-colors cursor-pointer">
+                            UPLOAD FULL ART
+                            <input 
+                                type="file" 
+                                className="hidden" 
+                                accept="image/*"
+                                onChange={(e) => onImageUpload('fullArtUrl', e)}
+                            />
+                        </label>
+                    </h2>
+                    
+                    <div className="flex gap-8 items-start">
+                        {/* Full Art Preview & Cropper */}
+                        <div className="flex-[2] border border-purple-900/50 bg-black/60 rounded p-4 relative min-h-[300px]">
+                            {selectedItem.fullArtUrl ? (
+                                <div className="flex flex-col gap-4">
+                                    <ReactCrop
+                                        crop={crop}
+                                        onChange={(c) => setCrop(c)}
+                                        onComplete={(c) => setCompletedCrop(c)}
+                                        aspect={1}
+                                        className="max-h-[500px] overflow-hidden"
+                                    >
+                                        <img 
+                                            ref={imgRef}
+                                            src={selectedItem.fullArtUrl} 
+                                            alt="Full Art" 
+                                            className="max-h-[500px] object-contain mx-auto"
+                                        />
+                                    </ReactCrop>
+                                    <button 
+                                        onClick={savePortrait}
+                                        disabled={!completedCrop?.width || !completedCrop?.height}
+                                        className="w-full py-2 bg-purple-900/40 text-purple-400 border border-purple-500 hover:bg-purple-500 hover:text-black disabled:opacity-50 disabled:cursor-not-allowed transition-colors tracking-widest text-[10px]"
+                                    >
+                                        EXTRACT AND SAVE PORTRAIT
+                                    </button>
+                                </div>
+                            ) : (
+                                <div className="text-gray-600 flex flex-col items-center justify-center h-full gap-2 absolute inset-0">
+                                    <span className="text-purple-900/50 text-4xl">∅</span>
+                                    <span>NO FULL ART SET</span>
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Portrait Preview */}
+                        <div className="flex-1 border border-purple-900/50 bg-black/60 rounded p-4 flex flex-col items-center gap-4">
+                            <h3 className="text-gray-500 text-[10px] tracking-widest text-center">CURRENT PORTRAIT</h3>
+                            {selectedItem.portraitUrl ? (
+                                <img 
+                                    src={selectedItem.portraitUrl} 
+                                    alt="Portrait" 
+                                    className="w-48 h-48 object-cover border-2 border-purple-900/50 shadow-[0_0_15px_rgba(168,85,247,0.2)] rounded-full bg-black"
+                                />
+                            ) : (selectedItem.id.split('_').length >= 3 && portraitMap[selectedItem.id.split('_')[2]]) ? (
+                                <PortraitSprite 
+                                    baseId={selectedItem.id} 
+                                    className="w-48 h-48 rounded-full border-2 border-purple-900/50 shadow-[0_0_15px_rgba(168,85,247,0.2)] bg-black"
+                                />
+                            ) : (
+                                <div className="w-48 h-48 rounded-full border border-dashed border-gray-700 flex items-center justify-center text-gray-600 text-center text-[10px]">
+                                    NO PORTRAIT<br/>EXTRACTED
+                                </div>
+                            )}
+                            <div className="w-full relative mt-auto">
+                              <label className="text-[10px] text-gray-500">Portrait URL Override</label>
+                              <input 
+                                  type="text"
+                                  value={selectedItem.portraitUrl || ''}
+                                  onChange={e => handleUpdate('portraitUrl', e.target.value)}
+                                  className="w-full mt-1 bg-black/50 border border-purple-900 px-3 py-2 text-purple-100 outline-none focus:border-purple-400"
+                              />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
 
             {/* ANIMATION MANIFEST EDITOR */}
             {(activeTab === 'characters' || activeTab === 'enemies') && (

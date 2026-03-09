@@ -22,7 +22,7 @@ Until bespoke animations and high-fidelity art are created, we must use a robust
 ### **Phase 2A: Static Portrait Dummies**
 We need a standard format for character portraits.
 - **Requirement:** A `512x512` PNG for every ID in the game.
-- **Proxy Protocol:** Use AI image generators or simple colored silhouettes (e.g., a Blue Knight for Frontline, Red Mage for Backline) stored in `public/assets/portraits/`.
+- **Champion Protocol:** Use AI image generators or simple colored silhouettes (e.g., a Blue Knight for Frontline, Red Mage for Backline) stored in `public/assets/portraits/`.
 - **Implementation:** The `ActiveCharacter` interface gains a property `portraitUrl`. The UI components (`CombatGrid`, `RosterView`) will pull `<img src={unit.portraitUrl} />`.
 
 ### **Phase 2B: Combat Sprites & Visual States**

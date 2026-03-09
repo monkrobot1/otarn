@@ -14,7 +14,7 @@
     "tier": 1,
     "sector": "Judgment",
     "name": "Void Stare",
-    "effect": "+5% Authority to Backline proxies.",
+    "effect": "+5% Authority to Backline champions.",
     "cost": 10,
     "rarity": "Common",
     "category": "Stats Up"
@@ -34,7 +34,7 @@
     "tier": 1,
     "sector": "Judgment",
     "name": "Metallic Plating",
-    "effect": "+5% Physicality (Armor) to Frontline proxies.",
+    "effect": "+5% Physicality (Armor) to Frontline champions.",
     "cost": 10,
     "rarity": "Common",
     "category": "Stats Up"
@@ -44,7 +44,7 @@
     "tier": 1,
     "sector": "Judgment",
     "name": "Calculated Strikes",
-    "effect": "+5% Acumen to all proxies.",
+    "effect": "+5% Acumen to all champions.",
     "cost": 10,
     "rarity": "Common",
     "category": "Stats Up"
@@ -134,7 +134,7 @@
     "tier": 2,
     "sector": "Judgment",
     "name": "Synthetic Armor",
-    "effect": "Frontline proxies ignore the first physical attack of the battle.",
+    "effect": "Frontline champions ignore the first physical attack of the battle.",
     "cost": 25,
     "rarity": "Uncommon",
     "category": "Passive Offensive"
@@ -154,7 +154,7 @@
     "tier": 2,
     "sector": "Judgment",
     "name": "Shadow-Step",
-    "effect": "Backline proxies gain +20% Fate (Dodge) on the first turn.",
+    "effect": "Backline champions gain +20% Fate (Dodge) on the first turn.",
     "cost": 25,
     "rarity": "Uncommon",
     "category": "Stats Up"
@@ -204,7 +204,7 @@
     "tier": 3,
     "sector": "Judgment",
     "name": "Reanimator's Grace",
-    "effect": "The first time a proxy dies, resurrect them with 25% HP.",
+    "effect": "The first time a champion dies, resurrect them with 25% HP.",
     "cost": 50,
     "rarity": "Epic",
     "category": "Passive Defensive"
@@ -314,7 +314,7 @@
     "tier": 1,
     "sector": "Order",
     "name": "Clockwork Steps",
-    "effect": "+5% Grace to all proxies.",
+    "effect": "+5% Grace to all champions.",
     "cost": 10,
     "rarity": "Common",
     "category": "Stats Up"
@@ -344,7 +344,7 @@
     "tier": 1,
     "sector": "Order",
     "name": "True Aim",
-    "effect": "+5% Spiritual Hit Chance (Acumen) to all proxies.",
+    "effect": "+5% Spiritual Hit Chance (Acumen) to all champions.",
     "cost": 10,
     "rarity": "Common",
     "category": "Stats Up"
@@ -364,7 +364,7 @@
     "tier": 1,
     "sector": "Order",
     "name": "Honor Bound",
-    "effect": "Proxies deal +5% damage to full-health enemies.",
+    "effect": "Champions deal +5% damage to full-health enemies.",
     "cost": 10,
     "rarity": "Common",
     "category": "Stats Up"
@@ -394,7 +394,7 @@
     "tier": 1,
     "sector": "Order",
     "name": "Vanguard's Light",
-    "effect": "Frontline proxies gain +5% max HP.",
+    "effect": "Frontline champions gain +5% max HP.",
     "cost": 10,
     "rarity": "Common",
     "category": "Stats Up"
@@ -444,7 +444,7 @@
     "tier": 2,
     "sector": "Order",
     "name": "Chrono-Lock",
-    "effect": "Enemies cannot act before your fastest proxy on the first turn.",
+    "effect": "Enemies cannot act before your fastest champion on the first turn.",
     "cost": 25,
     "rarity": "Rare",
     "category": "Unique"
@@ -464,7 +464,7 @@
     "tier": 2,
     "sector": "Order",
     "name": "Paladin's Oath",
-    "effect": "Healing a proxy to full HP grants them a 10% Physicality shield.",
+    "effect": "Healing a champion to full HP grants them a 10% Physicality shield.",
     "cost": 25,
     "rarity": "Uncommon",
     "category": "Passive Defensive"
@@ -474,7 +474,7 @@
     "tier": 2,
     "sector": "Order",
     "name": "Stalwart Defense",
-    "effect": "Proxies with a shield cannot be critically hit.",
+    "effect": "Champions with a shield cannot be critically hit.",
     "cost": 25,
     "rarity": "Uncommon",
     "category": "Passive Offensive"
@@ -484,7 +484,7 @@
     "tier": 2,
     "sector": "Order",
     "name": "Momentum",
-    "effect": "Every time a proxy acts, their Grace increases by 2% (stacking).",
+    "effect": "Every time a champion acts, their Grace increases by 2% (stacking).",
     "cost": 25,
     "rarity": "Uncommon",
     "category": "Unique"
@@ -494,7 +494,7 @@
     "tier": 2,
     "sector": "Order",
     "name": "Verdict",
-    "effect": "Hitting an enemy with 3 different proxies in one round inflicts Stun.",
+    "effect": "Hitting an enemy with 3 different champions in one round inflicts Stun.",
     "cost": 25,
     "rarity": "Uncommon",
     "category": "Unique"
@@ -554,7 +554,7 @@
     "tier": 3,
     "sector": "Order",
     "name": "Time-Dilation",
-    "effect": "Your proxies' buffs last 1 extra turn; enemy debuffs last 1 extra turn.",
+    "effect": "Your champions' buffs last 1 extra turn; enemy debuffs last 1 extra turn.",
     "cost": 50,
     "rarity": "Rare",
     "category": "Unique"
@@ -564,7 +564,7 @@
     "tier": 4,
     "sector": "Order",
     "name": "The Grand Cathedral",
-    "effect": "Start every battle with a shield on all proxies equal to 50% of their Max HP.",
+    "effect": "Start every battle with a shield on all champions equal to 50% of their Max HP.",
     "cost": 100,
     "rarity": "Divine",
     "category": "Passive Defensive"
@@ -614,7 +614,7 @@
     "tier": 1,
     "sector": "Chaos",
     "name": "Shifting Winds",
-    "effect": "+5% Dodge (Fate) to all proxies.",
+    "effect": "+5% Dodge (Fate) to all champions.",
     "cost": 10,
     "rarity": "Common",
     "category": "Stats Up"
@@ -624,7 +624,7 @@
     "tier": 1,
     "sector": "Chaos",
     "name": "Sparking Embers",
-    "effect": "+5% Authority to all proxies.",
+    "effect": "+5% Authority to all champions.",
     "cost": 10,
     "rarity": "Common",
     "category": "Stats Up"
@@ -734,7 +734,7 @@
     "tier": 2,
     "sector": "Chaos",
     "name": "Scorched Earth",
-    "effect": "Enemies that attack a frontline proxy suffer Burn.",
+    "effect": "Enemies that attack a frontline champion suffer Burn.",
     "cost": 25,
     "rarity": "Uncommon",
     "category": "Passive Offensive"
@@ -754,7 +754,7 @@
     "tier": 2,
     "sector": "Chaos",
     "name": "Stone Skin",
-    "effect": "The first physical attack taken by each proxy is reduced by 50%.",
+    "effect": "The first physical attack taken by each champion is reduced by 50%.",
     "cost": 25,
     "rarity": "Uncommon",
     "category": "Passive Offensive"
@@ -804,7 +804,7 @@
     "tier": 3,
     "sector": "Chaos",
     "name": "Elemental Roulette",
-    "effect": "Every turn, one random proxy gains +100% Damage for that turn only.",
+    "effect": "Every turn, one random champion gains +100% Damage for that turn only.",
     "cost": 50,
     "rarity": "Epic",
     "category": "Stats Up"
@@ -834,7 +834,7 @@
     "tier": 3,
     "sector": "Chaos",
     "name": "Eye of the Storm",
-    "effect": "If a proxy dodges 3 attacks in one combat, they gain 100% Crit Chance for 2 turns.",
+    "effect": "If a champion dodges 3 attacks in one combat, they gain 100% Crit Chance for 2 turns.",
     "cost": 50,
     "rarity": "Rare",
     "category": "Passive Offensive"
@@ -874,7 +874,7 @@
     "tier": 4,
     "sector": "Chaos",
     "name": "Avatar of Chaos",
-    "effect": "At the start of combat, one random proxy becomes immune to all damage for 3 turns.",
+    "effect": "At the start of combat, one random champion becomes immune to all damage for 3 turns.",
     "cost": 100,
     "rarity": "Divine",
     "category": "Passive Offensive"
@@ -924,7 +924,7 @@
     "tier": 1,
     "sector": "Love",
     "name": "Spore Cloud",
-    "effect": "+5% Debuff Resist to all proxies.",
+    "effect": "+5% Debuff Resist to all champions.",
     "cost": 10,
     "rarity": "Common",
     "category": "Stats Up"
@@ -934,7 +934,7 @@
     "tier": 1,
     "sector": "Love",
     "name": "Photosynthesis",
-    "effect": "Proxies heal 2% Max HP at the start of their turn.",
+    "effect": "Champions heal 2% Max HP at the start of their turn.",
     "cost": 10,
     "rarity": "Common",
     "category": "Passive Defensive"
@@ -954,7 +954,7 @@
     "tier": 1,
     "sector": "Love",
     "name": "Dreamers' Haze",
-    "effect": "+5% Acumen to Backline proxies.",
+    "effect": "+5% Acumen to Backline champions.",
     "cost": 10,
     "rarity": "Common",
     "category": "Stats Up"
@@ -964,7 +964,7 @@
     "tier": 1,
     "sector": "Love",
     "name": "Vitality Spores",
-    "effect": "Max HP increased by 5% for all proxies.",
+    "effect": "Max HP increased by 5% for all champions.",
     "cost": 10,
     "rarity": "Common",
     "category": "Passive Defensive"
@@ -1024,7 +1024,7 @@
     "tier": 2,
     "sector": "Love",
     "name": "Symbiotic Link",
-    "effect": "When a proxy is healed, the healer gains 50% of that healing.",
+    "effect": "When a champion is healed, the healer gains 50% of that healing.",
     "cost": 25,
     "rarity": "Uncommon",
     "category": "Unique"
@@ -1064,7 +1064,7 @@
     "tier": 2,
     "sector": "Love",
     "name": "Nurturing Touch",
-    "effect": "Resurrected proxies return with 50% HP instead of the default amount.",
+    "effect": "Resurrected champions return with 50% HP instead of the default amount.",
     "cost": 25,
     "rarity": "Uncommon",
     "category": "Passive Defensive"
@@ -1074,7 +1074,7 @@
     "tier": 2,
     "sector": "Love",
     "name": "Psychic Web",
-    "effect": "If one proxy dodges an attack, the whole team gains +10% Dodge for 1 turn.",
+    "effect": "If one champion dodges an attack, the whole team gains +10% Dodge for 1 turn.",
     "cost": 25,
     "rarity": "Uncommon",
     "category": "Stats Up"
@@ -1104,7 +1104,7 @@
     "tier": 3,
     "sector": "Love",
     "name": "Overgrowth",
-    "effect": "Healing a proxy past max HP converts the excess into permanent Physicality for that combat.",
+    "effect": "Healing a champion past max HP converts the excess into permanent Physicality for that combat.",
     "cost": 50,
     "rarity": "Epic",
     "category": "Passive Defensive"
@@ -1134,7 +1134,7 @@
     "tier": 3,
     "sector": "Love",
     "name": "World-Tree Roots",
-    "effect": "Frontline proxies cannot be moved or delayed on the timeline by enemies.",
+    "effect": "Frontline champions cannot be moved or delayed on the timeline by enemies.",
     "cost": 50,
     "rarity": "Rare",
     "category": "Unique"
@@ -1154,7 +1154,7 @@
     "tier": 3,
     "sector": "Love",
     "name": "Blossom",
-    "effect": "At the start of Turn 4, all dead proxies are revived with 10% HP.",
+    "effect": "At the start of Turn 4, all dead champions are revived with 10% HP.",
     "cost": 50,
     "rarity": "Rare",
     "category": "Passive Defensive"
@@ -1164,7 +1164,7 @@
     "tier": 4,
     "sector": "Love",
     "name": "The World Tree",
-    "effect": "All proxies regenerate 15% of their Max HP at the start of their turn.",
+    "effect": "All champions regenerate 15% of their Max HP at the start of their turn.",
     "cost": 100,
     "rarity": "Divine",
     "category": "Passive Defensive"
@@ -1174,7 +1174,7 @@
     "tier": 4,
     "sector": "Love",
     "name": "Unconditional Love",
-    "effect": "Any attack that would kill a proxy leaves them at 1 HP instead (Once per proxy per combat).",
+    "effect": "Any attack that would kill a champion leaves them at 1 HP instead (Once per champion per combat).",
     "cost": 100,
     "rarity": "Divine",
     "category": "Passive Offensive"
@@ -1184,7 +1184,7 @@
     "tier": 4,
     "sector": "Love",
     "name": "Genesis",
-    "effect": "Max HP of all proxies is doubled, but damage output is reduced by 20%.",
+    "effect": "Max HP of all champions is doubled, but damage output is reduced by 20%.",
     "cost": 100,
     "rarity": "Divine",
     "category": "Passive Offensive"
@@ -1194,7 +1194,7 @@
     "tier": 4,
     "sector": "Love",
     "name": "Hive Mind",
-    "effect": "All damage taken is distributed evenly among all four proxies.",
+    "effect": "All damage taken is distributed evenly among all four champions.",
     "cost": 100,
     "rarity": "Divine",
     "category": "Passive Offensive"

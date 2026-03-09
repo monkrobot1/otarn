@@ -166,14 +166,14 @@ export const AxiomPedestal = () => {
     };
 
     return (
-        <div className="w-full h-full flex items-stretch gap-6 overflow-hidden px-4 pb-4">
+        <div className="w-full h-[calc(100vh-140px)] flex items-stretch gap-6 overflow-hidden px-4">
             {/* Left Side: Axiom Selectors */}
-            <div className="w-[300px] h-full flex flex-col items-center gap-8 pt-2 shrink-0 border-r border-white/10 pr-6 pb-6 overflow-y-auto scrollbar-hide">
-                <div className="flex flex-col items-center gap-3 w-full">
+            <div className="w-[300px] h-full flex flex-col items-center gap-8 pt-2 shrink-0 border-r border-cyan-900/40 pr-6 overflow-y-auto scrollbar-hide">
+                <div className="flex flex-col items-center gap-3 w-full mt-4">
                     <h2 className="text-3xl font-light tracking-widest text-gold-trim text-center border-b border-gold-trim/30 pb-4 w-full">
                         AXIOM PEDESTAL
                     </h2>
-                    <p className="text-gray-400 italic text-xs text-center leading-relaxed px-2">
+                    <p className="text-cyan-200/50 italic text-[11px] text-center leading-relaxed px-2 font-mono">
                         Offer the latent resonance gathered from your ascensions. Invest deeply into your chosen aspects to unlock higher tiers of power.
                     </p>
                 </div>
@@ -243,7 +243,9 @@ export const AxiomPedestal = () => {
                     </button>
                 </div>
                 
-                {renderTree()}
+                <div className="flex-1 min-h-0 relative">
+                    {renderTree()}
+                </div>
             </div>
         </div>
     );

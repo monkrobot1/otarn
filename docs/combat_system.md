@@ -2,7 +2,7 @@
 
 ## 1. Overview and Battlefield Layout
 The combat in "Awakening of Otaran" revolves around a **4v4 Turn-Based system** mapped on a dynamic timeline.
-- **Player Side (Left):** 4 Playable Proxies.
+- **Player Side (Left):** 4 Playable Champions.
 - **Enemy Side (Right):** Up to 4 Enemies (Regulars, Elites, or Bosses).
 
 ### Grid / Formation (Frontline vs Backline)
@@ -11,18 +11,18 @@ Each side consists of two rows:
 - **Backline (Slots 3 & 4):** Typically reserved for magic users, healers, and squishy damage dealers. Often untargetable by standard melee attacks unless the Frontline is decimated or via specific "Snipe / Assassinate" skills.
 
 ## 2. Character Abilities (The 3+1 Structure)
-Each Proxy (and complex enemy) possesses a fixed set of abilities that define their role:
+Each Champion (and complex enemy) possesses a fixed set of abilities that define their role:
 1. **Basic Attack:** Costs 0 MP. Generates a small amount of MP. Often physical, but can be scaled by other stats based on class.
 2. **Skill 1 (Core Utility):** Costs MP. Defines the class's primary loop (e.g., a strong heal, a taunt, applying a stacking DoT).
 3. **Skill 2 (Strategic Nuke/Control):** Costs high MP. Examples include AoE damage, Stuns, massive single-target execution, or team-wide shielding.
 
 ## 3. "God" Abilities (The Player's Direct Influence)
 Because the player acts as an awakened deity overseeing the battlefield from the Diamond Throne, they have direct intervention mechanics.
-- **Divine Energy (or Ephemeral Faith):** The player has a separate resource pool that passively generates each turn or when proxies take damage/die.
+- **Divine Energy (or Ephemeral Faith):** The player has a separate resource pool that passively generates each turn or when champions take damage/die.
 - **God Spells (Interventions):** Available from a global UI bar above the combat area.
   - *Smite:* Deal fixed absolute damage to a specific enemy to assist in an execute.
-  - *Aegis:* Grant a one-turn invulnerability shield to a specific proxy in danger of dying.
-  - *Chronos Shift:* Manually advance one proxy's timeline position to the current turn to interrupt a boss.
+  - *Aegis:* Grant a one-turn invulnerability shield to a specific champion in danger of dying.
+  - *Chronos Shift:* Manually advance one champion's timeline position to the current turn to interrupt a boss.
   - *Purge:* Cleanse all debuffs from the entire party.
   *Note: These interventions cost significant amounts of meta-resource and have cooldowns, making them strategic trump cards rather than spammable skills.*
 
@@ -44,6 +44,14 @@ Attacks fall into two main categories: Physical and Spiritual (Magic).
   - Crit Damage Multiplier scaled by `Acumen`.
 
 ## 6. Combat Flow & Win/Loss Conditions
-- **Win:** All enemies reach 0 HP. Rewards are distributed (Ephemeral Faith, Relic drafts, XP for Proxies).
-- **Loss:** All 4 Proxies reach 0 HP. The run ends. The player is returned to the Diamond Throne with earned Divine Sparks to unlock permanent meta-progressions.
-- **Death & Revives:** Dead Proxies are removed from the timeline. Some classes (e.g., Weaver of Life) or specific items can revive dead Proxies mid-combat. Otherwise, death persists until a Sanctuary node on the map.
+- **Win:** All enemies reach 0 HP. Rewards are distributed (Ephemeral Faith, Relic drafts, XP for Champions).
+- **Loss:** All 4 Champions reach 0 HP. The run ends. The player is returned to the Diamond Throne with earned Divine Sparks to unlock permanent meta-progressions.
+- **Death & Revives:** Dead Champions are removed from the timeline. Some classes (e.g., Weaver of Life) or specific items can revive dead Champions mid-combat. Otherwise, death persists until a Sanctuary node on the map.
+
+## 7. Combat Balancing & Power Profiles
+To evaluate encounters and ensure an appropriate level of challenge, the game calculates a Tri-Factor **Power Profile** for both player characters and enemies. Instead of a single number, this measures:
+1. **Damage Score**: Raw lethal output against average resistances.
+2. **Survivability Score**: Effective HP (via mitigation and dodge mechanics).
+3. **Support Score**: Tactical utility (healing, status conditions, and speed/turn economy).
+
+For full details on how power levels and profiles mathematically interact to define combat strength, refer to [Power Profile System](./power_profile_system.md).

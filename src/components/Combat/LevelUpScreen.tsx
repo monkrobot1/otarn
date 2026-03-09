@@ -10,7 +10,7 @@ const allTalents = talentsData as Talent[];
 const generateOptions = (character: ActiveCharacter): Talent[] => {
     // Basic logic for the "3 trees" requirement until formal trees are mapped
     const raceTalents = allTalents.filter(t => t.sector === character.sector);
-    const classTalents = allTalents.filter(t => t.sector !== character.sector); // Proxy class pool
+    const classTalents = allTalents.filter(t => t.sector !== character.sector); // Champion class pool
     const wildCardTalents = allTalents;
 
     const pickRandom = (pool: Talent[]) => pool[Math.floor(Math.random() * pool.length)];
@@ -48,7 +48,7 @@ export const LevelUpScreen = () => {
 
     if (!runData || levelingCharacters.length === 0) {
         return (
-            <div className="w-full h-full flex flex-col items-center justify-center bg-black/90 absolute inset-0 backdrop-blur-lg">
+            <div className="w-full h-full flex flex-col items-center justify-center bg-black/90 backdrop-blur-lg rounded-xl border border-cyan-500/30 relative">
                 <div className="text-white text-center tracking-widest animate-pulse">RESUMING ASCENT...</div>
             </div>
         );
@@ -82,12 +82,12 @@ export const LevelUpScreen = () => {
     };
 
     return (
-        <div className="w-full h-full flex flex-col items-center justify-center gap-8 bg-black/90 z-50 absolute inset-0 backdrop-blur-lg">
-            <h1 className="text-5xl text-gold-trim font-mono tracking-widest border-b border-gold-trim pb-4 drop-shadow-[0_0_15px_rgba(225,193,110,0.8)]">
+        <div className="w-full h-full flex flex-col items-center justify-center bg-black/90 z-50 backdrop-blur-lg rounded-xl border border-gold-trim/30 relative py-8 overflow-y-auto">
+            <h1 className="text-5xl text-gold-trim font-mono tracking-widest border-b border-gold-trim pb-4 drop-shadow-[0_0_15px_rgba(225,193,110,0.8)] shrink-0">
                 ASCENSION REACHED
             </h1>
 
-            <div className="flex flex-col items-center mt-6 z-10">
+            <div className="flex flex-col items-center mt-6 z-10 shrink-0">
                 <img src={currentActor.portraitUrl} className="w-32 h-32 object-cover border-4 border-gold-trim/50 shadow-[0_0_20px_rgba(225,193,110,0.5)] rounded-full mb-4" alt={currentActor.name} />
                 <h2 className="text-2xl text-white font-mono tracking-widest">{currentActor.name}</h2>
                 <div className="text-sm text-cyan-400 font-mono mt-1 tracking-widest uppercase">

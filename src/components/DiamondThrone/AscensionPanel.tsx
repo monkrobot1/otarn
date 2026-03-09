@@ -30,7 +30,7 @@ export const AscensionPanel = () => {
 
       <div className="glass-panel p-8 w-2/3 mx-auto flex flex-col gap-8">
         <p className="text-gray-400 font-light text-sm italic">
-          "Spend your Divine Sparks to permanently alter the baseline architecture of all Proxies."
+          "Spend your Divine Sparks to permanently alter the baseline architecture of all Champions."
         </p>
 
         <div className="grid grid-cols-2 gap-4">
